@@ -1,0 +1,49 @@
+type (
+	// 用户登录
+	LoginRequest {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	}
+	LoginResponse {
+		AccessToken  string `json:"accessToken"`
+		AccessExpire int64  `json:"accessExpire"`
+	}
+
+	CaptchaResponse {
+		Code int64  `json:"code"`
+		Data string `json:"data"`
+		Id   string `json:"id"`
+		Msg  string `json:"msg"`
+	}
+
+	// 用户信息
+	UserInfoResponse {
+		Introduction string   `json:"introduction"`
+		Avatar       string   `json:"avatar"`
+		UserName     string   `json:"userName"`
+		UserId       int64    `json:"userId"`
+		DeptId       int64    `json:"deptId"`
+		Name         string   `json:"name"`
+		Code         int64    `json:"code"`
+		Buttons      []string `json:"buttons"`
+		Roles        []string `json:"roles"`
+		Permissions  []string `json:"permissions"`
+	}
+)
+
+service sys {
+	@handler Login
+	post /api/user/login(LoginRequest) returns (LoginResponse)
+	@handler UserInfo
+	get /api/v1/getinfo returns (UserInfoResponse)
+	@handler Captcha
+	get /api/v1/captcha returns (CaptchaResponse)
+}
+
+@server(
+	jwt: Auth
+)
+service sys {
+	@handler Profile
+	get /api/v1/user/profile returns (UserInfoResponse)
+}
