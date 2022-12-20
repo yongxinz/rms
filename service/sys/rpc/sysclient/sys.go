@@ -24,12 +24,15 @@ type (
 	MenuListResp     = sys.MenuListResp
 	MenuUpdateReq    = sys.MenuUpdateReq
 	MenuUpdateResp   = sys.MenuUpdateResp
+	SysConfigReq     = sys.SysConfigReq
+	SysConfigResp    = sys.SysConfigResp
 	UserInfoRequest  = sys.UserInfoRequest
 	UserInfoResponse = sys.UserInfoResponse
 
 	Sys interface {
 		Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 		UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
+		SysConfig(ctx context.Context, in *SysConfigReq, opts ...grpc.CallOption) (*SysConfigResp, error)
 		MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
 		MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
 		MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
@@ -55,6 +58,11 @@ func (m *defaultSys) Login(ctx context.Context, in *LoginRequest, opts ...grpc.C
 func (m *defaultSys) UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.UserInfo(ctx, in, opts...)
+}
+
+func (m *defaultSys) SysConfig(ctx context.Context, in *SysConfigReq, opts ...grpc.CallOption) (*SysConfigResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.SysConfig(ctx, in, opts...)
 }
 
 func (m *defaultSys) MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error) {

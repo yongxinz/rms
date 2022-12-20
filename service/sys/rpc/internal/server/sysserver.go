@@ -32,6 +32,11 @@ func (s *SysServer) UserInfo(ctx context.Context, in *sys.UserInfoRequest) (*sys
 	return l.UserInfo(in)
 }
 
+func (s *SysServer) SysConfig(ctx context.Context, in *sys.SysConfigReq) (*sys.SysConfigResp, error) {
+	l := logic.NewSysConfigLogic(ctx, s.svcCtx)
+	return l.SysConfig(in)
+}
+
 func (s *SysServer) MenuAdd(ctx context.Context, in *sys.MenuAddReq) (*sys.MenuAddResp, error) {
 	l := logic.NewMenuAddLogic(ctx, s.svcCtx)
 	return l.MenuAdd(in)

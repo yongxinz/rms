@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type SysClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
+	SysConfig(ctx context.Context, in *SysConfigReq, opts ...grpc.CallOption) (*SysConfigResp, error)
 	MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
 	MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
 	MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
@@ -50,6 +51,15 @@ func (c *sysClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.Ca
 func (c *sysClient) UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error) {
 	out := new(UserInfoResponse)
 	err := c.cc.Invoke(ctx, "/sysclient.Sys/UserInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) SysConfig(ctx context.Context, in *SysConfigReq, opts ...grpc.CallOption) (*SysConfigResp, error) {
+	out := new(SysConfigResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/SysConfig", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -98,6 +108,7 @@ func (c *sysClient) MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...g
 type SysServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	UserInfo(context.Context, *UserInfoRequest) (*UserInfoResponse, error)
+	SysConfig(context.Context, *SysConfigReq) (*SysConfigResp, error)
 	MenuAdd(context.Context, *MenuAddReq) (*MenuAddResp, error)
 	MenuList(context.Context, *MenuListReq) (*MenuListResp, error)
 	MenuUpdate(context.Context, *MenuUpdateReq) (*MenuUpdateResp, error)
@@ -114,6 +125,9 @@ func (UnimplementedSysServer) Login(context.Context, *LoginRequest) (*LoginRespo
 }
 func (UnimplementedSysServer) UserInfo(context.Context, *UserInfoRequest) (*UserInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserInfo not implemented")
+}
+func (UnimplementedSysServer) SysConfig(context.Context, *SysConfigReq) (*SysConfigResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SysConfig not implemented")
 }
 func (UnimplementedSysServer) MenuAdd(context.Context, *MenuAddReq) (*MenuAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MenuAdd not implemented")
@@ -172,6 +186,24 @@ func _Sys_UserInfo_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).UserInfo(ctx, req.(*UserInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_SysConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SysConfigReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).SysConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/SysConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).SysConfig(ctx, req.(*SysConfigReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -262,6 +294,10 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UserInfo",
 			Handler:    _Sys_UserInfo_Handler,
+		},
+		{
+			MethodName: "SysConfig",
+			Handler:    _Sys_SysConfig_Handler,
 		},
 		{
 			MethodName: "MenuAdd",

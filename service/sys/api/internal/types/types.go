@@ -30,3 +30,9 @@ type UserInfoResponse struct {
 	Roles        []string `json:"roles"`
 	Permissions  []string `json:"permissions"`
 }
+
+type SysConfigResp struct {
+	Code int64             `json:"code"`
+	Data map[string]string `json:"data"`
+	Msg  string            `json:"msg"`
+}

@@ -33,6 +33,16 @@ message UserInfoResponse {
 }
 // user end
 
+// sys-config start
+message SysConfigReq {
+}
+
+message SysConfigResp {
+    string sys_app_logo = 1;
+    string sys_app_name = 2;
+}
+// sys-config end
+
 // menu start
 message MenuAddReq {
     string menu_name = 1;
@@ -125,6 +135,8 @@ message MenuDeleteResp {
 service Sys {
     rpc Login(LoginRequest) returns(LoginResponse);
     rpc UserInfo(UserInfoRequest) returns(UserInfoResponse);
+
+    rpc SysConfig(SysConfigReq) returns(SysConfigResp);
 
     rpc MenuAdd(MenuAddReq) returns(MenuAddResp);
     rpc MenuList(MenuListReq) returns(MenuListResp);

@@ -1,0 +1,12 @@
+type (
+	SysConfigResp {
+		Code int64             `json:"code"`
+		Data map[string]string `json:"data"`
+		Msg  string            `json:"msg"`
+	}
+)
+
+service sys {
+	@handler SysConfig
+	get /api/v1/app-config returns (SysConfigResp)
+}
