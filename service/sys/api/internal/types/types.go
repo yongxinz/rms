@@ -4,11 +4,16 @@ package types
 type LoginRequest struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
+	Uuid     string `json:"uuid"`
+	Code     string `json:"code"`
 }
 
 type LoginResponse struct {
-	AccessToken  string `json:"accessToken"`
-	AccessExpire int64  `json:"accessExpire"`
+	Code             int64  `json:"code"`
+	Success          bool   `json:"success"`
+	CurrentAuthority string `json:"currentAuthority"`
+	Expire           int64  `json:"expire"`
+	Token            string `json:"token"`
 }
 
 type CaptchaResponse struct {
@@ -18,17 +23,21 @@ type CaptchaResponse struct {
 	Msg  string `json:"msg"`
 }
 
-type UserInfoResponse struct {
+type UserInfo struct {
 	Introduction string   `json:"introduction"`
 	Avatar       string   `json:"avatar"`
 	UserName     string   `json:"userName"`
 	UserId       int64    `json:"userId"`
 	DeptId       int64    `json:"deptId"`
 	Name         string   `json:"name"`
-	Code         int64    `json:"code"`
 	Buttons      []string `json:"buttons"`
 	Roles        []string `json:"roles"`
 	Permissions  []string `json:"permissions"`
+}
+
+type UserInfoResponse struct {
+	Code int64    `json:"code"`
+	Data UserInfo `json:"data"`
 }
 
 type SysConfigResp struct {

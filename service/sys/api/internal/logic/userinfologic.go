@@ -35,15 +35,17 @@ func (l *UserInfoLogic) UserInfo() (resp *types.UserInfoResponse, err error) {
 	}
 
 	return &types.UserInfoResponse{
-		UserId:       res.UserId,
-		UserName:     res.UserName,
-		Name:         res.Name,
-		Avatar:       res.Avatar,
-		Introduction: res.Introduction,
-		DeptId:       res.DeptId,
-		Buttons:      res.Buttons,
-		Permissions:  res.Permissions,
-		Roles:        res.Roles,
-		Code:         res.Code,
+		Code: res.Code,
+		Data: types.UserInfo{
+			Avatar:       res.Avatar,
+			Introduction: res.Introduction,
+			Name:         res.Name,
+			UserName:     res.UserName,
+			UserId:       res.UserId,
+			DeptId:       res.DeptId,
+			Buttons:      res.Buttons,
+			Roles:        res.Roles,
+			Permissions:  res.Permissions,
+		},
 	}, nil
 }

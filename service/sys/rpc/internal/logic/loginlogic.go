@@ -2,9 +2,12 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"time"
 
+	"rms/common/captcha"
 	"rms/common/cryptx"
+	"rms/common/jwtx"
 	"rms/service/sys/model"
 	"rms/service/sys/rpc/internal/svc"
 	"rms/service/sys/rpc/sys"
@@ -39,15 +42,27 @@ func (l *LoginLogic) Login(in *sys.LoginRequest) (*sys.LoginResponse, error) {
 
 	// 判断密码是否正确
 	password := cryptx.PasswordEncrypt(l.svcCtx.Config.Salt, in.Password)
-	fmt.Println(in.Password)
-	fmt.Println(password)
-	fmt.Println(res.Password)
 	if password != res.Password {
 		return nil, status.Error(100, "密码错误")
 	}
 
+	if !captcha.Verify(in.Uuid, in.Code, true) {
+		return nil, status.Error(100, "验证码错误")
+	}
+
+	now := time.Now().Unix()
+	accessExpire := l.svcCtx.Config.JWT.AccessExpire
+	jwtToken, err := jwtx.GetToken(l.svcCtx.Config.JWT.AccessSecret, now, l.svcCtx.Config.JWT.AccessExpire, res.UserId)
+
+	if err != nil {
+		reqStr, _ := json.Marshal(in)
+		logx.WithContext(l.ctx).Errorf("生成token失败,参数:%s,异常:%s", reqStr, err.Error())
+		return nil, err
+	}
+
 	return &sys.LoginResponse{
-		UserId:   res.UserId,
-		Username: res.Username,
+		CurrentAuthority: res.Username,
+		Expire:           now + accessExpire,
+		Token:            jwtToken,
 	}, nil
 }

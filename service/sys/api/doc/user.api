@@ -3,10 +3,15 @@ type (
 	LoginRequest {
 		Username string `json:"username"`
 		Password string `json:"password"`
+		Uuid     string `json:"uuid"`
+		Code     string `json:"code"`
 	}
 	LoginResponse {
-		AccessToken  string `json:"accessToken"`
-		AccessExpire int64  `json:"accessExpire"`
+		Code             int64  `json:"code"`
+		Success          bool   `json:"success"`
+		CurrentAuthority string `json:"currentAuthority"`
+		Expire           int64  `json:"expire"`
+		Token            string `json:"token"`
 	}
 
 	CaptchaResponse {
@@ -17,23 +22,26 @@ type (
 	}
 
 	// 用户信息
-	UserInfoResponse {
+	UserInfo {
 		Introduction string   `json:"introduction"`
 		Avatar       string   `json:"avatar"`
 		UserName     string   `json:"userName"`
 		UserId       int64    `json:"userId"`
 		DeptId       int64    `json:"deptId"`
 		Name         string   `json:"name"`
-		Code         int64    `json:"code"`
 		Buttons      []string `json:"buttons"`
 		Roles        []string `json:"roles"`
 		Permissions  []string `json:"permissions"`
+	}
+	UserInfoResponse {
+		Code int64    `json:"code"`
+		Data UserInfo `json:"data"`
 	}
 )
 
 service sys {
 	@handler Login
-	post /api/user/login(LoginRequest) returns (LoginResponse)
+	post /api/v1/login(LoginRequest) returns (LoginResponse)
 	@handler UserInfo
 	get /api/v1/getinfo returns (UserInfoResponse)
 	@handler Captcha

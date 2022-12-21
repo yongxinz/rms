@@ -9,10 +9,13 @@ option go_package = "./sys";
 message LoginRequest {
     string Username = 1;
     string Password = 2;
+    string Code = 3;
+    string Uuid = 4;
 }
 message LoginResponse {
-    int64 UserId = 1;
-    string Username = 2;
+    string CurrentAuthority = 1;
+    int64 Expire = 2;
+    string Token = 3;
 }
 
 // 用户信息
