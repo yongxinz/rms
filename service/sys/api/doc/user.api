@@ -42,8 +42,6 @@ type (
 service sys {
 	@handler Login
 	post /api/v1/login(LoginRequest) returns (LoginResponse)
-	@handler UserInfo
-	get /api/v1/getinfo returns (UserInfoResponse)
 	@handler Captcha
 	get /api/v1/captcha returns (CaptchaResponse)
 }
@@ -52,6 +50,8 @@ service sys {
 	jwt: Auth
 )
 service sys {
+	@handler UserInfo
+	get /api/v1/getinfo returns (UserInfoResponse)
 	@handler Profile
 	get /api/v1/user/profile returns (UserInfoResponse)
 }
