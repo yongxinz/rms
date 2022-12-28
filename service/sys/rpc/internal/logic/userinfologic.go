@@ -25,7 +25,7 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 	}
 }
 
-func (l *UserInfoLogic) UserInfo(in *sys.UserInfoRequest) (*sys.UserInfoResponse, error) {
+func (l *UserInfoLogic) UserInfo(in *sys.UserInfoReq) (*sys.UserInfoResp, error) {
 	// 查询用户是否存在
 	res, err := l.svcCtx.UserModel.FindOne(l.ctx, in.UserId)
 	if err != nil {
@@ -35,12 +35,12 @@ func (l *UserInfoLogic) UserInfo(in *sys.UserInfoRequest) (*sys.UserInfoResponse
 		return nil, status.Error(500, err.Error())
 	}
 
-	return &sys.UserInfoResponse{
+	return &sys.UserInfoResp{
 		UserId:       res.UserId,
 		UserName:     res.Username,
 		Avatar:       "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
 		Name:         res.Username,
-		Code:         200,
+		RoleId:       res.RoleId.Int64,
 		Introduction: "am a super administrator",
 		DeptId:       1,
 		Buttons:      []string{"*:*:*"},

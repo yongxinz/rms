@@ -27,7 +27,7 @@ func (s *SysServer) Login(ctx context.Context, in *sys.LoginRequest) (*sys.Login
 	return l.Login(in)
 }
 
-func (s *SysServer) UserInfo(ctx context.Context, in *sys.UserInfoRequest) (*sys.UserInfoResponse, error) {
+func (s *SysServer) UserInfo(ctx context.Context, in *sys.UserInfoReq) (*sys.UserInfoResp, error) {
 	l := logic.NewUserInfoLogic(ctx, s.svcCtx)
 	return l.UserInfo(in)
 }
@@ -52,7 +52,7 @@ func (s *SysServer) MenuUpdate(ctx context.Context, in *sys.MenuUpdateReq) (*sys
 	return l.MenuUpdate(in)
 }
 
-func (s *SysServer) MenuDelete(ctx context.Context, in *sys.MenuDeleteReq) (*sys.MenuDeleteResp, error) {
-	l := logic.NewMenuDeleteLogic(ctx, s.svcCtx)
-	return l.MenuDelete(in)
+func (s *SysServer) MenuRole(ctx context.Context, in *sys.MenuRoleReq) (*sys.MenuRoleResp, error) {
+	l := logic.NewMenuRoleLogic(ctx, s.svcCtx)
+	return l.MenuRole(in)
 }

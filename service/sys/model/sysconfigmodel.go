@@ -16,7 +16,7 @@ type (
 	// and implement the added methods in customSysConfigModel.
 	SysConfigModel interface {
 		sysConfigModel
-		FindAll(ctx context.Context) ([]*SysConfig, error)
+		FindAll(context.Context) ([]*SysConfig, error)
 	}
 
 	customSysConfigModel struct {

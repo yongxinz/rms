@@ -27,7 +27,7 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 
 func (l *UserInfoLogic) UserInfo() (resp *types.UserInfoResponse, err error) {
 	userId, _ := l.ctx.Value("userId").(json.Number).Int64()
-	res, err := l.svcCtx.SysRpc.UserInfo(l.ctx, &sysclient.UserInfoRequest{
+	res, err := l.svcCtx.SysRpc.UserInfo(l.ctx, &sysclient.UserInfoReq{
 		UserId: userId,
 	})
 	if err != nil {
@@ -35,7 +35,7 @@ func (l *UserInfoLogic) UserInfo() (resp *types.UserInfoResponse, err error) {
 	}
 
 	return &types.UserInfoResponse{
-		Code: res.Code,
+		Code: 200,
 		Data: types.UserInfo{
 			Avatar:       res.Avatar,
 			Introduction: res.Introduction,

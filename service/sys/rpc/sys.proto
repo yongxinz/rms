@@ -19,10 +19,10 @@ message LoginResponse {
 }
 
 // 用户信息
-message UserInfoRequest {
+message UserInfoReq {
     int64 userId = 1;
 }
-message UserInfoResponse {
+message UserInfoResp {
     repeated string roles = 1;
     repeated string permissions = 2;
     repeated string buttons = 3;
@@ -32,7 +32,7 @@ message UserInfoResponse {
     string name = 7;
     int64 userId = 8;
     int64 deptId = 9;
-    int64 code = 10;
+    int64 roleId = 10;
 }
 // user end
 
@@ -77,30 +77,31 @@ message MenuListReq {
 }
 
 message MenuListData {
-    string menu_name = 1;
-    string title = 2;
-    string icon = 3;
-    string path = 4;
-    string paths = 5;
-    string menu_type = 6;
-    string action = 7;
-    string permission = 8;
-    string breadcrumb =9;
-    string component =10;
-    string visible =11;
-    string is_frame =12;
-    int64 parent_id = 13;
-    int64 no_cache = 14;
-    int64 sort = 15;
-    string create_by =16;
-    string update_by =17;
+    int64 menu_id = 1;
+    string menu_name = 2;
+    string title = 3;
+    string icon = 4;
+    string path = 5;
+    string paths = 6;
+    string menu_type = 7;
+    string action = 8;
+    string permission = 9;
+    string breadcrumb =10;
+    string component =11;
+    string visible =12;
+    string is_frame =13;
+    int64 parent_id = 14;
+    int64 no_cache = 15;
+    int64 sort = 16;
+    string create_by =17;
+    string update_by =18;
 }
-
 
 message MenuListResp{
     int64 total = 1;
-    repeated  MenuListData list = 2;
+    repeated MenuListData list = 2;
 }
+
 message MenuUpdateReq {
     string menu_name = 1;
     string title = 2;
@@ -133,16 +134,30 @@ message MenuDeleteReq {
 message MenuDeleteResp {
     string pong = 1;
 }
+
+message MenuRoleReq {
+    int64 role_id = 1;
+}
+
+message MenuTree {
+    MenuListData data = 1;
+    repeated MenuTree children = 2;
+}
+
+message MenuRoleResp {
+    repeated MenuTree data = 1;
+}
 // menu end
 
 service Sys {
     rpc Login(LoginRequest) returns(LoginResponse);
-    rpc UserInfo(UserInfoRequest) returns(UserInfoResponse);
+    rpc UserInfo(UserInfoReq) returns(UserInfoResp);
 
     rpc SysConfig(SysConfigReq) returns(SysConfigResp);
 
     rpc MenuAdd(MenuAddReq) returns(MenuAddResp);
     rpc MenuList(MenuListReq) returns(MenuListResp);
     rpc MenuUpdate(MenuUpdateReq) returns(MenuUpdateResp);
-    rpc MenuDelete(MenuDeleteReq) returns(MenuDeleteResp);
+
+    rpc MenuRole(MenuRoleReq) returns(MenuRoleResp);
 }

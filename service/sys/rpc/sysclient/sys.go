@@ -13,30 +13,33 @@ import (
 )
 
 type (
-	LoginRequest     = sys.LoginRequest
-	LoginResponse    = sys.LoginResponse
-	MenuAddReq       = sys.MenuAddReq
-	MenuAddResp      = sys.MenuAddResp
-	MenuDeleteReq    = sys.MenuDeleteReq
-	MenuDeleteResp   = sys.MenuDeleteResp
-	MenuListData     = sys.MenuListData
-	MenuListReq      = sys.MenuListReq
-	MenuListResp     = sys.MenuListResp
-	MenuUpdateReq    = sys.MenuUpdateReq
-	MenuUpdateResp   = sys.MenuUpdateResp
-	SysConfigReq     = sys.SysConfigReq
-	SysConfigResp    = sys.SysConfigResp
-	UserInfoRequest  = sys.UserInfoRequest
-	UserInfoResponse = sys.UserInfoResponse
+	LoginRequest   = sys.LoginRequest
+	LoginResponse  = sys.LoginResponse
+	MenuAddReq     = sys.MenuAddReq
+	MenuAddResp    = sys.MenuAddResp
+	MenuDeleteReq  = sys.MenuDeleteReq
+	MenuDeleteResp = sys.MenuDeleteResp
+	MenuListData   = sys.MenuListData
+	MenuListReq    = sys.MenuListReq
+	MenuListResp   = sys.MenuListResp
+	MenuRoleReq    = sys.MenuRoleReq
+	MenuRoleResp   = sys.MenuRoleResp
+	MenuTree       = sys.MenuTree
+	MenuUpdateReq  = sys.MenuUpdateReq
+	MenuUpdateResp = sys.MenuUpdateResp
+	SysConfigReq   = sys.SysConfigReq
+	SysConfigResp  = sys.SysConfigResp
+	UserInfoReq    = sys.UserInfoReq
+	UserInfoResp   = sys.UserInfoResp
 
 	Sys interface {
 		Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-		UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
+		UserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoResp, error)
 		SysConfig(ctx context.Context, in *SysConfigReq, opts ...grpc.CallOption) (*SysConfigResp, error)
 		MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
 		MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
 		MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
-		MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error)
+		MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
 	}
 
 	defaultSys struct {
@@ -55,7 +58,7 @@ func (m *defaultSys) Login(ctx context.Context, in *LoginRequest, opts ...grpc.C
 	return client.Login(ctx, in, opts...)
 }
 
-func (m *defaultSys) UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error) {
+func (m *defaultSys) UserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.UserInfo(ctx, in, opts...)
 }
@@ -80,7 +83,7 @@ func (m *defaultSys) MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...
 	return client.MenuUpdate(ctx, in, opts...)
 }
 
-func (m *defaultSys) MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error) {
+func (m *defaultSys) MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
-	return client.MenuDelete(ctx, in, opts...)
+	return client.MenuRole(ctx, in, opts...)
 }

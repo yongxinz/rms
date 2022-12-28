@@ -1,2 +1,3 @@
 import "doc/user.api"
 import "doc/sysconfig.api"
+import "doc/rolemenu.api"

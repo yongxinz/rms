@@ -23,12 +23,12 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SysClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-	UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
+	UserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoResp, error)
 	SysConfig(ctx context.Context, in *SysConfigReq, opts ...grpc.CallOption) (*SysConfigResp, error)
 	MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
 	MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
 	MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
-	MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error)
+	MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
 }
 
 type sysClient struct {
@@ -48,8 +48,8 @@ func (c *sysClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.Ca
 	return out, nil
 }
 
-func (c *sysClient) UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error) {
-	out := new(UserInfoResponse)
+func (c *sysClient) UserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoResp, error) {
+	out := new(UserInfoResp)
 	err := c.cc.Invoke(ctx, "/sysclient.Sys/UserInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -93,9 +93,9 @@ func (c *sysClient) MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...g
 	return out, nil
 }
 
-func (c *sysClient) MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error) {
-	out := new(MenuDeleteResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/MenuDelete", in, out, opts...)
+func (c *sysClient) MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error) {
+	out := new(MenuRoleResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/MenuRole", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -107,12 +107,12 @@ func (c *sysClient) MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...g
 // for forward compatibility
 type SysServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
-	UserInfo(context.Context, *UserInfoRequest) (*UserInfoResponse, error)
+	UserInfo(context.Context, *UserInfoReq) (*UserInfoResp, error)
 	SysConfig(context.Context, *SysConfigReq) (*SysConfigResp, error)
 	MenuAdd(context.Context, *MenuAddReq) (*MenuAddResp, error)
 	MenuList(context.Context, *MenuListReq) (*MenuListResp, error)
 	MenuUpdate(context.Context, *MenuUpdateReq) (*MenuUpdateResp, error)
-	MenuDelete(context.Context, *MenuDeleteReq) (*MenuDeleteResp, error)
+	MenuRole(context.Context, *MenuRoleReq) (*MenuRoleResp, error)
 	mustEmbedUnimplementedSysServer()
 }
 
@@ -123,7 +123,7 @@ type UnimplementedSysServer struct {
 func (UnimplementedSysServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
-func (UnimplementedSysServer) UserInfo(context.Context, *UserInfoRequest) (*UserInfoResponse, error) {
+func (UnimplementedSysServer) UserInfo(context.Context, *UserInfoReq) (*UserInfoResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserInfo not implemented")
 }
 func (UnimplementedSysServer) SysConfig(context.Context, *SysConfigReq) (*SysConfigResp, error) {
@@ -138,8 +138,8 @@ func (UnimplementedSysServer) MenuList(context.Context, *MenuListReq) (*MenuList
 func (UnimplementedSysServer) MenuUpdate(context.Context, *MenuUpdateReq) (*MenuUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MenuUpdate not implemented")
 }
-func (UnimplementedSysServer) MenuDelete(context.Context, *MenuDeleteReq) (*MenuDeleteResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MenuDelete not implemented")
+func (UnimplementedSysServer) MenuRole(context.Context, *MenuRoleReq) (*MenuRoleResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MenuRole not implemented")
 }
 func (UnimplementedSysServer) mustEmbedUnimplementedSysServer() {}
 
@@ -173,7 +173,7 @@ func _Sys_Login_Handler(srv interface{}, ctx context.Context, dec func(interface
 }
 
 func _Sys_UserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserInfoRequest)
+	in := new(UserInfoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -185,7 +185,7 @@ func _Sys_UserInfo_Handler(srv interface{}, ctx context.Context, dec func(interf
 		FullMethod: "/sysclient.Sys/UserInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).UserInfo(ctx, req.(*UserInfoRequest))
+		return srv.(SysServer).UserInfo(ctx, req.(*UserInfoReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -262,20 +262,20 @@ func _Sys_MenuUpdate_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_MenuDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MenuDeleteReq)
+func _Sys_MenuRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MenuRoleReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).MenuDelete(ctx, in)
+		return srv.(SysServer).MenuRole(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/MenuDelete",
+		FullMethod: "/sysclient.Sys/MenuRole",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).MenuDelete(ctx, req.(*MenuDeleteReq))
+		return srv.(SysServer).MenuRole(ctx, req.(*MenuRoleReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -312,8 +312,8 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Sys_MenuUpdate_Handler,
 		},
 		{
-			MethodName: "MenuDelete",
-			Handler:    _Sys_MenuDelete_Handler,
+			MethodName: "MenuRole",
+			Handler:    _Sys_MenuRole_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

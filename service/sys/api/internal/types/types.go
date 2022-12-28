@@ -45,3 +45,37 @@ type SysConfigResp struct {
 	Data map[string]string `json:"data"`
 	Msg  string            `json:"msg"`
 }
+
+type MenuData struct {
+	MenuId     int64      `json:"menuId"`
+	MenuName   string     `json:"menuName"`
+	MenuType   string     `json:"menuType"`
+	Title      string     `json:"title"`
+	Permission string     `json:"permission"`
+	Params     string     `json:"params"`
+	Path       string     `json:"path"`
+	Paths      string     `json:"paths"`
+	Action     string     `json:"action"`
+	Apis       string     `json:"apis"`
+	SysApi     string     `json:"sysApi"`
+	Breadcrumb string     `json:"breadcrumb"`
+	Component  string     `json:"component"`
+	ParentId   int64      `json:"parentId"`
+	Sort       int64      `json:"sort"`
+	DataScope  string     `json:"dataScope"`
+	Icon       string     `json:"icon"`
+	IsFrame    string     `json:"isFrame"`
+	Visible    string     `json:"visible"`
+	Is_select  bool       `json:"is_select"`
+	NoCache    int64      `json:"noCache"`
+	CreateBy   int64      `json:"createBy"`
+	CreatedAt  string     `json:"createdAt"`
+	UpdateBy   int64      `json:"updateBy"`
+	UpdatedAt  string     `json:"updatedAt"`
+	Children   []MenuData `json:"children"`
+}
+
+type MenuRoleResp struct {
+	Code int64       `json:"code"`
+	Data []*MenuData `json:"data"`
+}
