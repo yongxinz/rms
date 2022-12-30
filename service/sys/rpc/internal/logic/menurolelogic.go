@@ -26,19 +26,31 @@ func NewMenuRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuRole
 }
 
 func (l *MenuRoleLogic) MenuRole(in *sys.MenuRoleReq) (*sys.MenuRoleResp, error) {
-	res, err := l.svcCtx.RoleMenu.FindMenuIds(l.ctx, in.RoleId)
-	if err != nil {
-		return nil, status.Error(500, err.Error())
-	}
+	var err error
+	var menus []*model.SysMenu
 
-	var menuIds []int64
-	for _, item := range res {
-		menuIds = append(menuIds, item.MenuId.Int64)
-	}
+	roleInfo, _ := l.svcCtx.Role.FindOne(l.ctx, in.RoleId)
+	if roleInfo.RoleKey.String == "admin" {
+		count, _ := l.svcCtx.Menu.Count(l.ctx)
+		menus, err = l.svcCtx.Menu.FindAll(l.ctx, 1, count)
+		if err != nil {
+			return nil, status.Error(500, err.Error())
+		}
+	} else {
+		res, err := l.svcCtx.RoleMenu.FindMenuIds(l.ctx, in.RoleId)
+		if err != nil {
+			return nil, status.Error(500, err.Error())
+		}
 
-	menus, err := l.svcCtx.Menu.FindMenuList(l.ctx, menuIds)
-	if err != nil {
-		return nil, status.Error(500, err.Error())
+		var menuIds []int64
+		for _, item := range res {
+			menuIds = append(menuIds, item.MenuId.Int64)
+		}
+
+		menus, err = l.svcCtx.Menu.FindMenuList(l.ctx, menuIds)
+		if err != nil {
+			return nil, status.Error(500, err.Error())
+		}
 	}
 
 	data := make([]*sys.MenuTree, 0)

@@ -18,6 +18,8 @@ type (
 	SysMenuModel interface {
 		sysMenuModel
 		FindMenuList(context.Context, []int64) ([]*SysMenu, error)
+		FindAll(context.Context, int64, int64) ([]*SysMenu, error)
+		Count(context.Context) (int64, error)
 	}
 
 	customSysMenuModel struct {
@@ -48,5 +50,31 @@ func (m *customSysMenuModel) FindMenuList(ctx context.Context, MenuIds []int64) 
 		return nil, ErrNotFound
 	default:
 		return nil, err
+	}
+}
+
+func (m *customSysMenuModel) FindAll(ctx context.Context, Current int64, PageSize int64) ([]*SysMenu, error) {
+	var resp []*SysMenu
+	query := fmt.Sprintf("select %s from %s order by menu_id limit ?,?", sysMenuRows, m.table)
+	err := m.QueryRowsNoCacheCtx(ctx, &resp, query, (Current-1)*PageSize, PageSize)
+	switch err {
+	case nil:
+		return resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
+func (m *customSysMenuModel) Count(ctx context.Context) (int64, error) {
+	var count int64
+	query := fmt.Sprintf("select count(menu_id) from %s", m.table)
+	err := m.QueryRowNoCacheCtx(ctx, &count, query)
+	switch err {
+	case nil:
+		return count, nil
+	default:
+		return count, err
 	}
 }
