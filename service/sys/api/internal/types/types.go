@@ -40,6 +40,66 @@ type UserInfoResponse struct {
 	Data UserInfo `json:"data"`
 }
 
+type UserListReq struct {
+	PageIndex int64 `json:"pageIndex,default=1"`
+	PageSize  int64 `json:"pageSize,default=20"`
+}
+
+type UserListData struct {
+	UserId    int64        `json:"userId"`
+	UserName  string       `json:"username"`
+	NickName  string       `json:"nickName"`
+	Phone     string       `json:"phone"`
+	Status    string       `json:"status"`
+	Email     string       `json:"email"`
+	Salt      string       `json:"salt"`
+	Avatar    string       `json:"avatar"`
+	Sex       string       `json:"sex"`
+	Remark    string       `json:"remark"`
+	CreatedAt string       `json:"createdAt"`
+	UpdatedAt string       `json:"updatedAt"`
+	CreateBy  int64        `json:"createBy"`
+	UpdateBy  int64        `json:"updateBy"`
+	RoleId    int64        `json:"roleId"`
+	DeptId    int64        `json:"deptId"`
+	PostId    int64        `json:"postId"`
+	Dept      DeptListData `json:"dept"`
+}
+
+type UserData struct {
+	PageIndex int64           `json:"pageIndex"`
+	PageSize  int64           `json:"pageSize"`
+	Count     int64           `json:"count"`
+	List      []*UserListData `json:"list"`
+}
+
+type UserListResp struct {
+	Code int64    `json:"code"`
+	Msg  string   `json:"msg"`
+	Data UserData `json:"data"`
+}
+
+type DeptListReq struct {
+	PageIndex int64 `json:"pageIndex,default=1"`
+	PageSize  int64 `json:"pageSize,default=20"`
+}
+
+type DeptListData struct {
+	DeptId    int64  `json:"deptId"`
+	DeptPath  string `json:"deptPath"`
+	DeptName  string `json:"deptName"`
+	Phone     string `json:"phone"`
+	Status    int64  `json:"status"`
+	Email     string `json:"email"`
+	Leader    string `json:"leader"`
+	Sort      int64  `json:"sort"`
+	ParentId  int64  `json:"parentId"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	CreateBy  int64  `json:"createBy"`
+	UpdateBy  int64  `json:"updateBy"`
+}
+
 type SysConfigResp struct {
 	Code int64             `json:"code"`
 	Data map[string]string `json:"data"`

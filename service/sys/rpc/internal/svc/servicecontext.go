@@ -14,6 +14,7 @@ type ServiceContext struct {
 	Menu           model.SysMenuModel
 	RoleMenu       model.SysRoleMenuModel
 	Role           model.SysRoleModel
+	Dept           model.SysDeptModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -25,5 +26,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Menu:           model.NewSysMenuModel(conn, c.CacheRedis),
 		RoleMenu:       model.NewSysRoleMenuModel(conn, c.CacheRedis),
 		Role:           model.NewSysRoleModel(conn, c.CacheRedis),
+		Dept:           model.NewSysDeptModel(conn, c.CacheRedis),
 	}
 }

@@ -37,7 +37,17 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/api/v1/user/profile",
 				Handler: ProfileHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/v1/sys-user",
+				Handler: UserListHandler(serverCtx),
+			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
