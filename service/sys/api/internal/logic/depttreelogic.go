@@ -10,22 +10,22 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type DeepTreeLogic struct {
+type DeptTreeLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewDeepTreeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeepTreeLogic {
-	return &DeepTreeLogic{
+func NewDeptTreeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptTreeLogic {
+	return &DeptTreeLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *DeepTreeLogic) DeepTree() (resp *types.DeepTreeResp, err error) {
-	res, err := l.svcCtx.SysRpc.DeepTree(l.ctx, &sysclient.DeepTreeReq{})
+func (l *DeptTreeLogic) DeptTree() (resp *types.DeptTreeResp, err error) {
+	res, err := l.svcCtx.SysRpc.DeptTree(l.ctx, &sysclient.DeptTreeReq{})
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ func (l *DeepTreeLogic) DeepTree() (resp *types.DeepTreeResp, err error) {
 			Children: children,
 		})
 	}
-	resp = &types.DeepTreeResp{
+	resp = &types.DeptTreeResp{
 		Code: 200,
 		Data: data,
 	}

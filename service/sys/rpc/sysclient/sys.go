@@ -15,10 +15,10 @@ import (
 type (
 	ConfigPwReq    = sys.ConfigPwReq
 	ConfigPwResp   = sys.ConfigPwResp
-	DeepTreeData   = sys.DeepTreeData
-	DeepTreeReq    = sys.DeepTreeReq
-	DeepTreeResp   = sys.DeepTreeResp
 	DeptListData   = sys.DeptListData
+	DeptTreeData   = sys.DeptTreeData
+	DeptTreeReq    = sys.DeptTreeReq
+	DeptTreeResp   = sys.DeptTreeResp
 	DictDataOp     = sys.DictDataOp
 	DictDataOpReq  = sys.DictDataOpReq
 	DictDataOpResp = sys.DictDataOpResp
@@ -54,7 +54,7 @@ type (
 		MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
 		MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
 		MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
-		DeepTree(ctx context.Context, in *DeepTreeReq, opts ...grpc.CallOption) (*DeepTreeResp, error)
+		DeptTree(ctx context.Context, in *DeptTreeReq, opts ...grpc.CallOption) (*DeptTreeResp, error)
 		DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
 	}
 
@@ -114,9 +114,9 @@ func (m *defaultSys) MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc
 	return client.MenuRole(ctx, in, opts...)
 }
 
-func (m *defaultSys) DeepTree(ctx context.Context, in *DeepTreeReq, opts ...grpc.CallOption) (*DeepTreeResp, error) {
+func (m *defaultSys) DeptTree(ctx context.Context, in *DeptTreeReq, opts ...grpc.CallOption) (*DeptTreeResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
-	return client.DeepTree(ctx, in, opts...)
+	return client.DeptTree(ctx, in, opts...)
 }
 
 func (m *defaultSys) DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error) {

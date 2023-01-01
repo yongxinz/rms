@@ -24,7 +24,7 @@ type (
 		Label    string         `json:"label"`
 		Children []DeptTreeData `json:"children"`
 	}
-	DeepTreeResp {
+	DeptTreeResp {
 		Code int64           `json:"code"`
 		Data []*DeptTreeData `json:"data"`
 	}
@@ -34,6 +34,6 @@ type (
 	jwt: Auth
 )
 service sys {
-	@handler DeepTree
-	get /api/v1/deptTree returns (DeepTreeResp)
+	@handler DeptTree
+	get /api/v1/deptTree returns (DeptTreeResp)
 }

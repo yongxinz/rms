@@ -955,14 +955,14 @@ func (x *DeptListData) GetUpdateBy() int64 {
 	return 0
 }
 
-type DeepTreeReq struct {
+type DeptTreeReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *DeepTreeReq) Reset() {
-	*x = DeepTreeReq{}
+func (x *DeptTreeReq) Reset() {
+	*x = DeptTreeReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_sys_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -970,13 +970,13 @@ func (x *DeepTreeReq) Reset() {
 	}
 }
 
-func (x *DeepTreeReq) String() string {
+func (x *DeptTreeReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeepTreeReq) ProtoMessage() {}
+func (*DeptTreeReq) ProtoMessage() {}
 
-func (x *DeepTreeReq) ProtoReflect() protoreflect.Message {
+func (x *DeptTreeReq) ProtoReflect() protoreflect.Message {
 	mi := &file_sys_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -988,23 +988,23 @@ func (x *DeepTreeReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeepTreeReq.ProtoReflect.Descriptor instead.
-func (*DeepTreeReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeptTreeReq.ProtoReflect.Descriptor instead.
+func (*DeptTreeReq) Descriptor() ([]byte, []int) {
 	return file_sys_proto_rawDescGZIP(), []int{12}
 }
 
-type DeepTreeData struct {
+type DeptTreeData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	Id       int64           `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Label    string          `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
-	Children []*DeepTreeData `protobuf:"bytes,3,rep,name=children,proto3" json:"children,omitempty"`
+	Children []*DeptTreeData `protobuf:"bytes,3,rep,name=children,proto3" json:"children,omitempty"`
 }
 
-func (x *DeepTreeData) Reset() {
-	*x = DeepTreeData{}
+func (x *DeptTreeData) Reset() {
+	*x = DeptTreeData{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_sys_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1012,13 +1012,13 @@ func (x *DeepTreeData) Reset() {
 	}
 }
 
-func (x *DeepTreeData) String() string {
+func (x *DeptTreeData) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeepTreeData) ProtoMessage() {}
+func (*DeptTreeData) ProtoMessage() {}
 
-func (x *DeepTreeData) ProtoReflect() protoreflect.Message {
+func (x *DeptTreeData) ProtoReflect() protoreflect.Message {
 	mi := &file_sys_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1030,42 +1030,42 @@ func (x *DeepTreeData) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeepTreeData.ProtoReflect.Descriptor instead.
-func (*DeepTreeData) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeptTreeData.ProtoReflect.Descriptor instead.
+func (*DeptTreeData) Descriptor() ([]byte, []int) {
 	return file_sys_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *DeepTreeData) GetId() int64 {
+func (x *DeptTreeData) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *DeepTreeData) GetLabel() string {
+func (x *DeptTreeData) GetLabel() string {
 	if x != nil {
 		return x.Label
 	}
 	return ""
 }
 
-func (x *DeepTreeData) GetChildren() []*DeepTreeData {
+func (x *DeptTreeData) GetChildren() []*DeptTreeData {
 	if x != nil {
 		return x.Children
 	}
 	return nil
 }
 
-type DeepTreeResp struct {
+type DeptTreeResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data []*DeepTreeData `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Data []*DeptTreeData `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
 }
 
-func (x *DeepTreeResp) Reset() {
-	*x = DeepTreeResp{}
+func (x *DeptTreeResp) Reset() {
+	*x = DeptTreeResp{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_sys_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1073,13 +1073,13 @@ func (x *DeepTreeResp) Reset() {
 	}
 }
 
-func (x *DeepTreeResp) String() string {
+func (x *DeptTreeResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeepTreeResp) ProtoMessage() {}
+func (*DeptTreeResp) ProtoMessage() {}
 
-func (x *DeepTreeResp) ProtoReflect() protoreflect.Message {
+func (x *DeptTreeResp) ProtoReflect() protoreflect.Message {
 	mi := &file_sys_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1091,12 +1091,12 @@ func (x *DeepTreeResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeepTreeResp.ProtoReflect.Descriptor instead.
-func (*DeepTreeResp) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeptTreeResp.ProtoReflect.Descriptor instead.
+func (*DeptTreeResp) Descriptor() ([]byte, []int) {
 	return file_sys_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *DeepTreeResp) GetData() []*DeepTreeData {
+func (x *DeptTreeResp) GetData() []*DeptTreeData {
 	if x != nil {
 		return x.Data
 	}
@@ -2355,17 +2355,17 @@ var file_sys_proto_rawDesc = []byte{
 	0x64, 0x41, 0x74, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74,
 	0x65, 0x64, 0x41, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x42, 0x79,
 	0x18, 0x0d, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x42, 0x79,
-	0x22, 0x0d, 0x0a, 0x0b, 0x44, 0x65, 0x65, 0x70, 0x54, 0x72, 0x65, 0x65, 0x52, 0x65, 0x71, 0x22,
-	0x69, 0x0a, 0x0c, 0x44, 0x65, 0x65, 0x70, 0x54, 0x72, 0x65, 0x65, 0x44, 0x61, 0x74, 0x61, 0x12,
+	0x22, 0x0d, 0x0a, 0x0b, 0x44, 0x65, 0x70, 0x74, 0x54, 0x72, 0x65, 0x65, 0x52, 0x65, 0x71, 0x22,
+	0x69, 0x0a, 0x0c, 0x44, 0x65, 0x70, 0x74, 0x54, 0x72, 0x65, 0x65, 0x44, 0x61, 0x74, 0x61, 0x12,
 	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12,
 	0x14, 0x0a, 0x05, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
 	0x6c, 0x61, 0x62, 0x65, 0x6c, 0x12, 0x33, 0x0a, 0x08, 0x63, 0x68, 0x69, 0x6c, 0x64, 0x72, 0x65,
 	0x6e, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69,
-	0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x65, 0x70, 0x54, 0x72, 0x65, 0x65, 0x44, 0x61, 0x74, 0x61,
+	0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x70, 0x74, 0x54, 0x72, 0x65, 0x65, 0x44, 0x61, 0x74, 0x61,
 	0x52, 0x08, 0x63, 0x68, 0x69, 0x6c, 0x64, 0x72, 0x65, 0x6e, 0x22, 0x3b, 0x0a, 0x0c, 0x44, 0x65,
-	0x65, 0x70, 0x54, 0x72, 0x65, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x2b, 0x0a, 0x04, 0x64, 0x61,
+	0x70, 0x74, 0x54, 0x72, 0x65, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x2b, 0x0a, 0x04, 0x64, 0x61,
 	0x74, 0x61, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c,
-	0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x65, 0x70, 0x54, 0x72, 0x65, 0x65, 0x44, 0x61, 0x74,
+	0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x70, 0x74, 0x54, 0x72, 0x65, 0x65, 0x44, 0x61, 0x74,
 	0x61, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0xcb, 0x03, 0x0a, 0x0a, 0x4d, 0x65, 0x6e, 0x75,
 	0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x12, 0x1b, 0x0a, 0x09, 0x6d, 0x65, 0x6e, 0x75, 0x5f, 0x6e,
 	0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6d, 0x65, 0x6e, 0x75, 0x4e,
@@ -2533,10 +2533,10 @@ var file_sys_proto_rawDesc = []byte{
 	0x52, 0x6f, 0x6c, 0x65, 0x12, 0x16, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74,
 	0x2e, 0x4d, 0x65, 0x6e, 0x75, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x17, 0x2e, 0x73,
 	0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x65, 0x6e, 0x75, 0x52, 0x6f, 0x6c,
-	0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x3b, 0x0a, 0x08, 0x44, 0x65, 0x65, 0x70, 0x54, 0x72, 0x65,
+	0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x3b, 0x0a, 0x08, 0x44, 0x65, 0x70, 0x74, 0x54, 0x72, 0x65,
 	0x65, 0x12, 0x16, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65,
-	0x65, 0x70, 0x54, 0x72, 0x65, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x17, 0x2e, 0x73, 0x79, 0x73, 0x63,
-	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x65, 0x70, 0x54, 0x72, 0x65, 0x65, 0x52, 0x65,
+	0x70, 0x74, 0x54, 0x72, 0x65, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x17, 0x2e, 0x73, 0x79, 0x73, 0x63,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x70, 0x74, 0x54, 0x72, 0x65, 0x65, 0x52, 0x65,
 	0x73, 0x70, 0x12, 0x41, 0x0a, 0x0a, 0x44, 0x69, 0x63, 0x74, 0x44, 0x61, 0x74, 0x61, 0x4f, 0x70,
 	0x12, 0x18, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x69, 0x63,
 	0x74, 0x44, 0x61, 0x74, 0x61, 0x4f, 0x70, 0x52, 0x65, 0x71, 0x1a, 0x19, 0x2e, 0x73, 0x79, 0x73,
@@ -2571,9 +2571,9 @@ var file_sys_proto_goTypes = []interface{}{
 	(*UserListData)(nil),   // 9: sysclient.UserListData
 	(*UserListResp)(nil),   // 10: sysclient.UserListResp
 	(*DeptListData)(nil),   // 11: sysclient.DeptListData
-	(*DeepTreeReq)(nil),    // 12: sysclient.DeepTreeReq
-	(*DeepTreeData)(nil),   // 13: sysclient.DeepTreeData
-	(*DeepTreeResp)(nil),   // 14: sysclient.DeepTreeResp
+	(*DeptTreeReq)(nil),    // 12: sysclient.DeptTreeReq
+	(*DeptTreeData)(nil),   // 13: sysclient.DeptTreeData
+	(*DeptTreeResp)(nil),   // 14: sysclient.DeptTreeResp
 	(*MenuAddReq)(nil),     // 15: sysclient.MenuAddReq
 	(*MenuAddResp)(nil),    // 16: sysclient.MenuAddResp
 	(*MenuListReq)(nil),    // 17: sysclient.MenuListReq
@@ -2593,8 +2593,8 @@ var file_sys_proto_goTypes = []interface{}{
 var file_sys_proto_depIdxs = []int32{
 	11, // 0: sysclient.UserListData.dept:type_name -> sysclient.DeptListData
 	9,  // 1: sysclient.UserListResp.list:type_name -> sysclient.UserListData
-	13, // 2: sysclient.DeepTreeData.children:type_name -> sysclient.DeepTreeData
-	13, // 3: sysclient.DeepTreeResp.data:type_name -> sysclient.DeepTreeData
+	13, // 2: sysclient.DeptTreeData.children:type_name -> sysclient.DeptTreeData
+	13, // 3: sysclient.DeptTreeResp.data:type_name -> sysclient.DeptTreeData
 	18, // 4: sysclient.MenuListResp.list:type_name -> sysclient.MenuListData
 	18, // 5: sysclient.MenuTree.data:type_name -> sysclient.MenuListData
 	25, // 6: sysclient.MenuTree.children:type_name -> sysclient.MenuTree
@@ -2609,7 +2609,7 @@ var file_sys_proto_depIdxs = []int32{
 	17, // 15: sysclient.Sys.MenuList:input_type -> sysclient.MenuListReq
 	20, // 16: sysclient.Sys.MenuUpdate:input_type -> sysclient.MenuUpdateReq
 	24, // 17: sysclient.Sys.MenuRole:input_type -> sysclient.MenuRoleReq
-	12, // 18: sysclient.Sys.DeepTree:input_type -> sysclient.DeepTreeReq
+	12, // 18: sysclient.Sys.DeptTree:input_type -> sysclient.DeptTreeReq
 	27, // 19: sysclient.Sys.DictDataOp:input_type -> sysclient.DictDataOpReq
 	1,  // 20: sysclient.Sys.Login:output_type -> sysclient.LoginResponse
 	7,  // 21: sysclient.Sys.UserInfo:output_type -> sysclient.UserInfoResp
@@ -2620,7 +2620,7 @@ var file_sys_proto_depIdxs = []int32{
 	19, // 26: sysclient.Sys.MenuList:output_type -> sysclient.MenuListResp
 	21, // 27: sysclient.Sys.MenuUpdate:output_type -> sysclient.MenuUpdateResp
 	26, // 28: sysclient.Sys.MenuRole:output_type -> sysclient.MenuRoleResp
-	14, // 29: sysclient.Sys.DeepTree:output_type -> sysclient.DeepTreeResp
+	14, // 29: sysclient.Sys.DeptTree:output_type -> sysclient.DeptTreeResp
 	29, // 30: sysclient.Sys.DictDataOp:output_type -> sysclient.DictDataOpResp
 	20, // [20:31] is the sub-list for method output_type
 	9,  // [9:20] is the sub-list for method input_type
@@ -2780,7 +2780,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeepTreeReq); i {
+			switch v := v.(*DeptTreeReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2792,7 +2792,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeepTreeData); i {
+			switch v := v.(*DeptTreeData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2804,7 +2804,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeepTreeResp); i {
+			switch v := v.(*DeptTreeResp); i {
 			case 0:
 				return &v.state
 			case 1:

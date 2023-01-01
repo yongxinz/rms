@@ -103,17 +103,17 @@ message DeptListData{
     int64 updateBy = 13;
 }
 
-message DeepTreeReq {
+message DeptTreeReq {
 }
 
-message DeepTreeData {
+message DeptTreeData {
     int64 id = 1;
     string label = 2;
-    repeated DeepTreeData children = 3;
+    repeated DeptTreeData children = 3;
 }
 
-message DeepTreeResp {
-    repeated DeepTreeData data = 1;
+message DeptTreeResp {
+    repeated DeptTreeData data = 1;
 }
 // dept end
 
@@ -248,7 +248,7 @@ service Sys {
 
     rpc MenuRole(MenuRoleReq) returns(MenuRoleResp);
 
-    rpc DeepTree(DeepTreeReq) returns(DeepTreeResp);
+    rpc DeptTree(DeptTreeReq) returns(DeptTreeResp);
 
     rpc DictDataOp(DictDataOpReq) returns(DictDataOpResp);
 }

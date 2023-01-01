@@ -31,7 +31,7 @@ type SysClient interface {
 	MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
 	MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
 	MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
-	DeepTree(ctx context.Context, in *DeepTreeReq, opts ...grpc.CallOption) (*DeepTreeResp, error)
+	DeptTree(ctx context.Context, in *DeptTreeReq, opts ...grpc.CallOption) (*DeptTreeResp, error)
 	DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
 }
 
@@ -124,9 +124,9 @@ func (c *sysClient) MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.
 	return out, nil
 }
 
-func (c *sysClient) DeepTree(ctx context.Context, in *DeepTreeReq, opts ...grpc.CallOption) (*DeepTreeResp, error) {
-	out := new(DeepTreeResp)
-	err := c.cc.Invoke(ctx, "/sysclient.Sys/DeepTree", in, out, opts...)
+func (c *sysClient) DeptTree(ctx context.Context, in *DeptTreeReq, opts ...grpc.CallOption) (*DeptTreeResp, error) {
+	out := new(DeptTreeResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/DeptTree", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -155,7 +155,7 @@ type SysServer interface {
 	MenuList(context.Context, *MenuListReq) (*MenuListResp, error)
 	MenuUpdate(context.Context, *MenuUpdateReq) (*MenuUpdateResp, error)
 	MenuRole(context.Context, *MenuRoleReq) (*MenuRoleResp, error)
-	DeepTree(context.Context, *DeepTreeReq) (*DeepTreeResp, error)
+	DeptTree(context.Context, *DeptTreeReq) (*DeptTreeResp, error)
 	DictDataOp(context.Context, *DictDataOpReq) (*DictDataOpResp, error)
 	mustEmbedUnimplementedSysServer()
 }
@@ -191,8 +191,8 @@ func (UnimplementedSysServer) MenuUpdate(context.Context, *MenuUpdateReq) (*Menu
 func (UnimplementedSysServer) MenuRole(context.Context, *MenuRoleReq) (*MenuRoleResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MenuRole not implemented")
 }
-func (UnimplementedSysServer) DeepTree(context.Context, *DeepTreeReq) (*DeepTreeResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeepTree not implemented")
+func (UnimplementedSysServer) DeptTree(context.Context, *DeptTreeReq) (*DeptTreeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeptTree not implemented")
 }
 func (UnimplementedSysServer) DictDataOp(context.Context, *DictDataOpReq) (*DictDataOpResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DictDataOp not implemented")
@@ -372,20 +372,20 @@ func _Sys_MenuRole_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sys_DeepTree_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeepTreeReq)
+func _Sys_DeptTree_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeptTreeReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SysServer).DeepTree(ctx, in)
+		return srv.(SysServer).DeptTree(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sysclient.Sys/DeepTree",
+		FullMethod: "/sysclient.Sys/DeptTree",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).DeepTree(ctx, req.(*DeepTreeReq))
+		return srv.(SysServer).DeptTree(ctx, req.(*DeptTreeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -452,8 +452,8 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Sys_MenuRole_Handler,
 		},
 		{
-			MethodName: "DeepTree",
-			Handler:    _Sys_DeepTree_Handler,
+			MethodName: "DeptTree",
+			Handler:    _Sys_DeptTree_Handler,
 		},
 		{
 			MethodName: "DictDataOp",

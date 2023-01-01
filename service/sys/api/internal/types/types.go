@@ -106,7 +106,7 @@ type DeptTreeData struct {
 	Children []DeptTreeData `json:"children"`
 }
 
-type DeepTreeResp struct {
+type DeptTreeResp struct {
 	Code int64           `json:"code"`
 	Data []*DeptTreeData `json:"data"`
 }

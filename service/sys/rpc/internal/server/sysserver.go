@@ -67,9 +67,9 @@ func (s *SysServer) MenuRole(ctx context.Context, in *sys.MenuRoleReq) (*sys.Men
 	return l.MenuRole(in)
 }
 
-func (s *SysServer) DeepTree(ctx context.Context, in *sys.DeepTreeReq) (*sys.DeepTreeResp, error) {
-	l := logic.NewDeepTreeLogic(ctx, s.svcCtx)
-	return l.DeepTree(in)
+func (s *SysServer) DeptTree(ctx context.Context, in *sys.DeptTreeReq) (*sys.DeptTreeResp, error) {
+	l := logic.NewDeptTreeLogic(ctx, s.svcCtx)
+	return l.DeptTree(in)
 }
 
 func (s *SysServer) DictDataOp(ctx context.Context, in *sys.DictDataOpReq) (*sys.DictDataOpResp, error) {
