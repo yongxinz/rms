@@ -30,6 +30,7 @@ type SysClient interface {
 	MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
 	MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
 	MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
+	DeepTree(ctx context.Context, in *DeepTreeReq, opts ...grpc.CallOption) (*DeepTreeResp, error)
 }
 
 type sysClient struct {
@@ -112,6 +113,15 @@ func (c *sysClient) MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.
 	return out, nil
 }
 
+func (c *sysClient) DeepTree(ctx context.Context, in *DeepTreeReq, opts ...grpc.CallOption) (*DeepTreeResp, error) {
+	out := new(DeepTreeResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/DeepTree", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SysServer is the server API for Sys service.
 // All implementations must embed UnimplementedSysServer
 // for forward compatibility
@@ -124,6 +134,7 @@ type SysServer interface {
 	MenuList(context.Context, *MenuListReq) (*MenuListResp, error)
 	MenuUpdate(context.Context, *MenuUpdateReq) (*MenuUpdateResp, error)
 	MenuRole(context.Context, *MenuRoleReq) (*MenuRoleResp, error)
+	DeepTree(context.Context, *DeepTreeReq) (*DeepTreeResp, error)
 	mustEmbedUnimplementedSysServer()
 }
 
@@ -154,6 +165,9 @@ func (UnimplementedSysServer) MenuUpdate(context.Context, *MenuUpdateReq) (*Menu
 }
 func (UnimplementedSysServer) MenuRole(context.Context, *MenuRoleReq) (*MenuRoleResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MenuRole not implemented")
+}
+func (UnimplementedSysServer) DeepTree(context.Context, *DeepTreeReq) (*DeepTreeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeepTree not implemented")
 }
 func (UnimplementedSysServer) mustEmbedUnimplementedSysServer() {}
 
@@ -312,6 +326,24 @@ func _Sys_MenuRole_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sys_DeepTree_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeepTreeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).DeepTree(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/DeepTree",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).DeepTree(ctx, req.(*DeepTreeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Sys_ServiceDesc is the grpc.ServiceDesc for Sys service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -350,6 +382,10 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MenuRole",
 			Handler:    _Sys_MenuRole_Handler,
+		},
+		{
+			MethodName: "DeepTree",
+			Handler:    _Sys_DeepTree_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

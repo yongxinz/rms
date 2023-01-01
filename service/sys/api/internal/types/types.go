@@ -100,6 +100,17 @@ type DeptListData struct {
 	UpdateBy  int64  `json:"updateBy"`
 }
 
+type DeptTreeData struct {
+	Id       int64          `json:"id"`
+	Label    string         `json:"label"`
+	Children []DeptTreeData `json:"children"`
+}
+
+type DeepTreeResp struct {
+	Code int64           `json:"code"`
+	Data []*DeptTreeData `json:"data"`
+}
+
 type SysConfigResp struct {
 	Code int64             `json:"code"`
 	Data map[string]string `json:"data"`

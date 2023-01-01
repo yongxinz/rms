@@ -1,5 +1,3 @@
-import "dept.api"
-
 type (
 	// 用户登录
 	LoginRequest {

@@ -47,7 +47,13 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	)
 
 	server.AddRoutes(
-		[]rest.Route{},
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/v1/deptTree",
+				Handler: DeepTreeHandler(serverCtx),
+			},
+		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 

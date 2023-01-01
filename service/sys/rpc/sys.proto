@@ -94,6 +94,19 @@ message DeptListData{
     string updatedAt = 12;
     int64 updateBy = 13;
 }
+
+message DeepTreeReq {
+}
+
+message DeepTreeData {
+    int64 id = 1;
+    string label = 2;
+    repeated DeepTreeData children = 3;
+}
+
+message DeepTreeResp {
+    repeated DeepTreeData data = 1;
+}
 // dept end
 
 // menu start
@@ -212,4 +225,6 @@ service Sys {
     rpc MenuUpdate(MenuUpdateReq) returns(MenuUpdateResp);
 
     rpc MenuRole(MenuRoleReq) returns(MenuRoleResp);
+
+    rpc DeepTree(DeepTreeReq) returns(DeepTreeResp);
 }

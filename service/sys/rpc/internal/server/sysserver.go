@@ -61,3 +61,8 @@ func (s *SysServer) MenuRole(ctx context.Context, in *sys.MenuRoleReq) (*sys.Men
 	l := logic.NewMenuRoleLogic(ctx, s.svcCtx)
 	return l.MenuRole(in)
 }
+
+func (s *SysServer) DeepTree(ctx context.Context, in *sys.DeepTreeReq) (*sys.DeepTreeResp, error) {
+	l := logic.NewDeepTreeLogic(ctx, s.svcCtx)
+	return l.DeepTree(in)
+}

@@ -18,11 +18,22 @@ type (
 		CreateBy  int64  `json:"createBy"`
 		UpdateBy  int64  `json:"updateBy"`
 	}
+
+	DeptTreeData {
+		Id       int64          `json:"id"`
+		Label    string         `json:"label"`
+		Children []DeptTreeData `json:"children"`
+	}
+	DeepTreeResp {
+		Code int64           `json:"code"`
+		Data []*DeptTreeData `json:"data"`
+	}
 )
 
 @server(
 	jwt: Auth
 )
 service sys {
-	
+	@handler DeepTree
+	get /api/v1/deptTree returns (DeepTreeResp)
 }

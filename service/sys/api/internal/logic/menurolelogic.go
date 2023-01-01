@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 
 	"rms/service/sys/api/internal/svc"
 	"rms/service/sys/api/internal/types"
@@ -38,7 +37,6 @@ func (l *MenuRoleLogic) MenuRole() (resp *types.MenuRoleResp, err error) {
 	res, _ := l.svcCtx.SysRpc.MenuRole(l.ctx, &sysclient.MenuRoleReq{
 		RoleId: userinfo.RoleId,
 	})
-	fmt.Println(res)
 
 	var data []*types.MenuData
 	for _, menu := range res.Data {

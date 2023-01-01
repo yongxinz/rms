@@ -13,6 +13,9 @@ import (
 )
 
 type (
+	DeepTreeData   = sys.DeepTreeData
+	DeepTreeReq    = sys.DeepTreeReq
+	DeepTreeResp   = sys.DeepTreeResp
 	DeptListData   = sys.DeptListData
 	LoginRequest   = sys.LoginRequest
 	LoginResponse  = sys.LoginResponse
@@ -45,6 +48,7 @@ type (
 		MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
 		MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
 		MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
+		DeepTree(ctx context.Context, in *DeepTreeReq, opts ...grpc.CallOption) (*DeepTreeResp, error)
 	}
 
 	defaultSys struct {
@@ -96,4 +100,9 @@ func (m *defaultSys) MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...
 func (m *defaultSys) MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.MenuRole(ctx, in, opts...)
+}
+
+func (m *defaultSys) DeepTree(ctx context.Context, in *DeepTreeReq, opts ...grpc.CallOption) (*DeepTreeResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.DeepTree(ctx, in, opts...)
 }
