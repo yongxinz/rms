@@ -1,0 +1,22 @@
+type (
+	DictDataOpReq {
+		DictType string `form:"dictType"`
+	}
+	DictDataOp {
+		Label string `json:"label"`
+		Value string `json:"value"`
+	}
+	DictDataResp {
+		Code int64         `json:"code"`
+		Msg  string        `json:"msg"`
+		Data []*DictDataOp `json:"data"`
+	}
+)
+
+@server(
+	jwt: Auth
+)
+service sys {
+	@handler DictDataOp
+	get /api/v1/dict-data/option-select(DictDataOpReq) returns (DictDataResp)
+}

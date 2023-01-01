@@ -159,3 +159,18 @@ type MenuRoleResp struct {
 	Code int64       `json:"code"`
 	Data []*MenuData `json:"data"`
 }
+
+type DictDataOpReq struct {
+	DictType string `form:"dictType"`
+}
+
+type DictDataOp struct {
+	Label string `json:"label"`
+	Value string `json:"value"`
+}
+
+type DictDataResp struct {
+	Code int64         `json:"code"`
+	Msg  string        `json:"msg"`
+	Data []*DictDataOp `json:"data"`
+}

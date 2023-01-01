@@ -71,3 +71,8 @@ func (s *SysServer) DeepTree(ctx context.Context, in *sys.DeepTreeReq) (*sys.Dee
 	l := logic.NewDeepTreeLogic(ctx, s.svcCtx)
 	return l.DeepTree(in)
 }
+
+func (s *SysServer) DictDataOp(ctx context.Context, in *sys.DictDataOpReq) (*sys.DictDataOpResp, error) {
+	l := logic.NewDictDataOpLogic(ctx, s.svcCtx)
+	return l.DictDataOp(in)
+}

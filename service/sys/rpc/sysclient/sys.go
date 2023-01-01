@@ -19,6 +19,9 @@ type (
 	DeepTreeReq    = sys.DeepTreeReq
 	DeepTreeResp   = sys.DeepTreeResp
 	DeptListData   = sys.DeptListData
+	DictDataOp     = sys.DictDataOp
+	DictDataOpReq  = sys.DictDataOpReq
+	DictDataOpResp = sys.DictDataOpResp
 	LoginRequest   = sys.LoginRequest
 	LoginResponse  = sys.LoginResponse
 	MenuAddReq     = sys.MenuAddReq
@@ -52,6 +55,7 @@ type (
 		MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
 		MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
 		DeepTree(ctx context.Context, in *DeepTreeReq, opts ...grpc.CallOption) (*DeepTreeResp, error)
+		DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
 	}
 
 	defaultSys struct {
@@ -113,4 +117,9 @@ func (m *defaultSys) MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc
 func (m *defaultSys) DeepTree(ctx context.Context, in *DeepTreeReq, opts ...grpc.CallOption) (*DeepTreeResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.DeepTree(ctx, in, opts...)
+}
+
+func (m *defaultSys) DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.DictDataOp(ctx, in, opts...)
 }
