@@ -4,9 +4,25 @@ type (
 		Data map[string]string `json:"data"`
 		Msg  string            `json:"msg"`
 	}
+
+	ConfigPwReq {
+		configKey string `path:"configKey"`
+	}
+	ConfigPwResp {
+		Code int64             `json:"code"`
+		Data map[string]string `json:"data"`
+	}
 )
 
 service sys {
 	@handler SysConfig
 	get /api/v1/app-config returns (SysConfigResp)
+}
+
+@server(
+	jwt: Auth
+)
+service sys {
+	@handler ConfigPw
+	get /api/v1/configKey/:configKey(ConfigPwReq) returns (ConfigPwResp)
 }

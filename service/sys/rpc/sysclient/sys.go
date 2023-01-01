@@ -13,6 +13,8 @@ import (
 )
 
 type (
+	ConfigPwReq    = sys.ConfigPwReq
+	ConfigPwResp   = sys.ConfigPwResp
 	DeepTreeData   = sys.DeepTreeData
 	DeepTreeReq    = sys.DeepTreeReq
 	DeepTreeResp   = sys.DeepTreeResp
@@ -43,6 +45,7 @@ type (
 		Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 		UserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoResp, error)
 		SysConfig(ctx context.Context, in *SysConfigReq, opts ...grpc.CallOption) (*SysConfigResp, error)
+		ConfigPw(ctx context.Context, in *ConfigPwReq, opts ...grpc.CallOption) (*ConfigPwResp, error)
 		UserList(ctx context.Context, in *UserListReq, opts ...grpc.CallOption) (*UserListResp, error)
 		MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
 		MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
@@ -75,6 +78,11 @@ func (m *defaultSys) UserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc
 func (m *defaultSys) SysConfig(ctx context.Context, in *SysConfigReq, opts ...grpc.CallOption) (*SysConfigResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.SysConfig(ctx, in, opts...)
+}
+
+func (m *defaultSys) ConfigPw(ctx context.Context, in *ConfigPwReq, opts ...grpc.CallOption) (*ConfigPwResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.ConfigPw(ctx, in, opts...)
 }
 
 func (m *defaultSys) UserList(ctx context.Context, in *UserListReq, opts ...grpc.CallOption) (*UserListResp, error) {

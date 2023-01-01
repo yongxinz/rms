@@ -17,6 +17,7 @@ type (
 	SysConfigModel interface {
 		sysConfigModel
 		FindAll(context.Context) ([]*SysConfig, error)
+		FindByKey(context.Context, string) ([]*SysConfig, error)
 	}
 
 	customSysConfigModel struct {
@@ -35,6 +36,20 @@ func (m *customSysConfigModel) FindAll(ctx context.Context) ([]*SysConfig, error
 	var resp []*SysConfig
 	query := fmt.Sprintf("select %s from %s", sysConfigRows, m.table)
 	err := m.QueryRowsNoCacheCtx(ctx, &resp, query)
+	switch err {
+	case nil:
+		return resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
+func (m *customSysConfigModel) FindByKey(ctx context.Context, configKey string) ([]*SysConfig, error) {
+	var resp []*SysConfig
+	query := fmt.Sprintf("select %s from %s where config_key = ?", sysConfigRows, m.table)
+	err := m.QueryRowsNoCacheCtx(ctx, &resp, query, configKey)
 	switch err {
 	case nil:
 		return resp, nil

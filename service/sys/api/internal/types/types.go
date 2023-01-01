@@ -117,6 +117,15 @@ type SysConfigResp struct {
 	Msg  string            `json:"msg"`
 }
 
+type ConfigPwReq struct {
+	ConfigKey string `path:"configKey"`
+}
+
+type ConfigPwResp struct {
+	Code int64             `json:"code"`
+	Data map[string]string `json:"data"`
+}
+
 type MenuData struct {
 	MenuId     int64      `json:"menuId"`
 	MenuName   string     `json:"menuName"`

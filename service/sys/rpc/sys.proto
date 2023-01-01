@@ -26,6 +26,14 @@ message SysConfigResp {
     string sys_app_logo = 1;
     string sys_app_name = 2;
 }
+
+message ConfigPwReq {
+    string configKey = 1;
+}
+message ConfigPwResp {
+    string configKey = 1;
+    string configValue = 2;
+}
 // sys-config end
 
 // user start
@@ -217,6 +225,7 @@ service Sys {
     rpc UserInfo(UserInfoReq) returns(UserInfoResp);
 
     rpc SysConfig(SysConfigReq) returns(SysConfigResp);
+    rpc ConfigPw(ConfigPwReq) returns(ConfigPwResp);
 
     rpc UserList(UserListReq) returns(UserListResp);
 
