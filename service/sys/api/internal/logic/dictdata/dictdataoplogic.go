@@ -24,7 +24,7 @@ func NewDictDataOpLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictDa
 	}
 }
 
-func (l *DictDataOpLogic) DictDataOp(req *types.DictDataOpReq) (resp *types.DictDataResp, err error) {
+func (l *DictDataOpLogic) DictDataOp(req *types.DictDataOpReq) (resp *types.DictDataOpResp, err error) {
 	res, err := l.svcCtx.SysRpc.DictDataOp(l.ctx, &sysclient.DictDataOpReq{
 		DictType: req.DictType,
 	})
@@ -40,7 +40,7 @@ func (l *DictDataOpLogic) DictDataOp(req *types.DictDataOpReq) (resp *types.Dict
 		})
 	}
 
-	resp = &types.DictDataResp{
+	resp = &types.DictDataOpResp{
 		Code: 200,
 		Msg:  "查询成功",
 		Data: data,

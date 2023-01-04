@@ -1,3 +1,12 @@
+syntax = "v1"
+
+info(
+	title: "参数字典"
+	desc: "参数字典"
+	author: "yongxinz"
+	github: "https://github.com/yongxinz"
+)
+
 type (
 	DictDataOpReq {
 		DictType string `form:"dictType"`
@@ -6,7 +15,7 @@ type (
 		Label string `json:"label"`
 		Value string `json:"value"`
 	}
-	DictDataResp {
+	DictDataOpResp {
 		Code int64         `json:"code"`
 		Msg  string        `json:"msg"`
 		Data []*DictDataOp `json:"data"`
@@ -15,8 +24,13 @@ type (
 
 @server(
 	jwt: Auth
+	group: dictdata
+	prefix: /api/v1
 )
 service sys {
+	@doc(
+		summary: "参数下拉框 options"
+	)
 	@handler DictDataOp
-	get /api/v1/dict-data/option-select(DictDataOpReq) returns (DictDataResp)
+	get /dict-data/option-select(DictDataOpReq) returns (DictDataOpResp)
 }

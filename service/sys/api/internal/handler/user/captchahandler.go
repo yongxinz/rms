@@ -3,9 +3,10 @@ package handler
 import (
 	"net/http"
 
-	"github.com/zeromicro/go-zero/rest/httpx"
-	"rms/service/sys/api/internal/logic"
+	logic "rms/service/sys/api/internal/logic/user"
 	"rms/service/sys/api/internal/svc"
+
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func CaptchaHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

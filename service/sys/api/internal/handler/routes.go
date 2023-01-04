@@ -4,6 +4,11 @@ package handler
 import (
 	"net/http"
 
+	dept "rms/service/sys/api/internal/handler/dept"
+	dictdata "rms/service/sys/api/internal/handler/dictdata"
+	menu "rms/service/sys/api/internal/handler/menu"
+	sysconfig "rms/service/sys/api/internal/handler/sysconfig"
+	user "rms/service/sys/api/internal/handler/user"
 	"rms/service/sys/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -14,89 +19,96 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/v1/login",
-				Handler: LoginHandler(serverCtx),
+				Path:    "/login",
+				Handler: user.LoginHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/v1/captcha",
-				Handler: CaptchaHandler(serverCtx),
+				Path:    "/captcha",
+				Handler: user.CaptchaHandler(serverCtx),
 			},
 		},
+		rest.WithPrefix("/api/v1"),
 	)
 
 	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/v1/getinfo",
-				Handler: UserInfoHandler(serverCtx),
+				Path:    "/getinfo",
+				Handler: user.UserInfoHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/v1/user/profile",
-				Handler: ProfileHandler(serverCtx),
+				Path:    "/user/profile",
+				Handler: user.ProfileHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/v1/sys-user",
-				Handler: UserListHandler(serverCtx),
+				Path:    "/sys-user",
+				Handler: user.UserListHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1"),
 	)
 
 	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/v1/deptTree",
-				Handler: DeptTreeHandler(serverCtx),
+				Path:    "/deptTree",
+				Handler: dept.DeptTreeHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1"),
 	)
 
 	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/v1/app-config",
-				Handler: SysConfigHandler(serverCtx),
+				Path:    "/app-config",
+				Handler: sysconfig.SysConfigHandler(serverCtx),
 			},
 		},
+		rest.WithPrefix("/api/v1"),
 	)
 
 	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/v1/configKey/:configKey",
-				Handler: ConfigPwHandler(serverCtx),
-			},
-		},
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/v1/menurole",
-				Handler: MenuRoleHandler(serverCtx),
+				Path:    "/configKey/:configKey",
+				Handler: sysconfig.ConfigPwHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1"),
 	)
 
 	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/v1/dict-data/option-select",
-				Handler: DictDataOpHandler(serverCtx),
+				Path:    "/menurole",
+				Handler: menu.MenuRoleHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/dict-data/option-select",
+				Handler: dictdata.DictDataOpHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1"),
 	)
 }

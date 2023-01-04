@@ -1,3 +1,12 @@
+syntax = "v1"
+
+info(
+	title: "菜单"
+	desc: "菜单"
+	author: "yongxinz"
+	github: "https://github.com/yongxinz"
+)
+
 type (
 	MenuData {
 		MenuId     int64      `json:"menuId"`
@@ -35,8 +44,13 @@ type (
 
 @server(
 	jwt: Auth
+	group: menu
+	prefix: /api/v1
 )
 service sys {
+	@doc(
+		summary: "查询角色拥有的菜单"
+	)
 	@handler MenuRole
-	get /api/v1/menurole returns (MenuRoleResp)
+	get /menurole returns (MenuRoleResp)
 }

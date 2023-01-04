@@ -1,10 +1,21 @@
+syntax = "v1"
+
+info(
+	title: "系统配置"
+	desc: "系统配置"
+	author: "yongxinz"
+	github: "https://github.com/yongxinz"
+)
+
 type (
 	SysConfigResp {
 		Code int64             `json:"code"`
 		Data map[string]string `json:"data"`
 		Msg  string            `json:"msg"`
 	}
+)
 
+type (
 	ConfigPwReq {
 		configKey string `path:"configKey"`
 	}
@@ -14,15 +25,27 @@ type (
 	}
 )
 
+@server(
+	group: sysconfig
+	prefix: /api/v1
+)
 service sys {
+	@doc(
+		summary: "系统配置"
+	)
 	@handler SysConfig
-	get /api/v1/app-config returns (SysConfigResp)
+	get /app-config returns (SysConfigResp)
 }
 
 @server(
 	jwt: Auth
+	group: sysconfig
+	prefix: /api/v1
 )
 service sys {
+	@doc(
+		summary: "默认密码"
+	)
 	@handler ConfigPw
-	get /api/v1/configKey/:configKey(ConfigPwReq) returns (ConfigPwResp)
+	get /configKey/:configKey(ConfigPwReq) returns (ConfigPwResp)
 }

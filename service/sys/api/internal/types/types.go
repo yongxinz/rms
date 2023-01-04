@@ -169,7 +169,7 @@ type DictDataOp struct {
 	Value string `json:"value"`
 }
 
-type DictDataResp struct {
+type DictDataOpResp struct {
 	Code int64         `json:"code"`
 	Msg  string        `json:"msg"`
 	Data []*DictDataOp `json:"data"`

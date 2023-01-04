@@ -1,5 +1,13 @@
+syntax = "v1"
+
+info(
+	title: "用户"
+	desc: "用户"
+	author: "yongxinz"
+	github: "https://github.com/yongxinz"
+)
+
 type (
-	// 用户登录
 	LoginRequest {
 		Username string `json:"username"`
 		Password string `json:"password"`
@@ -13,15 +21,18 @@ type (
 		Expire           int64  `json:"expire"`
 		Token            string `json:"token"`
 	}
+)
 
+type (
 	CaptchaResponse {
 		Code int64  `json:"code"`
 		Data string `json:"data"`
 		Id   string `json:"id"`
 		Msg  string `json:"msg"`
 	}
+)
 
-	// 用户信息
+type (
 	UserInfo {
 		Introduction string   `json:"introduction"`
 		Avatar       string   `json:"avatar"`
@@ -37,7 +48,9 @@ type (
 		Code int64    `json:"code"`
 		Data UserInfo `json:"data"`
 	}
+)
 
+type (
 	UserListReq {
 		PageIndex int64 `json:"pageIndex,default=1"`
 		PageSize  int64 `json:"pageSize,default=20"`
@@ -75,21 +88,42 @@ type (
 	}
 )
 
+@server(
+	group: user
+	prefix: /api/v1
+)
 service sys {
+	@doc(
+		summary: "登录"
+	)
 	@handler Login
-	post /api/v1/login(LoginRequest) returns (LoginResponse)
+	post /login(LoginRequest) returns (LoginResponse)
+	@doc(
+		summary: "验证码"
+	)
 	@handler Captcha
-	get /api/v1/captcha returns (CaptchaResponse)
+	get /captcha returns (CaptchaResponse)
 }
 
 @server(
 	jwt: Auth
+	group: user
+	prefix: /api/v1
 )
 service sys {
+	@doc(
+		summary: "用户信息"
+	)
 	@handler UserInfo
-	get /api/v1/getinfo returns (UserInfoResponse)
+	get /getinfo returns (UserInfoResponse)
+	@doc(
+		summary: "个人中心"
+	)
 	@handler Profile
-	get /api/v1/user/profile returns (UserInfoResponse)
+	get /user/profile returns (UserInfoResponse)
+	@doc(
+		summary: "用户列表"
+	)
 	@handler UserList
-	get /api/v1/sys-user (UserListReq) returns (UserListResp)
+	get /sys-user (UserListReq) returns (UserListResp)
 }

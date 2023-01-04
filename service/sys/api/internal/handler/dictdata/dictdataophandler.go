@@ -3,10 +3,11 @@ package handler
 import (
 	"net/http"
 
-	"github.com/zeromicro/go-zero/rest/httpx"
-	"rms/service/sys/api/internal/logic"
+	logic "rms/service/sys/api/internal/logic/dictdata"
 	"rms/service/sys/api/internal/svc"
 	"rms/service/sys/api/internal/types"
+
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func DictDataOpHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

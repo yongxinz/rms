@@ -1,3 +1,12 @@
+syntax = "v1"
+
+info(
+	title: "部门"
+	desc: "部门"
+	author: "yongxinz"
+	github: "https://github.com/yongxinz"
+)
+
 type (
 	DeptListReq {
 		PageIndex int64 `json:"pageIndex,default=1"`
@@ -18,7 +27,9 @@ type (
 		CreateBy  int64  `json:"createBy"`
 		UpdateBy  int64  `json:"updateBy"`
 	}
+)
 
+type (
 	DeptTreeData {
 		Id       int64          `json:"id"`
 		Label    string         `json:"label"`
@@ -32,8 +43,13 @@ type (
 
 @server(
 	jwt: Auth
+	group: dept
+	prefix: /api/v1
 )
 service sys {
+	@doc(
+		summary: "部门树"
+	)
 	@handler DeptTree
-	get /api/v1/deptTree returns (DeptTreeResp)
+	get /deptTree returns (DeptTreeResp)
 }
