@@ -3,12 +3,12 @@ package logic
 import (
 	"context"
 
+	"rms/common/errorx"
 	"rms/service/sys/model"
 	"rms/service/sys/rpc/internal/svc"
 	"rms/service/sys/rpc/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
-	"google.golang.org/grpc/status"
 )
 
 type MenuRoleLogic struct {
@@ -34,12 +34,12 @@ func (l *MenuRoleLogic) MenuRole(in *sys.MenuRoleReq) (*sys.MenuRoleResp, error)
 		count, _ := l.svcCtx.Menu.Count(l.ctx)
 		menus, err = l.svcCtx.Menu.FindAll(l.ctx, 1, count)
 		if err != nil {
-			return nil, status.Error(500, err.Error())
+			return nil, errorx.NewSystemError(errorx.ServerErrorCode, err.Error())
 		}
 	} else {
 		res, err := l.svcCtx.RoleMenu.FindMenuIds(l.ctx, in.RoleId)
 		if err != nil {
-			return nil, status.Error(500, err.Error())
+			return nil, errorx.NewSystemError(errorx.ServerErrorCode, err.Error())
 		}
 
 		var menuIds []int64
@@ -49,7 +49,7 @@ func (l *MenuRoleLogic) MenuRole(in *sys.MenuRoleReq) (*sys.MenuRoleResp, error)
 
 		menus, err = l.svcCtx.Menu.FindMenuList(l.ctx, menuIds)
 		if err != nil {
-			return nil, status.Error(500, err.Error())
+			return nil, errorx.NewSystemError(errorx.ServerErrorCode, err.Error())
 		}
 	}
 

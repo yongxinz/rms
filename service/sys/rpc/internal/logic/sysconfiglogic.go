@@ -3,12 +3,12 @@ package logic
 import (
 	"context"
 
+	"rms/common/errorx"
 	"rms/service/sys/model"
 	"rms/service/sys/rpc/internal/svc"
 	"rms/service/sys/rpc/sys"
 
 	"github.com/zeromicro/go-zero/core/logx"
-	"google.golang.org/grpc/status"
 )
 
 type SysConfigLogic struct {
@@ -29,9 +29,9 @@ func (l *SysConfigLogic) SysConfig(in *sys.SysConfigReq) (*sys.SysConfigResp, er
 	res, err := l.svcCtx.SysConfigModel.FindAll(l.ctx)
 	if err != nil {
 		if err == model.ErrNotFound {
-			return nil, status.Error(100, "查询配置信息失败")
+			return nil, errorx.NewDefaultError(errorx.ConfigErrorCode)
 		}
-		return nil, status.Error(500, err.Error())
+		return nil, errorx.NewSystemError(errorx.ServerErrorCode, err.Error())
 	}
 
 	sysAppLogo, sysAppName := "", ""

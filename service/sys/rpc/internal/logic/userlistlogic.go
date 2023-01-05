@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 
+	"rms/common/errorx"
 	"rms/service/sys/rpc/internal/svc"
 	"rms/service/sys/rpc/sys"
 
@@ -26,11 +27,10 @@ func NewUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserList
 
 func (l *UserListLogic) UserList(in *sys.UserListReq) (*sys.UserListResp, error) {
 	res, err := l.svcCtx.UserModel.FindAll1(l.ctx, in.Page, in.Size)
-
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询用户列表信息失败,参数:%s,异常:%s", reqStr, err.Error())
-		return nil, err
+		logx.WithContext(l.ctx).Errorf("get userlist failed, params: %s, error: %s", reqStr, err.Error())
+		return nil, errorx.NewSystemError(errorx.ServerErrorCode, err.Error())
 	}
 
 	count, _ := l.svcCtx.UserModel.Count(l.ctx)
