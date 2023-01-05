@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 
+	"rms/common/errorx"
 	"rms/service/sys/model"
 	"rms/service/sys/rpc/internal/svc"
 	"rms/service/sys/rpc/sys"
@@ -26,10 +27,9 @@ func NewDeptTreeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptTree
 
 func (l *DeptTreeLogic) DeptTree(in *sys.DeptTreeReq) (*sys.DeptTreeResp, error) {
 	depts, err := l.svcCtx.Dept.FindAll(l.ctx, 1, 1000)
-
 	if err != nil {
-		logx.WithContext(l.ctx).Errorf("查询DeptTree信息失败,异常:%s", err.Error())
-		return nil, err
+		logx.WithContext(l.ctx).Errorf("get DeptTree error: %s", err.Error())
+		return nil, errorx.NewSystemError(errorx.ServerErrorCode, err.Error())
 	}
 
 	var data []*sys.DeptTreeData

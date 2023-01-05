@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 
+	"rms/common/errorx"
 	"rms/service/sys/rpc/internal/svc"
 	"rms/service/sys/rpc/sys"
 
@@ -28,8 +29,8 @@ func (l *DictDataOpLogic) DictDataOp(in *sys.DictDataOpReq) (*sys.DictDataOpResp
 	res, err := l.svcCtx.DictData.FindByDictType(l.ctx, in.DictType)
 	if err != nil {
 		reqStr, _ := json.Marshal(in)
-		logx.WithContext(l.ctx).Errorf("查询DictDataOp信息失败,参数:%s,异常:%s", reqStr, err.Error())
-		return nil, err
+		logx.WithContext(l.ctx).Errorf("get DictDataOp params: %s, error: %s", reqStr, err.Error())
+		return nil, errorx.NewSystemError(errorx.ServerErrorCode, err.Error())
 	}
 
 	var data []*sys.DictDataOp
