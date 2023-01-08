@@ -26,7 +26,7 @@ func NewUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserList
 	}
 }
 
-func (l *UserListLogic) UserList(req *types.UserListReq) (*types.UserListResp, error) {
+func (l *UserListLogic) UserList(req *types.UserListReq) (resp *types.UserListResp, err error) {
 	res, err := l.svcCtx.SysRpc.UserList(l.ctx, &sysclient.UserListReq{
 		Page: req.PageIndex,
 		Size: req.PageSize,
@@ -34,8 +34,8 @@ func (l *UserListLogic) UserList(req *types.UserListReq) (*types.UserListResp, e
 
 	if err != nil {
 		data, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("参数: %s,查询用户列表异常:%s", string(data), err.Error())
-		return nil, errorx.NewDefaultError("查询失败")
+		logx.WithContext(l.ctx).Errorf("get userlist error: %s, params: %s", err.Error(), string(data))
+		return nil, errorx.NewDefaultError(errorx.ServerErrorCode)
 	}
 
 	var list []*types.UserListData
@@ -76,14 +76,14 @@ func (l *UserListLogic) UserList(req *types.UserListReq) (*types.UserListResp, e
 		})
 	}
 
-	return &types.UserListResp{
-		Code: 200,
-		Msg:  "查询成功",
-		Data: types.UserData{
+	resp = &types.UserListResp{
+		List: list,
+		Pagination: types.Pagination{
 			PageIndex: req.PageIndex,
 			PageSize:  req.PageSize,
 			Count:     res.Count,
-			List:      list,
 		},
-	}, err
+	}
+
+	return
 }

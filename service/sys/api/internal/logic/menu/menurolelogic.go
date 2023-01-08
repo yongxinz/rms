@@ -25,7 +25,7 @@ func NewMenuRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuRole
 	}
 }
 
-func (l *MenuRoleLogic) MenuRole() (resp *types.MenuRoleResp, err error) {
+func (l *MenuRoleLogic) MenuRole() (resp []*types.MenuRoleResp, err error) {
 	userId, _ := l.ctx.Value("userId").(json.Number).Int64()
 	userinfo, err := l.svcCtx.SysRpc.UserInfo(l.ctx, &sysclient.UserInfoReq{
 		UserId: userId,
@@ -38,11 +38,11 @@ func (l *MenuRoleLogic) MenuRole() (resp *types.MenuRoleResp, err error) {
 		RoleId: userinfo.RoleId,
 	})
 
-	var data []*types.MenuData
+	var data []*types.MenuRoleResp
 	for _, menu := range res.Data {
-		children := make([]types.MenuData, 0)
+		children := make([]types.MenuRoleResp, 0)
 		for _, child := range menu.Children {
-			children = append(children, types.MenuData{
+			children = append(children, types.MenuRoleResp{
 				MenuId:     child.Data.MenuId,
 				MenuName:   child.Data.MenuName,
 				MenuType:   child.Data.MenuType,
@@ -60,7 +60,7 @@ func (l *MenuRoleLogic) MenuRole() (resp *types.MenuRoleResp, err error) {
 				Visible:    child.Data.Visible,
 			})
 		}
-		data = append(data, &types.MenuData{
+		data = append(data, &types.MenuRoleResp{
 			MenuId:     menu.Data.MenuId,
 			MenuName:   menu.Data.MenuName,
 			MenuType:   menu.Data.MenuType,
@@ -79,9 +79,7 @@ func (l *MenuRoleLogic) MenuRole() (resp *types.MenuRoleResp, err error) {
 			Children:   children,
 		})
 	}
+	resp = data
 
-	return &types.MenuRoleResp{
-		Code: 200,
-		Data: data,
-	}, nil
+	return
 }

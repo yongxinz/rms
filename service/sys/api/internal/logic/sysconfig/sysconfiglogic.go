@@ -30,14 +30,8 @@ func (l *SysConfigLogic) SysConfig() (resp *types.SysConfigResp, err error) {
 		return nil, err
 	}
 
-	data := map[string]string{
-		"sys_app_logo": res.SysAppLogo,
-		"sys_app_name": res.SysAppName,
-	}
-
 	return &types.SysConfigResp{
-		Data: data,
-		Code: 200,
-		Msg:  "查询成功",
+		SysAppName: res.SysAppName,
+		SysAppLogo: res.SysAppLogo,
 	}, nil
 }

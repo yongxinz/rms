@@ -11,14 +11,9 @@ type (
 	DictDataOpReq {
 		DictType string `form:"dictType"`
 	}
-	DictDataOp {
+	DictDataOpResp {
 		Label string `json:"label"`
 		Value string `json:"value"`
-	}
-	DictDataOpResp {
-		Code int64         `json:"code"`
-		Msg  string        `json:"msg"`
-		Data []*DictDataOp `json:"data"`
 	}
 )
 
@@ -32,5 +27,5 @@ service sys {
 		summary: "参数下拉框 options"
 	)
 	@handler DictDataOp
-	get /dict-data/option-select(DictDataOpReq) returns (DictDataOpResp)
+	get /dict-data/option-select(DictDataOpReq) returns ([]*DictDataOpResp)
 }

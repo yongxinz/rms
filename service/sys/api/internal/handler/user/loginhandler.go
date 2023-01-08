@@ -3,6 +3,7 @@ package handler
 import (
 	"net/http"
 
+	"rms/common/response"
 	logic "rms/service/sys/api/internal/logic/user"
 	"rms/service/sys/api/internal/svc"
 	"rms/service/sys/api/internal/types"
@@ -12,7 +13,7 @@ import (
 
 func LoginHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.LoginRequest
+		var req types.LoginReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.Error(w, err)
 			return
@@ -23,7 +24,7 @@ func LoginHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		if err != nil {
 			httpx.Error(w, err)
 		} else {
-			httpx.OkJson(w, resp)
+			response.Response(w, resp, err)
 		}
 	}
 }

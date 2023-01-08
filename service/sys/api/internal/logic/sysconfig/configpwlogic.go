@@ -32,14 +32,9 @@ func (l *ConfigPwLogic) ConfigPw(req *types.ConfigPwReq) (resp *types.ConfigPwRe
 		return nil, err
 	}
 
-	data := map[string]string{
-		"configKey":   res.ConfigKey,
-		"configValue": res.ConfigValue,
-	}
-
 	resp = &types.ConfigPwResp{
-		Data: data,
-		Code: 200,
+		ConfigKey:   res.ConfigKey,
+		ConfigValue: res.ConfigValue,
 	}
 
 	return

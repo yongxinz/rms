@@ -24,31 +24,28 @@ func NewDeptTreeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptTree
 	}
 }
 
-func (l *DeptTreeLogic) DeptTree() (resp *types.DeptTreeResp, err error) {
+func (l *DeptTreeLogic) DeptTree() (resp []*types.DeptTreeResp, err error) {
 	res, err := l.svcCtx.SysRpc.DeptTree(l.ctx, &sysclient.DeptTreeReq{})
 	if err != nil {
 		return nil, err
 	}
 
-	var data []*types.DeptTreeData
+	var data []*types.DeptTreeResp
 	for _, item := range res.Data {
-		children := make([]types.DeptTreeData, 0)
+		children := make([]types.DeptTreeResp, 0)
 		for _, dept := range item.Children {
-			children = append(children, types.DeptTreeData{
+			children = append(children, types.DeptTreeResp{
 				Id:    dept.Id,
 				Label: dept.Label,
 			})
 		}
-		data = append(data, &types.DeptTreeData{
+		data = append(data, &types.DeptTreeResp{
 			Id:       item.Id,
 			Label:    item.Label,
 			Children: children,
 		})
 	}
-	resp = &types.DeptTreeResp{
-		Code: 200,
-		Data: data,
-	}
+	resp = data
 
 	return
 }

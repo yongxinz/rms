@@ -27,11 +27,17 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 	}
 }
 
-func (l *LoginLogic) Login(req *types.LoginRequest) (resp *types.LoginResponse, err error) {
-	if len(strings.TrimSpace(req.Username)) == 0 || len(strings.TrimSpace(req.Password)) == 0 {
+func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err error) {
+	if len(strings.TrimSpace(req.Username)) == 0 {
 		reqStr, _ := json.Marshal(req)
-		logx.WithContext(l.ctx).Errorf("用户名或密码不能为空,请求信息失败,参数:%s", reqStr)
-		return nil, errorx.NewDefaultError("用户名或密码不能为空")
+		logx.WithContext(l.ctx).Errorf("username cannot nil, params: %s", reqStr)
+		return nil, errorx.NewDefaultError(errorx.AccountErrorCode)
+	}
+
+	if len(strings.TrimSpace(req.Password)) == 0 {
+		reqStr, _ := json.Marshal(req)
+		logx.WithContext(l.ctx).Errorf("password cannot be nil, params: %s", reqStr)
+		return nil, errorx.NewDefaultError(errorx.PasswordErrorCode)
 	}
 
 	res, err := l.svcCtx.SysRpc.Login(l.ctx, &sysclient.LoginRequest{
@@ -42,11 +48,11 @@ func (l *LoginLogic) Login(req *types.LoginRequest) (resp *types.LoginResponse, 
 		return nil, err
 	}
 
-	return &types.LoginResponse{
-		Code:             200,
-		Success:          true,
+	resp = &types.LoginResp{
 		CurrentAuthority: res.CurrentAuthority,
 		Expire:           res.Expire,
 		Token:            res.Token,
-	}, nil
+	}
+
+	return
 }

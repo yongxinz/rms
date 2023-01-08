@@ -24,16 +24,16 @@ func NewCaptchaLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CaptchaLo
 	}
 }
 
-func (l *CaptchaLogic) Captcha() (resp *types.CaptchaResponse, err error) {
+func (l *CaptchaLogic) Captcha() (resp *types.CaptchaResp, err error) {
 	id, b64s, err := captcha.DriverDigitFunc()
 	if err != nil {
 		return nil, err
 	}
 
-	return &types.CaptchaResponse{
+	resp = &types.CaptchaResp{
 		Id:   id,
 		Data: b64s,
-		Msg:  "success",
-		Code: 200,
-	}, nil
+	}
+
+	return
 }

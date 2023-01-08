@@ -9,19 +9,18 @@ info(
 
 type (
 	SysConfigResp {
-		Code int64             `json:"code"`
-		Data map[string]string `json:"data"`
-		Msg  string            `json:"msg"`
+		SysAppName string `json:"sys_app_name"`
+		SysAppLogo string `json:"sys_app_logo"`
 	}
 )
 
 type (
 	ConfigPwReq {
-		configKey string `path:"configKey"`
+		ConfigKey string `path:"configKey"`
 	}
 	ConfigPwResp {
-		Code int64             `json:"code"`
-		Data map[string]string `json:"data"`
+		ConfigKey   string `json:"configKey"`
+		ConfigValue string `json:"configValue"`
 	}
 )
 

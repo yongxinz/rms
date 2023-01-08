@@ -3,6 +3,7 @@ package handler
 import (
 	"net/http"
 
+	"rms/common/response"
 	logic "rms/service/sys/api/internal/logic/user"
 	"rms/service/sys/api/internal/svc"
 
@@ -16,7 +17,7 @@ func UserInfoHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		if err != nil {
 			httpx.Error(w, err)
 		} else {
-			httpx.OkJson(w, resp)
+			response.Response(w, resp, err)
 		}
 	}
 }

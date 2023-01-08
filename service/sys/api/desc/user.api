@@ -8,15 +8,13 @@ info(
 )
 
 type (
-	LoginRequest {
+	LoginReq {
 		Username string `json:"username"`
 		Password string `json:"password"`
 		Uuid     string `json:"uuid"`
 		Code     string `json:"code"`
 	}
-	LoginResponse {
-		Code             int64  `json:"code"`
-		Success          bool   `json:"success"`
+	LoginResp {
 		CurrentAuthority string `json:"currentAuthority"`
 		Expire           int64  `json:"expire"`
 		Token            string `json:"token"`
@@ -24,16 +22,14 @@ type (
 )
 
 type (
-	CaptchaResponse {
-		Code int64  `json:"code"`
+	CaptchaResp {
 		Data string `json:"data"`
 		Id   string `json:"id"`
-		Msg  string `json:"msg"`
 	}
 )
 
 type (
-	UserInfo {
+	UserInfoResp {
 		Introduction string   `json:"introduction"`
 		Avatar       string   `json:"avatar"`
 		UserName     string   `json:"userName"`
@@ -44,16 +40,11 @@ type (
 		Roles        []string `json:"roles"`
 		Permissions  []string `json:"permissions"`
 	}
-	UserInfoResponse {
-		Code int64    `json:"code"`
-		Data UserInfo `json:"data"`
-	}
 )
 
 type (
 	UserListReq {
-		PageIndex int64 `json:"pageIndex,default=1"`
-		PageSize  int64 `json:"pageSize,default=20"`
+		PageReq
 	}
 	UserListData {
 		UserId    int64        `json:"userId"`
@@ -75,16 +66,9 @@ type (
 		PostId    int64        `json:"postId"`
 		Dept      DeptListData `json:"dept"`
 	}
-	UserData {
-		PageIndex int64           `json:"pageIndex"`
-		PageSize  int64           `json:"pageSize"`
-		Count     int64           `json:"count"`
-		List      []*UserListData `json:"list"`
-	}
 	UserListResp {
-		Code int64    `json:"code"`
-		Msg  string   `json:"msg"`
-		Data UserData `json:"data"`
+		List []*UserListData `json:"list"`
+		Pagination
 	}
 )
 
@@ -97,12 +81,12 @@ service sys {
 		summary: "登录"
 	)
 	@handler Login
-	post /login(LoginRequest) returns (LoginResponse)
+	post /login(LoginReq) returns (LoginResp)
 	@doc(
 		summary: "验证码"
 	)
 	@handler Captcha
-	get /captcha returns (CaptchaResponse)
+	get /captcha returns (CaptchaResp)
 }
 
 @server(
@@ -115,12 +99,12 @@ service sys {
 		summary: "用户信息"
 	)
 	@handler UserInfo
-	get /getinfo returns (UserInfoResponse)
+	get /getinfo returns (UserInfoResp)
 	@doc(
 		summary: "个人中心"
 	)
 	@handler Profile
-	get /user/profile returns (UserInfoResponse)
+	get /user/profile returns (UserInfoResp)
 	@doc(
 		summary: "用户列表"
 	)

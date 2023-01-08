@@ -1,3 +1,4 @@
+import "desc/common.api"
 import "desc/user.api"
 import "desc/dept.api"
 import "desc/sysconfig.api"

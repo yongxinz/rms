@@ -25,7 +25,7 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 	}
 }
 
-func (l *UserInfoLogic) UserInfo() (resp *types.UserInfoResponse, err error) {
+func (l *UserInfoLogic) UserInfo() (resp *types.UserInfoResp, err error) {
 	userId, _ := l.ctx.Value("userId").(json.Number).Int64()
 	res, err := l.svcCtx.SysRpc.UserInfo(l.ctx, &sysclient.UserInfoReq{
 		UserId: userId,
@@ -34,18 +34,17 @@ func (l *UserInfoLogic) UserInfo() (resp *types.UserInfoResponse, err error) {
 		return nil, err
 	}
 
-	return &types.UserInfoResponse{
-		Code: 200,
-		Data: types.UserInfo{
-			Avatar:       res.Avatar,
-			Introduction: res.Introduction,
-			Name:         res.Name,
-			UserName:     res.UserName,
-			UserId:       res.UserId,
-			DeptId:       res.DeptId,
-			Buttons:      res.Buttons,
-			Roles:        res.Roles,
-			Permissions:  res.Permissions,
-		},
-	}, nil
+	resp = &types.UserInfoResp{
+		Avatar:       res.Avatar,
+		Introduction: res.Introduction,
+		Name:         res.Name,
+		UserName:     res.UserName,
+		UserId:       res.UserId,
+		DeptId:       res.DeptId,
+		Buttons:      res.Buttons,
+		Roles:        res.Roles,
+		Permissions:  res.Permissions,
+	}
+
+	return
 }

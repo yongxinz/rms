@@ -9,8 +9,7 @@ info(
 
 type (
 	DeptListReq {
-		PageIndex int64 `json:"pageIndex,default=1"`
-		PageSize  int64 `json:"pageSize,default=20"`
+		PageReq
 	}
 	DeptListData {
 		DeptId    int64  `json:"deptId"`
@@ -30,14 +29,10 @@ type (
 )
 
 type (
-	DeptTreeData {
+	DeptTreeResp {
 		Id       int64          `json:"id"`
 		Label    string         `json:"label"`
-		Children []DeptTreeData `json:"children"`
-	}
-	DeptTreeResp {
-		Code int64           `json:"code"`
-		Data []*DeptTreeData `json:"data"`
+		Children []DeptTreeResp `json:"children"`
 	}
 )
 
@@ -51,5 +46,5 @@ service sys {
 		summary: "部门树"
 	)
 	@handler DeptTree
-	get /deptTree returns (DeptTreeResp)
+	get /deptTree returns ([]*DeptTreeResp)
 }

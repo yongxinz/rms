@@ -8,7 +8,7 @@ info(
 )
 
 type (
-	MenuData {
+	MenuRoleResp {
 		MenuId     int64      `json:"menuId"`
 		MenuName   string     `json:"menuName"`
 		MenuType   string     `json:"menuType"`
@@ -34,11 +34,7 @@ type (
 		CreatedAt  string     `json:"createdAt"`
 		UpdateBy   int64      `json:"updateBy"`
 		UpdatedAt  string     `json:"updatedAt"`
-		Children   []MenuData `json:"children"`
-	}
-	MenuRoleResp {
-		Code int64       `json:"code"`
-		Data []*MenuData `json:"data"`
+		Children   []MenuRoleResp `json:"children"`
 	}
 )
 
@@ -52,5 +48,5 @@ service sys {
 		summary: "查询角色拥有的菜单"
 	)
 	@handler MenuRole
-	get /menurole returns (MenuRoleResp)
+	get /menurole returns ([]*MenuRoleResp)
 }

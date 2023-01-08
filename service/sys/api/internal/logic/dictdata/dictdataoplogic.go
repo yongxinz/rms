@@ -24,7 +24,7 @@ func NewDictDataOpLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictDa
 	}
 }
 
-func (l *DictDataOpLogic) DictDataOp(req *types.DictDataOpReq) (resp *types.DictDataOpResp, err error) {
+func (l *DictDataOpLogic) DictDataOp(req *types.DictDataOpReq) (resp []*types.DictDataOpResp, err error) {
 	res, err := l.svcCtx.SysRpc.DictDataOp(l.ctx, &sysclient.DictDataOpReq{
 		DictType: req.DictType,
 	})
@@ -32,19 +32,14 @@ func (l *DictDataOpLogic) DictDataOp(req *types.DictDataOpReq) (resp *types.Dict
 		return nil, err
 	}
 
-	var data []*types.DictDataOp
+	var data []*types.DictDataOpResp
 	for _, item := range res.Data {
-		data = append(data, &types.DictDataOp{
+		data = append(data, &types.DictDataOpResp{
 			Label: item.Label,
 			Value: item.Value,
 		})
 	}
-
-	resp = &types.DictDataOpResp{
-		Code: 200,
-		Msg:  "查询成功",
-		Data: data,
-	}
+	resp = data
 
 	return
 }

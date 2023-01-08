@@ -23,7 +23,7 @@ func NewProfileLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ProfileLo
 	}
 }
 
-func (l *ProfileLogic) Profile() (resp *types.UserInfoResponse, err error) {
+func (l *ProfileLogic) Profile() (resp *types.UserInfoResp, err error) {
 	// todo: add your logic here and delete this line
 
 	return
