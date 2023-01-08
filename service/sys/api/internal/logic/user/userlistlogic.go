@@ -9,6 +9,7 @@ import (
 	"rms/service/sys/api/internal/types"
 	"rms/service/sys/rpc/sysclient"
 
+	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -38,42 +39,11 @@ func (l *UserListLogic) UserList(req *types.UserListReq) (resp *types.UserListRe
 		return nil, errorx.NewDefaultError(errorx.ServerErrorCode)
 	}
 
+	var user types.UserListData
 	var list []*types.UserListData
-	for _, user := range res.List {
-		list = append(list, &types.UserListData{
-			UserId:    user.UserId,
-			UserName:  user.UserName,
-			NickName:  user.NickName,
-			Phone:     user.Phone,
-			Status:    user.Status,
-			Email:     user.Email,
-			Salt:      user.Salt,
-			Avatar:    user.Avatar,
-			Sex:       user.Sex,
-			Remark:    user.Remark,
-			CreateBy:  user.CreateBy,
-			CreatedAt: user.CreatedAt,
-			UpdateBy:  user.UpdateBy,
-			UpdatedAt: user.UpdatedAt,
-			RoleId:    user.RoleId,
-			DeptId:    user.DeptId,
-			PostId:    user.PostId,
-			Dept: types.DeptListData{
-				DeptId:    user.Dept.DeptId,
-				ParentId:  user.Dept.ParentId,
-				DeptPath:  user.Dept.DeptPath,
-				DeptName:  user.Dept.DeptName,
-				Sort:      user.Dept.Sort,
-				Leader:    user.Dept.Leader,
-				Phone:     user.Dept.Phone,
-				Email:     user.Dept.Email,
-				Status:    user.Dept.Status,
-				CreateBy:  user.Dept.CreateBy,
-				CreatedAt: user.Dept.CreatedAt,
-				UpdateBy:  user.Dept.UpdateBy,
-				UpdatedAt: user.Dept.UpdatedAt,
-			},
-		})
+	for _, v := range res.List {
+		copier.Copy(&user, v)
+		list = append(list, &user)
 	}
 
 	resp = &types.UserListResp{

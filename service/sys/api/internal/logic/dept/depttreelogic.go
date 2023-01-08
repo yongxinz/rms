@@ -7,6 +7,7 @@ import (
 	"rms/service/sys/api/internal/types"
 	"rms/service/sys/rpc/sysclient"
 
+	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -31,20 +32,7 @@ func (l *DeptTreeLogic) DeptTree() (resp []*types.DeptTreeResp, err error) {
 	}
 
 	var data []*types.DeptTreeResp
-	for _, item := range res.Data {
-		children := make([]types.DeptTreeResp, 0)
-		for _, dept := range item.Children {
-			children = append(children, types.DeptTreeResp{
-				Id:    dept.Id,
-				Label: dept.Label,
-			})
-		}
-		data = append(data, &types.DeptTreeResp{
-			Id:       item.Id,
-			Label:    item.Label,
-			Children: children,
-		})
-	}
+	copier.Copy(&data, res.Data)
 	resp = data
 
 	return

@@ -38,7 +38,6 @@ func (l *MenuRoleLogic) MenuRole() (resp []*types.MenuRoleResp, err error) {
 		RoleId: userinfo.RoleId,
 	})
 
-	var data []*types.MenuRoleResp
 	for _, menu := range res.Data {
 		children := make([]types.MenuRoleResp, 0)
 		for _, child := range menu.Children {
@@ -60,7 +59,7 @@ func (l *MenuRoleLogic) MenuRole() (resp []*types.MenuRoleResp, err error) {
 				Visible:    child.Data.Visible,
 			})
 		}
-		data = append(data, &types.MenuRoleResp{
+		resp = append(resp, &types.MenuRoleResp{
 			MenuId:     menu.Data.MenuId,
 			MenuName:   menu.Data.MenuName,
 			MenuType:   menu.Data.MenuType,
@@ -79,7 +78,6 @@ func (l *MenuRoleLogic) MenuRole() (resp []*types.MenuRoleResp, err error) {
 			Children:   children,
 		})
 	}
-	resp = data
 
 	return
 }
