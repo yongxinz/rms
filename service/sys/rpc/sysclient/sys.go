@@ -36,6 +36,9 @@ type (
 	MenuTree       = sys.MenuTree
 	MenuUpdateReq  = sys.MenuUpdateReq
 	MenuUpdateResp = sys.MenuUpdateResp
+	PostListData   = sys.PostListData
+	PostListReq    = sys.PostListReq
+	PostListResp   = sys.PostListResp
 	SysConfigReq   = sys.SysConfigReq
 	SysConfigResp  = sys.SysConfigResp
 	UserInfoReq    = sys.UserInfoReq
@@ -56,6 +59,7 @@ type (
 		MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
 		DeptTree(ctx context.Context, in *DeptTreeReq, opts ...grpc.CallOption) (*DeptTreeResp, error)
 		DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
+		PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error)
 	}
 
 	defaultSys struct {
@@ -122,4 +126,9 @@ func (m *defaultSys) DeptTree(ctx context.Context, in *DeptTreeReq, opts ...grpc
 func (m *defaultSys) DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.DictDataOp(ctx, in, opts...)
+}
+
+func (m *defaultSys) PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.PostList(ctx, in, opts...)
 }

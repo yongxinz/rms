@@ -1,0 +1,45 @@
+syntax = "v1"
+
+// import "common.api"
+
+info(
+	title: "岗位"
+	desc: "岗位"
+	author: "yongxinz"
+	github: "https://github.com/yongxinz"
+)
+
+type (
+	PostListReq {
+		PageReq
+	}
+	PostListData {
+		PostId    int64  `json:"postId"`
+		PostName  string `json:"postName"`
+		PostCode  string `json:"postCode"`
+		Sort      int64  `json:"sort"`
+		Status    int64  `json:"status"`
+		Remark    string `json:"remark"`
+		CreatedAt string `json:"createdAt"`
+		UpdatedAt string `json:"updatedAt"`
+		CreateBy  int64  `json:"createBy"`
+		UpdateBy  int64  `json:"updateBy"`
+	}
+	PostListResp {
+		list []PostListData `json:"list"`
+		Pagination
+	}
+)
+
+@server(
+	jwt: Auth
+	group: post
+	prefix: /api/v1
+)
+service sys {
+	@doc(
+		summary: "岗位列表"
+	)
+	@handler PostList
+	get /post (PostListReq) returns (PostListResp)
+}

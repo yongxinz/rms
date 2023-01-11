@@ -33,6 +33,7 @@ type SysClient interface {
 	MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
 	DeptTree(ctx context.Context, in *DeptTreeReq, opts ...grpc.CallOption) (*DeptTreeResp, error)
 	DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
+	PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error)
 }
 
 type sysClient struct {
@@ -142,6 +143,15 @@ func (c *sysClient) DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...g
 	return out, nil
 }
 
+func (c *sysClient) PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error) {
+	out := new(PostListResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/PostList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SysServer is the server API for Sys service.
 // All implementations must embed UnimplementedSysServer
 // for forward compatibility
@@ -157,6 +167,7 @@ type SysServer interface {
 	MenuRole(context.Context, *MenuRoleReq) (*MenuRoleResp, error)
 	DeptTree(context.Context, *DeptTreeReq) (*DeptTreeResp, error)
 	DictDataOp(context.Context, *DictDataOpReq) (*DictDataOpResp, error)
+	PostList(context.Context, *PostListReq) (*PostListResp, error)
 	mustEmbedUnimplementedSysServer()
 }
 
@@ -196,6 +207,9 @@ func (UnimplementedSysServer) DeptTree(context.Context, *DeptTreeReq) (*DeptTree
 }
 func (UnimplementedSysServer) DictDataOp(context.Context, *DictDataOpReq) (*DictDataOpResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DictDataOp not implemented")
+}
+func (UnimplementedSysServer) PostList(context.Context, *PostListReq) (*PostListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostList not implemented")
 }
 func (UnimplementedSysServer) mustEmbedUnimplementedSysServer() {}
 
@@ -408,6 +422,24 @@ func _Sys_DictDataOp_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sys_PostList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).PostList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/PostList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).PostList(ctx, req.(*PostListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Sys_ServiceDesc is the grpc.ServiceDesc for Sys service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -458,6 +490,10 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DictDataOp",
 			Handler:    _Sys_DictDataOp_Handler,
+		},
+		{
+			MethodName: "PostList",
+			Handler:    _Sys_PostList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

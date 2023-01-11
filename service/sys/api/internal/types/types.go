@@ -149,3 +149,25 @@ type DictDataOpResp struct {
 	Label string `json:"label"`
 	Value string `json:"value"`
 }
+
+type PostListReq struct {
+	PageReq
+}
+
+type PostListData struct {
+	PostId    int64  `json:"postId"`
+	PostName  string `json:"postName"`
+	PostCode  string `json:"postCode"`
+	Sort      int64  `json:"sort"`
+	Status    int64  `json:"status"`
+	Remark    string `json:"remark"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	CreateBy  int64  `json:"createBy"`
+	UpdateBy  int64  `json:"updateBy"`
+}
+
+type PostListResp struct {
+	List []PostListData `json:"list"`
+	Pagination
+}

@@ -76,3 +76,8 @@ func (s *SysServer) DictDataOp(ctx context.Context, in *sys.DictDataOpReq) (*sys
 	l := logic.NewDictDataOpLogic(ctx, s.svcCtx)
 	return l.DictDataOp(in)
 }
+
+func (s *SysServer) PostList(ctx context.Context, in *sys.PostListReq) (*sys.PostListResp, error) {
+	l := logic.NewPostListLogic(ctx, s.svcCtx)
+	return l.PostList(in)
+}
