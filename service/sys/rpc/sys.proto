@@ -86,6 +86,34 @@ message UserListResp {
 }
 // user end
 
+// role start
+message RoleListReq {
+    int64 page = 1;
+    int64 size = 2;
+}
+
+message RoleListData{
+    int64 roleId = 1;
+    string roleName = 2;
+    string roleKey = 3;
+    int64 roleSort = 4;
+    string flag = 5;
+    string remark = 6;
+    int64 admin = 7;
+    string status = 8;
+    string dataScope = 9;
+    int64 createBy = 10;
+    string createdAt = 11;
+    int64 updateBy = 12;
+    string updatedAt = 13;
+}
+
+message RoleListResp {
+    int64 count = 1;
+    repeated RoleListData data = 2;
+}
+// role end
+
 // dept start
 message DeptListData{
     int64 deptId = 1;
@@ -266,6 +294,8 @@ service Sys {
     rpc ConfigPw(ConfigPwReq) returns(ConfigPwResp);
 
     rpc UserList(UserListReq) returns(UserListResp);
+
+    rpc RoleList(RoleListReq) returns(RoleListResp);
 
     rpc MenuAdd(MenuAddReq) returns(MenuAddResp);
     rpc MenuList(MenuListReq) returns(MenuListResp);

@@ -72,6 +72,31 @@ type UserListResp struct {
 	Pagination
 }
 
+type RoleListReq struct {
+	PageReq
+}
+
+type RoleListData struct {
+	RoleId    int64  `json:"roleId"`
+	RoleName  string `json:"roleName"`
+	RoleKey   string `json:"roleKey"`
+	RoleSort  int64  `json:"roleSort"`
+	Flag      string `json:"flag"`
+	DataScope string `json:"dataScope"`
+	Admin     int64  `json:"admin"`
+	Status    int64  `json:"status"`
+	Remark    string `json:"remark"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	CreateBy  int64  `json:"createBy"`
+	UpdateBy  int64  `json:"updateBy"`
+}
+
+type RoleListResp struct {
+	List []RoleListData `json:"list"`
+	Pagination
+}
+
 type DeptListReq struct {
 	PageReq
 }

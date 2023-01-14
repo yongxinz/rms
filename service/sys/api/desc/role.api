@@ -1,0 +1,48 @@
+syntax = "v1"
+
+// import "common.api"
+
+info(
+	title: "角色"
+	desc: "角色"
+	author: "yongxinz"
+	github: "https://github.com/yongxinz"
+)
+
+type (
+	RoleListReq {
+		PageReq
+	}
+	RoleListData {
+		RoleId    int64  `json:"roleId"`
+		RoleName  string `json:"roleName"`
+		RoleKey   string `json:"roleKey"`
+		RoleSort  int64  `json:"roleSort"`
+		Flag      string `json:"flag"`
+		DataScope string `json:"dataScope"`
+		Admin     int64  `json:"admin"`
+		Status    int64  `json:"status"`
+		Remark    string `json:"remark"`
+		CreatedAt string `json:"createdAt"`
+		UpdatedAt string `json:"updatedAt"`
+		CreateBy  int64  `json:"createBy"`
+		UpdateBy  int64  `json:"updateBy"`
+	}
+	RoleListResp {
+		List []RoleListData `json:"list"`
+		Pagination
+	}
+)
+
+@server(
+	jwt: Auth
+	group: role
+	prefix: /api/v1
+)
+service sys {
+	@doc(
+		summary: "角色列表"
+	)
+	@handler RoleList
+	get /role (RoleListReq) returns (RoleListResp)
+}

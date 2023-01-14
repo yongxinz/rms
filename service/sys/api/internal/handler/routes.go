@@ -8,6 +8,7 @@ import (
 	dictdata "rms/service/sys/api/internal/handler/dictdata"
 	menu "rms/service/sys/api/internal/handler/menu"
 	post "rms/service/sys/api/internal/handler/post"
+	role "rms/service/sys/api/internal/handler/role"
 	sysconfig "rms/service/sys/api/internal/handler/sysconfig"
 	user "rms/service/sys/api/internal/handler/user"
 	"rms/service/sys/api/internal/svc"
@@ -48,6 +49,18 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodGet,
 				Path:    "/sys-user",
 				Handler: user.UserListHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/role",
+				Handler: role.RoleListHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

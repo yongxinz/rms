@@ -39,6 +39,9 @@ type (
 	PostListData   = sys.PostListData
 	PostListReq    = sys.PostListReq
 	PostListResp   = sys.PostListResp
+	RoleListData   = sys.RoleListData
+	RoleListReq    = sys.RoleListReq
+	RoleListResp   = sys.RoleListResp
 	SysConfigReq   = sys.SysConfigReq
 	SysConfigResp  = sys.SysConfigResp
 	UserInfoReq    = sys.UserInfoReq
@@ -53,6 +56,7 @@ type (
 		SysConfig(ctx context.Context, in *SysConfigReq, opts ...grpc.CallOption) (*SysConfigResp, error)
 		ConfigPw(ctx context.Context, in *ConfigPwReq, opts ...grpc.CallOption) (*ConfigPwResp, error)
 		UserList(ctx context.Context, in *UserListReq, opts ...grpc.CallOption) (*UserListResp, error)
+		RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error)
 		MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
 		MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
 		MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
@@ -96,6 +100,11 @@ func (m *defaultSys) ConfigPw(ctx context.Context, in *ConfigPwReq, opts ...grpc
 func (m *defaultSys) UserList(ctx context.Context, in *UserListReq, opts ...grpc.CallOption) (*UserListResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.UserList(ctx, in, opts...)
+}
+
+func (m *defaultSys) RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.RoleList(ctx, in, opts...)
 }
 
 func (m *defaultSys) MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error) {
