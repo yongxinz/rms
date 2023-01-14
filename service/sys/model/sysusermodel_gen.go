@@ -18,8 +18,8 @@ import (
 var (
 	sysUserFieldNames          = builder.RawFieldNames(&SysUser{})
 	sysUserRows                = strings.Join(sysUserFieldNames, ",")
-	sysUserRowsExpectAutoSet   = strings.Join(stringx.Remove(sysUserFieldNames, "`user_id`", "`created_at`", "`create_time`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`"), ",")
-	sysUserRowsWithPlaceHolder = strings.Join(stringx.Remove(sysUserFieldNames, "`user_id`", "`created_at`", "`create_time`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`"), "=?,") + "=?"
+	sysUserRowsExpectAutoSet   = strings.Join(stringx.Remove(sysUserFieldNames, "`user_id`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`", "`create_time`", "`update_at`"), ",")
+	sysUserRowsWithPlaceHolder = strings.Join(stringx.Remove(sysUserFieldNames, "`user_id`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`", "`create_time`", "`update_at`"), "=?,") + "=?"
 
 	cacheSysUserUserIdPrefix   = "cache:sysUser:userId:"
 	cacheSysUserUsernamePrefix = "cache:sysUser:username:"
@@ -47,7 +47,7 @@ type (
 		Phone     sql.NullString `db:"phone"`      // 手机号
 		RoleId    sql.NullInt64  `db:"role_id"`    // 角色ID
 		Salt      sql.NullString `db:"salt"`       // 加盐
-		Avatar    sql.NullString `db:"avatar"`     // 头像
+		Avatar    string         `db:"avatar"`     // 头像
 		Sex       sql.NullString `db:"sex"`        // 性别
 		Email     sql.NullString `db:"email"`      // 邮箱
 		DeptId    sql.NullInt64  `db:"dept_id"`    // 部门

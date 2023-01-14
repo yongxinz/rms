@@ -40,10 +40,10 @@ func (l *UserListLogic) UserList(req *types.UserListReq) (resp *types.UserListRe
 	}
 
 	var user types.UserListData
-	var list []*types.UserListData
+	var list []types.UserListData
 	for _, v := range res.List {
-		copier.Copy(&user, v)
-		list = append(list, &user)
+		copier.Copy(&user, &v)
+		list = append(list, user)
 	}
 
 	resp = &types.UserListResp{

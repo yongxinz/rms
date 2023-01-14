@@ -27,11 +27,6 @@ func (s *SysServer) Login(ctx context.Context, in *sys.LoginRequest) (*sys.Login
 	return l.Login(in)
 }
 
-func (s *SysServer) UserInfo(ctx context.Context, in *sys.UserInfoReq) (*sys.UserInfoResp, error) {
-	l := logic.NewUserInfoLogic(ctx, s.svcCtx)
-	return l.UserInfo(in)
-}
-
 func (s *SysServer) SysConfig(ctx context.Context, in *sys.SysConfigReq) (*sys.SysConfigResp, error) {
 	l := logic.NewSysConfigLogic(ctx, s.svcCtx)
 	return l.SysConfig(in)
@@ -42,9 +37,29 @@ func (s *SysServer) ConfigPw(ctx context.Context, in *sys.ConfigPwReq) (*sys.Con
 	return l.ConfigPw(in)
 }
 
+func (s *SysServer) UserInfo(ctx context.Context, in *sys.UserInfoReq) (*sys.UserInfoResp, error) {
+	l := logic.NewUserInfoLogic(ctx, s.svcCtx)
+	return l.UserInfo(in)
+}
+
 func (s *SysServer) UserList(ctx context.Context, in *sys.UserListReq) (*sys.UserListResp, error) {
 	l := logic.NewUserListLogic(ctx, s.svcCtx)
 	return l.UserList(in)
+}
+
+func (s *SysServer) UserRetrieve(ctx context.Context, in *sys.UserInfoReq) (*sys.UserRetrieveResp, error) {
+	l := logic.NewUserRetrieveLogic(ctx, s.svcCtx)
+	return l.UserRetrieve(in)
+}
+
+func (s *SysServer) UserAdd(ctx context.Context, in *sys.UserAddReq) (*sys.UserAddResp, error) {
+	l := logic.NewUserAddLogic(ctx, s.svcCtx)
+	return l.UserAdd(in)
+}
+
+func (s *SysServer) UserUpdate(ctx context.Context, in *sys.UserUpdateReq) (*sys.UserUpdateResp, error) {
+	l := logic.NewUserUpdateLogic(ctx, s.svcCtx)
+	return l.UserUpdate(in)
 }
 
 func (s *SysServer) RoleList(ctx context.Context, in *sys.RoleListReq) (*sys.RoleListResp, error) {

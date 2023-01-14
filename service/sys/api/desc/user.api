@@ -67,8 +67,62 @@ type (
 		Dept      DeptListData `json:"dept"`
 	}
 	UserListResp {
-		List []*UserListData `json:"list"`
+		List []UserListData `json:"list"`
 		Pagination
+	}
+)
+
+type (
+	UserAddReq {
+		Username  string       `json:"username"`
+		Password  string       `json:"password"`
+		NickName  string       `json:"nickName"`
+		Phone     string       `json:"phone"`
+		Status    string       `json:"status"`
+		Email     string       `json:"email"`
+		Sex       string       `json:"sex"`
+		Remark    string       `json:"remark"`
+		RoleId    int64        `json:"roleId"`
+		DeptId    int64        `json:"deptId"`
+		PostId    int64        `json:"postId"`
+		CreateBy  int64        `json:"createBy,optional"`
+		UpdateBy  int64        `json:"updateBy,optional"`
+	}
+)
+
+type (
+	UserRetrieveReq {
+		UserId    int64        `path:"userId"`
+	}
+	UserRetrieveResp {
+		UserId    int64        `json:"userId"`
+		Username  string       `json:"username"`
+		NickName  string       `json:"nickName"`
+		Phone     string       `json:"phone"`
+		Status    string       `json:"status"`
+		Email     string       `json:"email"`
+		Sex       string       `json:"sex"`
+		Remark    string       `json:"remark"`
+		RoleId    int64        `json:"roleId"`
+		DeptId    int64        `json:"deptId"`
+		PostId    int64        `json:"postId"`
+	}
+)
+
+type (
+	UserUpdateReq {
+		UserId    int64        `json:"userId"`
+		Username  string       `json:"username"`
+		NickName  string       `json:"nickName"`
+		Phone     string       `json:"phone"`
+		Status    string       `json:"status"`
+		Email     string       `json:"email"`
+		Sex       string       `json:"sex"`
+		Remark    string       `json:"remark"`
+		RoleId    int64        `json:"roleId"`
+		DeptId    int64        `json:"deptId"`
+		PostId    int64        `json:"postId"`
+		UpdateBy  int64        `json:"updateBy,optional"`
 	}
 )
 
@@ -110,4 +164,19 @@ service sys {
 	)
 	@handler UserList
 	get /sys-user (UserListReq) returns (UserListResp)
+	@doc(
+		summary: "获取单个用户"
+	)
+	@handler UserRetrieve
+	get /sys-user/:userId (UserRetrieveReq) returns (UserRetrieveResp)
+	@doc(
+		summary: "新增用户"
+	)
+	@handler UserAdd
+	post /sys-user (UserAddReq)
+	@doc(
+		summary: "更新用户"
+	)
+	@handler UserUpdate
+	put /sys-user (UserUpdateReq)
 }

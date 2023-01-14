@@ -54,6 +54,20 @@ message UserInfoResp {
     int64 roleId = 10;
 }
 
+message UserRetrieveResp {
+    int64 userId = 1;
+    string username = 2;
+    string nickName = 3;
+    string phone = 4;
+    string status = 5;
+    string email = 6;
+    string sex = 7;
+    string remark = 8;
+    int64 roleId = 9;
+    int64 deptId = 10;
+    int64 postId = 11;
+}
+
 message UserListReq {
     int64 page = 1;
     int64 size = 2;
@@ -84,6 +98,43 @@ message UserListResp {
     int64 count = 1;
     repeated UserListData list = 2;
 }
+
+message UserAddReq {
+    string username = 1;
+    string password = 2;
+    string nickName = 3;
+    string phone = 4;
+    int64 roleId = 5;
+    string salt = 6;
+    string avatar = 7;
+    string sex = 8;
+    string email = 9;
+    int64 deptId = 10;
+    int64 postId = 11;
+    string remark = 12;
+    string status = 13;
+    int64 createBy = 14;
+    int64 updateBy = 16;
+}
+
+message UserAddResp {}
+
+message UserUpdateReq {
+    int64 userId = 1;
+    string username = 2;
+    string nickName = 3;
+    string phone = 4;
+    int64 roleId = 5;
+    string sex = 6;
+    string email = 7;
+    int64 deptId = 8;
+    int64 postId = 9;
+    string remark = 10;
+    string status = 11;
+    int64 updateBy = 12;
+}
+
+message UserUpdateResp {}
 // user end
 
 // role start
@@ -288,12 +339,15 @@ message PostListResp {
 
 service Sys {
     rpc Login(LoginRequest) returns(LoginResponse);
-    rpc UserInfo(UserInfoReq) returns(UserInfoResp);
 
     rpc SysConfig(SysConfigReq) returns(SysConfigResp);
     rpc ConfigPw(ConfigPwReq) returns(ConfigPwResp);
 
+    rpc UserInfo(UserInfoReq) returns(UserInfoResp);
     rpc UserList(UserListReq) returns(UserListResp);
+    rpc UserRetrieve(UserInfoReq) returns(UserRetrieveResp);
+    rpc UserAdd(UserAddReq) returns(UserAddResp);
+    rpc UserUpdate(UserUpdateReq) returns(UserUpdateResp);
 
     rpc RoleList(RoleListReq) returns(RoleListResp);
 

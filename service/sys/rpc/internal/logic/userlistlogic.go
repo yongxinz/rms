@@ -45,7 +45,7 @@ func (l *UserListLogic) UserList(in *sys.UserListReq) (*sys.UserListResp, error)
 			Status:    user.SysUser.Status.String,
 			Email:     user.SysUser.Email.String,
 			Salt:      user.Salt.String,
-			Avatar:    user.Avatar.String,
+			Avatar:    user.Avatar,
 			Sex:       user.Sex.String,
 			Remark:    user.Remark.String,
 			CreateBy:  user.SysUser.CreateBy.Int64,

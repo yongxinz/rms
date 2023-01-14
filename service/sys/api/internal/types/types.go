@@ -68,8 +68,57 @@ type UserListData struct {
 }
 
 type UserListResp struct {
-	List []*UserListData `json:"list"`
+	List []UserListData `json:"list"`
 	Pagination
+}
+
+type UserAddReq struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+	NickName string `json:"nickName"`
+	Phone    string `json:"phone"`
+	Status   string `json:"status"`
+	Email    string `json:"email"`
+	Sex      string `json:"sex"`
+	Remark   string `json:"remark"`
+	RoleId   int64  `json:"roleId"`
+	DeptId   int64  `json:"deptId"`
+	PostId   int64  `json:"postId"`
+	CreateBy int64  `json:"createBy,optional"`
+	UpdateBy int64  `json:"updateBy,optional"`
+}
+
+type UserRetrieveReq struct {
+	UserId int64 `path:"userId"`
+}
+
+type UserRetrieveResp struct {
+	UserId   int64  `json:"userId"`
+	Username string `json:"username"`
+	NickName string `json:"nickName"`
+	Phone    string `json:"phone"`
+	Status   string `json:"status"`
+	Email    string `json:"email"`
+	Sex      string `json:"sex"`
+	Remark   string `json:"remark"`
+	RoleId   int64  `json:"roleId"`
+	DeptId   int64  `json:"deptId"`
+	PostId   int64  `json:"postId"`
+}
+
+type UserUpdateReq struct {
+	UserId   int64  `json:"userId"`
+	Username string `json:"username"`
+	NickName string `json:"nickName"`
+	Phone    string `json:"phone"`
+	Status   string `json:"status"`
+	Email    string `json:"email"`
+	Sex      string `json:"sex"`
+	Remark   string `json:"remark"`
+	RoleId   int64  `json:"roleId"`
+	DeptId   int64  `json:"deptId"`
+	PostId   int64  `json:"postId"`
+	UpdateBy int64  `json:"updateBy,optional"`
 }
 
 type RoleListReq struct {

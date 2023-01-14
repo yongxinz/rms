@@ -8,7 +8,7 @@ CREATE TABLE `sys_user` (
   `phone` varchar(11) DEFAULT NULL COMMENT '手机号',
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `salt` varchar(255) DEFAULT NULL COMMENT '加盐',
-  `avatar` varchar(255) DEFAULT NULL COMMENT '头像',
+  `avatar` varchar(255) DEFAULT '' COMMENT '头像',
   `sex` varchar(255) DEFAULT NULL COMMENT '性别',
   `email` varchar(128) DEFAULT NULL COMMENT '邮箱',
   `dept_id` bigint(20) DEFAULT NULL COMMENT '部门',
