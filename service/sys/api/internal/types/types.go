@@ -121,6 +121,10 @@ type UserUpdateReq struct {
 	UpdateBy int64  `json:"updateBy,optional"`
 }
 
+type UserDeleteReq struct {
+	Ids []int64 `json:"ids"`
+}
+
 type RoleListReq struct {
 	PageReq
 }

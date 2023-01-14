@@ -126,6 +126,12 @@ type (
 	}
 )
 
+type (
+	UserDeleteReq {
+		ids []int64 `json:"ids"`
+	}
+)
+
 @server(
 	group: user
 	prefix: /api/v1
@@ -179,4 +185,9 @@ service sys {
 	)
 	@handler UserUpdate
 	put /sys-user (UserUpdateReq)
+	@doc(
+		summary: "删除用户"
+	)
+	@handler UserDelete
+	delete /sys-user (UserDeleteReq)
 }

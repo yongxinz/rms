@@ -135,6 +135,12 @@ message UserUpdateReq {
 }
 
 message UserUpdateResp {}
+
+message UserDeleteReq {
+    repeated int64 userIds = 1;
+}
+
+message UserDeleteResp {}
 // user end
 
 // role start
@@ -348,6 +354,7 @@ service Sys {
     rpc UserRetrieve(UserInfoReq) returns(UserRetrieveResp);
     rpc UserAdd(UserAddReq) returns(UserAddResp);
     rpc UserUpdate(UserUpdateReq) returns(UserUpdateResp);
+    rpc UserDelete(UserDeleteReq) returns(UserDeleteResp);
 
     rpc RoleList(RoleListReq) returns(RoleListResp);
 
