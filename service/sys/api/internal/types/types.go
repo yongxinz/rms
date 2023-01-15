@@ -79,11 +79,11 @@ type UserAddReq struct {
 	Phone    string `json:"phone"`
 	Status   string `json:"status"`
 	Email    string `json:"email"`
-	Sex      string `json:"sex"`
-	Remark   string `json:"remark"`
-	RoleId   int64  `json:"roleId"`
+	Sex      string `json:"sex,optional"`
+	Remark   string `json:"remark,optional"`
+	RoleId   int64  `json:"roleId,optional"`
 	DeptId   int64  `json:"deptId"`
-	PostId   int64  `json:"postId"`
+	PostId   int64  `json:"postId,optional"`
 	CreateBy int64  `json:"createBy,optional"`
 	UpdateBy int64  `json:"updateBy,optional"`
 }
@@ -113,11 +113,11 @@ type UserUpdateReq struct {
 	Phone    string `json:"phone"`
 	Status   string `json:"status"`
 	Email    string `json:"email"`
-	Sex      string `json:"sex"`
-	Remark   string `json:"remark"`
-	RoleId   int64  `json:"roleId"`
+	Sex      string `json:"sex,optional"`
+	Remark   string `json:"remark,optional"`
+	RoleId   int64  `json:"roleId,optional"`
 	DeptId   int64  `json:"deptId"`
-	PostId   int64  `json:"postId"`
+	PostId   int64  `json:"postId,optional"`
 	UpdateBy int64  `json:"updateBy,optional"`
 }
 

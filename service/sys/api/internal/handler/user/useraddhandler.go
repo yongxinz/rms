@@ -21,11 +21,6 @@ func UserAddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		l := logic.NewUserAddLogic(r.Context(), svcCtx)
 		err := l.UserAdd(&req)
-		if err != nil {
-			httpx.Error(w, err)
-			return
-		} else {
-			response.Response(w, nil, err)
-		}
+		response.Response(w, nil, err)
 	}
 }
