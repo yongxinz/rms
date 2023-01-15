@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/cache"
@@ -56,9 +57,8 @@ type (
 		Status    sql.NullString `db:"status"`     // 状态
 		CreateBy  sql.NullInt64  `db:"create_by"`  // 创建者
 		UpdateBy  sql.NullInt64  `db:"update_by"`  // 更新者
-		CreatedAt sql.NullTime   `db:"created_at"` // 创建时间
-		UpdatedAt sql.NullTime   `db:"updated_at"` // 最后更新时间
-		DeletedAt sql.NullTime   `db:"deleted_at"` // 删除时间
+		CreatedAt time.Time      `db:"created_at"` // 创建时间
+		UpdatedAt time.Time      `db:"updated_at"` // 更新时间
 	}
 )
 
@@ -125,8 +125,8 @@ func (m *defaultSysUserModel) Insert(ctx context.Context, data *SysUser) (sql.Re
 	sysUserUserIdKey := fmt.Sprintf("%s%v", cacheSysUserUserIdPrefix, data.UserId)
 	sysUserUsernameKey := fmt.Sprintf("%s%v", cacheSysUserUsernamePrefix, data.Username)
 	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, sysUserRowsExpectAutoSet)
-		return conn.ExecCtx(ctx, query, data.Username, data.Password, data.NickName, data.Phone, data.RoleId, data.Salt, data.Avatar, data.Sex, data.Email, data.DeptId, data.PostId, data.Remark, data.Status, data.CreateBy, data.UpdateBy, data.DeletedAt)
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, sysUserRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.Username, data.Password, data.NickName, data.Phone, data.RoleId, data.Salt, data.Avatar, data.Sex, data.Email, data.DeptId, data.PostId, data.Remark, data.Status, data.CreateBy, data.UpdateBy)
 	}, sysUserUserIdKey, sysUserUsernameKey)
 	return ret, err
 }
@@ -141,7 +141,7 @@ func (m *defaultSysUserModel) Update(ctx context.Context, newData *SysUser) erro
 	sysUserUsernameKey := fmt.Sprintf("%s%v", cacheSysUserUsernamePrefix, data.Username)
 	_, err = m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `user_id` = ?", m.table, sysUserRowsWithPlaceHolder)
-		return conn.ExecCtx(ctx, query, newData.Username, newData.Password, newData.NickName, newData.Phone, newData.RoleId, newData.Salt, newData.Avatar, newData.Sex, newData.Email, newData.DeptId, newData.PostId, newData.Remark, newData.Status, newData.CreateBy, newData.UpdateBy, newData.DeletedAt, newData.UserId)
+		return conn.ExecCtx(ctx, query, newData.Username, newData.Password, newData.NickName, newData.Phone, newData.RoleId, newData.Salt, newData.Avatar, newData.Sex, newData.Email, newData.DeptId, newData.PostId, newData.Remark, newData.Status, newData.CreateBy, newData.UpdateBy, newData.UserId)
 	}, sysUserUserIdKey, sysUserUsernameKey)
 	return err
 }

@@ -51,9 +51,6 @@ func (l *UserAddLogic) UserAdd(in *sys.UserAddReq) (*sys.UserAddResp, error) {
 		sysUser.Avatar = utils.AvatarUrl()
 		sysUser.Password = cryptx.PasswordEncrypt(l.svcCtx.Config.Salt, in.Password)
 
-		// sysUser.CreatedAt.Time = time.Now()
-		// sysUser.UpdatedAt.Time = time.Now()
-
 		_, err = l.svcCtx.UserModel.Insert(l.ctx, sysUser)
 		if err != nil {
 			return nil, errorx.NewSystemError(errorx.ServerErrorCode, err.Error())
