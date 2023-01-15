@@ -31,6 +31,7 @@ type SysClient interface {
 	UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
 	UserUpdate(ctx context.Context, in *UserUpdateReq, opts ...grpc.CallOption) (*UserUpdateResp, error)
 	UserUpdateStatus(ctx context.Context, in *UserUpdateStatusReq, opts ...grpc.CallOption) (*UserUpdateStatusResp, error)
+	UserUpdatePwd(ctx context.Context, in *UserUpdatePwdReq, opts ...grpc.CallOption) (*UserUpdatePwdResp, error)
 	UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error)
 	RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error)
 	MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
@@ -131,6 +132,15 @@ func (c *sysClient) UserUpdateStatus(ctx context.Context, in *UserUpdateStatusRe
 	return out, nil
 }
 
+func (c *sysClient) UserUpdatePwd(ctx context.Context, in *UserUpdatePwdReq, opts ...grpc.CallOption) (*UserUpdatePwdResp, error) {
+	out := new(UserUpdatePwdResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/UserUpdatePwd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *sysClient) UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error) {
 	out := new(UserDeleteResp)
 	err := c.cc.Invoke(ctx, "/sysclient.Sys/UserDelete", in, out, opts...)
@@ -225,6 +235,7 @@ type SysServer interface {
 	UserAdd(context.Context, *UserAddReq) (*UserAddResp, error)
 	UserUpdate(context.Context, *UserUpdateReq) (*UserUpdateResp, error)
 	UserUpdateStatus(context.Context, *UserUpdateStatusReq) (*UserUpdateStatusResp, error)
+	UserUpdatePwd(context.Context, *UserUpdatePwdReq) (*UserUpdatePwdResp, error)
 	UserDelete(context.Context, *UserDeleteReq) (*UserDeleteResp, error)
 	RoleList(context.Context, *RoleListReq) (*RoleListResp, error)
 	MenuAdd(context.Context, *MenuAddReq) (*MenuAddResp, error)
@@ -267,6 +278,9 @@ func (UnimplementedSysServer) UserUpdate(context.Context, *UserUpdateReq) (*User
 }
 func (UnimplementedSysServer) UserUpdateStatus(context.Context, *UserUpdateStatusReq) (*UserUpdateStatusResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserUpdateStatus not implemented")
+}
+func (UnimplementedSysServer) UserUpdatePwd(context.Context, *UserUpdatePwdReq) (*UserUpdatePwdResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserUpdatePwd not implemented")
 }
 func (UnimplementedSysServer) UserDelete(context.Context, *UserDeleteReq) (*UserDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserDelete not implemented")
@@ -466,6 +480,24 @@ func _Sys_UserUpdateStatus_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).UserUpdateStatus(ctx, req.(*UserUpdateStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_UserUpdatePwd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserUpdatePwdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).UserUpdatePwd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/UserUpdatePwd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).UserUpdatePwd(ctx, req.(*UserUpdatePwdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -674,6 +706,10 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UserUpdateStatus",
 			Handler:    _Sys_UserUpdateStatus_Handler,
+		},
+		{
+			MethodName: "UserUpdatePwd",
+			Handler:    _Sys_UserUpdatePwd_Handler,
 		},
 		{
 			MethodName: "UserDelete",

@@ -67,6 +67,11 @@ func (s *SysServer) UserUpdateStatus(ctx context.Context, in *sys.UserUpdateStat
 	return l.UserUpdateStatus(in)
 }
 
+func (s *SysServer) UserUpdatePwd(ctx context.Context, in *sys.UserUpdatePwdReq) (*sys.UserUpdatePwdResp, error) {
+	l := logic.NewUserUpdatePwdLogic(ctx, s.svcCtx)
+	return l.UserUpdatePwd(in)
+}
+
 func (s *SysServer) UserDelete(ctx context.Context, in *sys.UserDeleteReq) (*sys.UserDeleteResp, error) {
 	l := logic.NewUserDeleteLogic(ctx, s.svcCtx)
 	return l.UserDelete(in)

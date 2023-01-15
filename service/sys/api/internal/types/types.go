@@ -127,6 +127,12 @@ type UserUpdateStatusReq struct {
 	UpdateBy int64  `json:"updateBy,optional"`
 }
 
+type UserUpdatePwdReq struct {
+	UserId   int64  `json:"userId"`
+	Password string `json:"password"`
+	UpdateBy int64  `json:"updateBy,optional"`
+}
+
 type UserDeleteReq struct {
 	Ids []int64 `json:"ids"`
 }

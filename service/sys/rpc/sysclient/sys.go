@@ -54,6 +54,8 @@ type (
 	UserListReq          = sys.UserListReq
 	UserListResp         = sys.UserListResp
 	UserRetrieveResp     = sys.UserRetrieveResp
+	UserUpdatePwdReq     = sys.UserUpdatePwdReq
+	UserUpdatePwdResp    = sys.UserUpdatePwdResp
 	UserUpdateReq        = sys.UserUpdateReq
 	UserUpdateResp       = sys.UserUpdateResp
 	UserUpdateStatusReq  = sys.UserUpdateStatusReq
@@ -69,6 +71,7 @@ type (
 		UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
 		UserUpdate(ctx context.Context, in *UserUpdateReq, opts ...grpc.CallOption) (*UserUpdateResp, error)
 		UserUpdateStatus(ctx context.Context, in *UserUpdateStatusReq, opts ...grpc.CallOption) (*UserUpdateStatusResp, error)
+		UserUpdatePwd(ctx context.Context, in *UserUpdatePwdReq, opts ...grpc.CallOption) (*UserUpdatePwdResp, error)
 		UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error)
 		RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error)
 		MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
@@ -134,6 +137,11 @@ func (m *defaultSys) UserUpdate(ctx context.Context, in *UserUpdateReq, opts ...
 func (m *defaultSys) UserUpdateStatus(ctx context.Context, in *UserUpdateStatusReq, opts ...grpc.CallOption) (*UserUpdateStatusResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.UserUpdateStatus(ctx, in, opts...)
+}
+
+func (m *defaultSys) UserUpdatePwd(ctx context.Context, in *UserUpdatePwdReq, opts ...grpc.CallOption) (*UserUpdatePwdResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.UserUpdatePwd(ctx, in, opts...)
 }
 
 func (m *defaultSys) UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error) {

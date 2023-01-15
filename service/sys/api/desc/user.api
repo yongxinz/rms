@@ -135,6 +135,14 @@ type (
 )
 
 type (
+	UserUpdatePwdReq {
+		UserId    int64        `json:"userId"`
+		password  string       `json:"password"`
+		UpdateBy  int64        `json:"updateBy,optional"`
+	}
+)
+
+type (
 	UserDeleteReq {
 		ids []int64 `json:"ids"`
 	}
@@ -198,6 +206,11 @@ service sys {
 	)
 	@handler UserUpdateStatus
 	put /user/status (UserUpdateStatusReq)
+	@doc(
+		summary: "重置用户密码"
+	)
+	@handler UserUpdatePwd
+	put /user/pwd/reset (UserUpdatePwdReq)
 	@doc(
 		summary: "删除用户"
 	)

@@ -144,6 +144,14 @@ message UserUpdateStatusReq {
 
 message UserUpdateStatusResp {}
 
+message UserUpdatePwdReq {
+    int64 userId = 1;
+    string password = 2;
+    int64 updateBy = 3;
+}
+
+message UserUpdatePwdResp {}
+
 message UserDeleteReq {
     repeated int64 userIds = 1;
 }
@@ -363,6 +371,7 @@ service Sys {
     rpc UserAdd(UserAddReq) returns(UserAddResp);
     rpc UserUpdate(UserUpdateReq) returns(UserUpdateResp);
     rpc UserUpdateStatus(UserUpdateStatusReq) returns(UserUpdateStatusResp);
+    rpc UserUpdatePwd(UserUpdatePwdReq) returns(UserUpdatePwdResp);
     rpc UserDelete(UserDeleteReq) returns(UserDeleteResp);
 
     rpc RoleList(RoleListReq) returns(RoleListResp);
