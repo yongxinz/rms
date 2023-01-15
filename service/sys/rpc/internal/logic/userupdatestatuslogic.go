@@ -11,34 +11,24 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type UserUpdateLogic struct {
+type UserUpdateStatusLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewUserUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserUpdateLogic {
-	return &UserUpdateLogic{
+func NewUserUpdateStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserUpdateStatusLogic {
+	return &UserUpdateStatusLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *UserUpdateLogic) UserUpdate(in *sys.UserUpdateReq) (*sys.UserUpdateResp, error) {
+func (l *UserUpdateStatusLogic) UserUpdateStatus(in *sys.UserUpdateStatusReq) (*sys.UserUpdateStatusResp, error) {
 	sysUser, err := l.svcCtx.UserModel.FindOne(l.ctx, in.UserId)
 	if err != nil {
 		return nil, errorx.NewDefaultError(errorx.UserIdErrorCode)
-	}
-
-	_, err = l.svcCtx.Dept.FindOne(l.ctx, in.DeptId)
-	if err != nil {
-		return nil, errorx.NewDefaultError(errorx.DeptIdErrorCode)
-	}
-
-	_, err = l.svcCtx.Post.FindOne(l.ctx, in.PostId)
-	if err != nil {
-		return nil, errorx.NewDefaultError(errorx.PostIdErrorCode)
 	}
 
 	err = copier.Copy(sysUser, in)
@@ -50,5 +40,5 @@ func (l *UserUpdateLogic) UserUpdate(in *sys.UserUpdateReq) (*sys.UserUpdateResp
 		return nil, errorx.NewSystemError(errorx.ServerErrorCode, err.Error())
 	}
 
-	return &sys.UserUpdateResp{}, nil
+	return &sys.UserUpdateStatusResp{}, nil
 }

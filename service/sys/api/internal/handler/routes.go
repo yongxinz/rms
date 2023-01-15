@@ -66,6 +66,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: user.UserUpdateHandler(serverCtx),
 			},
 			{
+				Method:  http.MethodPut,
+				Path:    "/user/status",
+				Handler: user.UserUpdateStatusHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodDelete,
 				Path:    "/sys-user",
 				Handler: user.UserDeleteHandler(serverCtx),

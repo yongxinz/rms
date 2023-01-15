@@ -13,49 +13,51 @@ import (
 )
 
 type (
-	ConfigPwReq      = sys.ConfigPwReq
-	ConfigPwResp     = sys.ConfigPwResp
-	DeptListData     = sys.DeptListData
-	DeptTreeData     = sys.DeptTreeData
-	DeptTreeReq      = sys.DeptTreeReq
-	DeptTreeResp     = sys.DeptTreeResp
-	DictDataOp       = sys.DictDataOp
-	DictDataOpReq    = sys.DictDataOpReq
-	DictDataOpResp   = sys.DictDataOpResp
-	LoginRequest     = sys.LoginRequest
-	LoginResponse    = sys.LoginResponse
-	MenuAddReq       = sys.MenuAddReq
-	MenuAddResp      = sys.MenuAddResp
-	MenuDeleteReq    = sys.MenuDeleteReq
-	MenuDeleteResp   = sys.MenuDeleteResp
-	MenuListData     = sys.MenuListData
-	MenuListReq      = sys.MenuListReq
-	MenuListResp     = sys.MenuListResp
-	MenuRoleReq      = sys.MenuRoleReq
-	MenuRoleResp     = sys.MenuRoleResp
-	MenuTree         = sys.MenuTree
-	MenuUpdateReq    = sys.MenuUpdateReq
-	MenuUpdateResp   = sys.MenuUpdateResp
-	PostListData     = sys.PostListData
-	PostListReq      = sys.PostListReq
-	PostListResp     = sys.PostListResp
-	RoleListData     = sys.RoleListData
-	RoleListReq      = sys.RoleListReq
-	RoleListResp     = sys.RoleListResp
-	SysConfigReq     = sys.SysConfigReq
-	SysConfigResp    = sys.SysConfigResp
-	UserAddReq       = sys.UserAddReq
-	UserAddResp      = sys.UserAddResp
-	UserDeleteReq    = sys.UserDeleteReq
-	UserDeleteResp   = sys.UserDeleteResp
-	UserInfoReq      = sys.UserInfoReq
-	UserInfoResp     = sys.UserInfoResp
-	UserListData     = sys.UserListData
-	UserListReq      = sys.UserListReq
-	UserListResp     = sys.UserListResp
-	UserRetrieveResp = sys.UserRetrieveResp
-	UserUpdateReq    = sys.UserUpdateReq
-	UserUpdateResp   = sys.UserUpdateResp
+	ConfigPwReq          = sys.ConfigPwReq
+	ConfigPwResp         = sys.ConfigPwResp
+	DeptListData         = sys.DeptListData
+	DeptTreeData         = sys.DeptTreeData
+	DeptTreeReq          = sys.DeptTreeReq
+	DeptTreeResp         = sys.DeptTreeResp
+	DictDataOp           = sys.DictDataOp
+	DictDataOpReq        = sys.DictDataOpReq
+	DictDataOpResp       = sys.DictDataOpResp
+	LoginRequest         = sys.LoginRequest
+	LoginResponse        = sys.LoginResponse
+	MenuAddReq           = sys.MenuAddReq
+	MenuAddResp          = sys.MenuAddResp
+	MenuDeleteReq        = sys.MenuDeleteReq
+	MenuDeleteResp       = sys.MenuDeleteResp
+	MenuListData         = sys.MenuListData
+	MenuListReq          = sys.MenuListReq
+	MenuListResp         = sys.MenuListResp
+	MenuRoleReq          = sys.MenuRoleReq
+	MenuRoleResp         = sys.MenuRoleResp
+	MenuTree             = sys.MenuTree
+	MenuUpdateReq        = sys.MenuUpdateReq
+	MenuUpdateResp       = sys.MenuUpdateResp
+	PostListData         = sys.PostListData
+	PostListReq          = sys.PostListReq
+	PostListResp         = sys.PostListResp
+	RoleListData         = sys.RoleListData
+	RoleListReq          = sys.RoleListReq
+	RoleListResp         = sys.RoleListResp
+	SysConfigReq         = sys.SysConfigReq
+	SysConfigResp        = sys.SysConfigResp
+	UserAddReq           = sys.UserAddReq
+	UserAddResp          = sys.UserAddResp
+	UserDeleteReq        = sys.UserDeleteReq
+	UserDeleteResp       = sys.UserDeleteResp
+	UserInfoReq          = sys.UserInfoReq
+	UserInfoResp         = sys.UserInfoResp
+	UserListData         = sys.UserListData
+	UserListReq          = sys.UserListReq
+	UserListResp         = sys.UserListResp
+	UserRetrieveResp     = sys.UserRetrieveResp
+	UserUpdateReq        = sys.UserUpdateReq
+	UserUpdateResp       = sys.UserUpdateResp
+	UserUpdateStatusReq  = sys.UserUpdateStatusReq
+	UserUpdateStatusResp = sys.UserUpdateStatusResp
 
 	Sys interface {
 		Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
@@ -66,6 +68,7 @@ type (
 		UserRetrieve(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserRetrieveResp, error)
 		UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
 		UserUpdate(ctx context.Context, in *UserUpdateReq, opts ...grpc.CallOption) (*UserUpdateResp, error)
+		UserUpdateStatus(ctx context.Context, in *UserUpdateStatusReq, opts ...grpc.CallOption) (*UserUpdateStatusResp, error)
 		UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error)
 		RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error)
 		MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
@@ -126,6 +129,11 @@ func (m *defaultSys) UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.C
 func (m *defaultSys) UserUpdate(ctx context.Context, in *UserUpdateReq, opts ...grpc.CallOption) (*UserUpdateResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.UserUpdate(ctx, in, opts...)
+}
+
+func (m *defaultSys) UserUpdateStatus(ctx context.Context, in *UserUpdateStatusReq, opts ...grpc.CallOption) (*UserUpdateStatusResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.UserUpdateStatus(ctx, in, opts...)
 }
 
 func (m *defaultSys) UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error) {

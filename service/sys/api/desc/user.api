@@ -127,6 +127,14 @@ type (
 )
 
 type (
+	UserUpdateStatusReq {
+		UserId    int64        `json:"userId"`
+		Status    string       `json:"status"`
+		UpdateBy  int64        `json:"updateBy,optional"`
+	}
+)
+
+type (
 	UserDeleteReq {
 		ids []int64 `json:"ids"`
 	}
@@ -185,6 +193,11 @@ service sys {
 	)
 	@handler UserUpdate
 	put /sys-user (UserUpdateReq)
+	@doc(
+		summary: "更新用户状态"
+	)
+	@handler UserUpdateStatus
+	put /user/status (UserUpdateStatusReq)
 	@doc(
 		summary: "删除用户"
 	)
