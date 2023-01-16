@@ -2,7 +2,9 @@ package model
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
+	"strings"
 
 	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
@@ -18,6 +20,7 @@ type (
 		sysPostModel
 		FindAll(context.Context, int64, int64) ([]*SysPost, error)
 		Count(context.Context) (int64, error)
+		DeleteMulti(context.Context, []int64) error
 	}
 
 	customSysPostModel struct {
@@ -56,4 +59,20 @@ func (m *customSysPostModel) Count(ctx context.Context) (int64, error) {
 	default:
 		return count, err
 	}
+}
+
+func (m *customSysPostModel) DeleteMulti(ctx context.Context, postIds []int64) error {
+	args := make([]interface{}, len(postIds))
+	for i, id := range postIds {
+		args[i] = id
+	}
+
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf(`delete from %s where post_id in (?`+strings.Repeat(",?", len(postIds)-1)+`)`, m.table)
+		return conn.ExecCtx(ctx, query, args...)
+	})
+	if err != nil {
+		return err
+	}
+	return nil
 }

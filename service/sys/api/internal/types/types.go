@@ -261,3 +261,40 @@ type PostListResp struct {
 	List []PostListData `json:"list"`
 	Pagination
 }
+
+type PostRetrieveReq struct {
+	PostId int64 `path:"postId"`
+}
+
+type PostRetrieveResp struct {
+	PostId   int64  `json:"postId"`
+	PostName string `json:"postName"`
+	PostCode string `json:"postCode"`
+	Sort     int64  `json:"sort"`
+	Status   int64  `json:"status"`
+	Remark   string `json:"remark"`
+}
+
+type PostAddReq struct {
+	PostName string `json:"postName"`
+	PostCode string `json:"postCode"`
+	Sort     int64  `json:"sort"`
+	Status   int64  `json:"status,optional"`
+	Remark   string `json:"remark,optional"`
+	CreateBy int64  `json:"createBy,optional"`
+	UpdateBy int64  `json:"updateBy,optional"`
+}
+
+type PostUpdateReq struct {
+	PostId   int64  `json:"postId"`
+	PostName string `json:"postName"`
+	PostCode string `json:"postCode"`
+	Sort     int64  `json:"sort"`
+	Status   int64  `json:"status,optional"`
+	Remark   string `json:"remark,optional"`
+	UpdateBy int64  `json:"updateBy,optional"`
+}
+
+type PostDeleteReq struct {
+	Ids []int64 `json:"ids"`
+}

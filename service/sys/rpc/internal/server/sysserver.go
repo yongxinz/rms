@@ -116,3 +116,23 @@ func (s *SysServer) PostList(ctx context.Context, in *sys.PostListReq) (*sys.Pos
 	l := logic.NewPostListLogic(ctx, s.svcCtx)
 	return l.PostList(in)
 }
+
+func (s *SysServer) PostRetrieve(ctx context.Context, in *sys.PostRetrieveReq) (*sys.PostRetrieveResp, error) {
+	l := logic.NewPostRetrieveLogic(ctx, s.svcCtx)
+	return l.PostRetrieve(in)
+}
+
+func (s *SysServer) PostAdd(ctx context.Context, in *sys.PostAddReq) (*sys.PostAddResp, error) {
+	l := logic.NewPostAddLogic(ctx, s.svcCtx)
+	return l.PostAdd(in)
+}
+
+func (s *SysServer) PostUpdate(ctx context.Context, in *sys.PostUpdateReq) (*sys.PostUpdateResp, error) {
+	l := logic.NewPostUpdateLogic(ctx, s.svcCtx)
+	return l.PostUpdate(in)
+}
+
+func (s *SysServer) PostDelete(ctx context.Context, in *sys.PostDeleteReq) (*sys.PostDeleteResp, error) {
+	l := logic.NewPostDeleteLogic(ctx, s.svcCtx)
+	return l.PostDelete(in)
+}

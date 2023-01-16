@@ -357,6 +357,49 @@ message PostListResp {
     int64 count = 1;
     repeated PostListData data = 2;
 }
+
+message PostRetrieveReq {
+    int64 postId = 1;
+}
+
+message PostRetrieveResp {
+    int64 postId = 1;
+    string postName = 2;
+    string postCode = 3;
+    int64 sort = 4;
+    int64 status = 5;
+    string remark = 6;
+}
+
+message PostAddReq {
+    string postName = 1;
+    string postCode = 2;
+    int64 sort = 3;
+    int64 status = 4;
+    string remark = 5;
+    int64 createBy = 6;
+    int64 updateBy = 7;
+}
+
+message PostAddResp {}
+
+message PostUpdateReq {
+    int64 postId = 1;
+    string postName = 2;
+    string postCode = 3;
+    int64 sort = 4;
+    int64 status = 5;
+    string remark = 6;
+    int64 updateBy = 7;
+}
+
+message PostUpdateResp {}
+
+message PostDeleteReq {
+    repeated int64 postIds = 1;
+}
+
+message PostDeleteResp {}
 // post end
 
 service Sys {
@@ -387,4 +430,8 @@ service Sys {
     rpc DictDataOp(DictDataOpReq) returns(DictDataOpResp);
 
     rpc PostList(PostListReq) returns(PostListResp);
+    rpc PostRetrieve(PostRetrieveReq) returns(PostRetrieveResp);
+    rpc PostAdd(PostAddReq) returns(PostAddResp);
+    rpc PostUpdate(PostUpdateReq) returns(PostUpdateResp);
+    rpc PostDelete(PostDeleteReq) returns(PostDeleteResp);
 }

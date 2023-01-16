@@ -163,6 +163,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/post",
 				Handler: post.PostListHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/post/:postId",
+				Handler: post.PostRetrieveHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/post",
+				Handler: post.PostAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/post",
+				Handler: post.PostUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/post",
+				Handler: post.PostDeleteHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/v1"),

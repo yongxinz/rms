@@ -36,9 +36,17 @@ type (
 	MenuTree             = sys.MenuTree
 	MenuUpdateReq        = sys.MenuUpdateReq
 	MenuUpdateResp       = sys.MenuUpdateResp
+	PostAddReq           = sys.PostAddReq
+	PostAddResp          = sys.PostAddResp
+	PostDeleteReq        = sys.PostDeleteReq
+	PostDeleteResp       = sys.PostDeleteResp
 	PostListData         = sys.PostListData
 	PostListReq          = sys.PostListReq
 	PostListResp         = sys.PostListResp
+	PostRetrieveReq      = sys.PostRetrieveReq
+	PostRetrieveResp     = sys.PostRetrieveResp
+	PostUpdateReq        = sys.PostUpdateReq
+	PostUpdateResp       = sys.PostUpdateResp
 	RoleListData         = sys.RoleListData
 	RoleListReq          = sys.RoleListReq
 	RoleListResp         = sys.RoleListResp
@@ -81,6 +89,10 @@ type (
 		DeptTree(ctx context.Context, in *DeptTreeReq, opts ...grpc.CallOption) (*DeptTreeResp, error)
 		DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
 		PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error)
+		PostRetrieve(ctx context.Context, in *PostRetrieveReq, opts ...grpc.CallOption) (*PostRetrieveResp, error)
+		PostAdd(ctx context.Context, in *PostAddReq, opts ...grpc.CallOption) (*PostAddResp, error)
+		PostUpdate(ctx context.Context, in *PostUpdateReq, opts ...grpc.CallOption) (*PostUpdateResp, error)
+		PostDelete(ctx context.Context, in *PostDeleteReq, opts ...grpc.CallOption) (*PostDeleteResp, error)
 	}
 
 	defaultSys struct {
@@ -187,4 +199,24 @@ func (m *defaultSys) DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...
 func (m *defaultSys) PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.PostList(ctx, in, opts...)
+}
+
+func (m *defaultSys) PostRetrieve(ctx context.Context, in *PostRetrieveReq, opts ...grpc.CallOption) (*PostRetrieveResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.PostRetrieve(ctx, in, opts...)
+}
+
+func (m *defaultSys) PostAdd(ctx context.Context, in *PostAddReq, opts ...grpc.CallOption) (*PostAddResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.PostAdd(ctx, in, opts...)
+}
+
+func (m *defaultSys) PostUpdate(ctx context.Context, in *PostUpdateReq, opts ...grpc.CallOption) (*PostUpdateResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.PostUpdate(ctx, in, opts...)
+}
+
+func (m *defaultSys) PostDelete(ctx context.Context, in *PostDeleteReq, opts ...grpc.CallOption) (*PostDeleteResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.PostDelete(ctx, in, opts...)
 }

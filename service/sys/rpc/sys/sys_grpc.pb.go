@@ -41,6 +41,10 @@ type SysClient interface {
 	DeptTree(ctx context.Context, in *DeptTreeReq, opts ...grpc.CallOption) (*DeptTreeResp, error)
 	DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
 	PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error)
+	PostRetrieve(ctx context.Context, in *PostRetrieveReq, opts ...grpc.CallOption) (*PostRetrieveResp, error)
+	PostAdd(ctx context.Context, in *PostAddReq, opts ...grpc.CallOption) (*PostAddResp, error)
+	PostUpdate(ctx context.Context, in *PostUpdateReq, opts ...grpc.CallOption) (*PostUpdateResp, error)
+	PostDelete(ctx context.Context, in *PostDeleteReq, opts ...grpc.CallOption) (*PostDeleteResp, error)
 }
 
 type sysClient struct {
@@ -222,6 +226,42 @@ func (c *sysClient) PostList(ctx context.Context, in *PostListReq, opts ...grpc.
 	return out, nil
 }
 
+func (c *sysClient) PostRetrieve(ctx context.Context, in *PostRetrieveReq, opts ...grpc.CallOption) (*PostRetrieveResp, error) {
+	out := new(PostRetrieveResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/PostRetrieve", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) PostAdd(ctx context.Context, in *PostAddReq, opts ...grpc.CallOption) (*PostAddResp, error) {
+	out := new(PostAddResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/PostAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) PostUpdate(ctx context.Context, in *PostUpdateReq, opts ...grpc.CallOption) (*PostUpdateResp, error) {
+	out := new(PostUpdateResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/PostUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) PostDelete(ctx context.Context, in *PostDeleteReq, opts ...grpc.CallOption) (*PostDeleteResp, error) {
+	out := new(PostDeleteResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/PostDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SysServer is the server API for Sys service.
 // All implementations must embed UnimplementedSysServer
 // for forward compatibility
@@ -245,6 +285,10 @@ type SysServer interface {
 	DeptTree(context.Context, *DeptTreeReq) (*DeptTreeResp, error)
 	DictDataOp(context.Context, *DictDataOpReq) (*DictDataOpResp, error)
 	PostList(context.Context, *PostListReq) (*PostListResp, error)
+	PostRetrieve(context.Context, *PostRetrieveReq) (*PostRetrieveResp, error)
+	PostAdd(context.Context, *PostAddReq) (*PostAddResp, error)
+	PostUpdate(context.Context, *PostUpdateReq) (*PostUpdateResp, error)
+	PostDelete(context.Context, *PostDeleteReq) (*PostDeleteResp, error)
 	mustEmbedUnimplementedSysServer()
 }
 
@@ -308,6 +352,18 @@ func (UnimplementedSysServer) DictDataOp(context.Context, *DictDataOpReq) (*Dict
 }
 func (UnimplementedSysServer) PostList(context.Context, *PostListReq) (*PostListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostList not implemented")
+}
+func (UnimplementedSysServer) PostRetrieve(context.Context, *PostRetrieveReq) (*PostRetrieveResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostRetrieve not implemented")
+}
+func (UnimplementedSysServer) PostAdd(context.Context, *PostAddReq) (*PostAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostAdd not implemented")
+}
+func (UnimplementedSysServer) PostUpdate(context.Context, *PostUpdateReq) (*PostUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostUpdate not implemented")
+}
+func (UnimplementedSysServer) PostDelete(context.Context, *PostDeleteReq) (*PostDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostDelete not implemented")
 }
 func (UnimplementedSysServer) mustEmbedUnimplementedSysServer() {}
 
@@ -664,6 +720,78 @@ func _Sys_PostList_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sys_PostRetrieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostRetrieveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).PostRetrieve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/PostRetrieve",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).PostRetrieve(ctx, req.(*PostRetrieveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_PostAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).PostAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/PostAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).PostAdd(ctx, req.(*PostAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_PostUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).PostUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/PostUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).PostUpdate(ctx, req.(*PostUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_PostDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).PostDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/PostDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).PostDelete(ctx, req.(*PostDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Sys_ServiceDesc is the grpc.ServiceDesc for Sys service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -746,6 +874,22 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostList",
 			Handler:    _Sys_PostList_Handler,
+		},
+		{
+			MethodName: "PostRetrieve",
+			Handler:    _Sys_PostRetrieve_Handler,
+		},
+		{
+			MethodName: "PostAdd",
+			Handler:    _Sys_PostAdd_Handler,
+		},
+		{
+			MethodName: "PostUpdate",
+			Handler:    _Sys_PostUpdate_Handler,
+		},
+		{
+			MethodName: "PostDelete",
+			Handler:    _Sys_PostDelete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
