@@ -162,10 +162,6 @@ type RoleListResp struct {
 	Pagination
 }
 
-type DeptListReq struct {
-	PageReq
-}
-
 type DeptListData struct {
 	DeptId    int64  `json:"deptId"`
 	DeptPath  string `json:"deptPath"`
@@ -180,6 +176,23 @@ type DeptListData struct {
 	UpdatedAt string `json:"updatedAt"`
 	CreateBy  int64  `json:"createBy"`
 	UpdateBy  int64  `json:"updateBy"`
+}
+
+type DeptListResp struct {
+	DeptId    int64          `json:"deptId"`
+	DeptPath  string         `json:"deptPath"`
+	DeptName  string         `json:"deptName"`
+	Phone     string         `json:"phone"`
+	Status    int64          `json:"status"`
+	Email     string         `json:"email"`
+	Leader    string         `json:"leader"`
+	Sort      int64          `json:"sort"`
+	ParentId  int64          `json:"parentId"`
+	CreatedAt string         `json:"createdAt"`
+	UpdatedAt string         `json:"updatedAt"`
+	CreateBy  int64          `json:"createBy"`
+	UpdateBy  int64          `json:"updateBy"`
+	Children  []DeptListData `json:"children"`
 }
 
 type DeptTreeResp struct {

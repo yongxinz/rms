@@ -188,6 +188,22 @@ message RoleListResp {
 // role end
 
 // dept start
+message DeptTreeReq {
+}
+
+message DeptTreeData {
+    int64 id = 1;
+    string label = 2;
+    repeated DeptTreeData children = 3;
+}
+
+message DeptTreeResp {
+    repeated DeptTreeData data = 1;
+}
+
+message DeptListReq {
+}
+
 message DeptListData{
     int64 deptId = 1;
     string deptPath = 2;
@@ -202,19 +218,11 @@ message DeptListData{
     string createdAt = 11;
     string updatedAt = 12;
     int64 updateBy = 13;
+    repeated DeptListData children = 14;
 }
 
-message DeptTreeReq {
-}
-
-message DeptTreeData {
-    int64 id = 1;
-    string label = 2;
-    repeated DeptTreeData children = 3;
-}
-
-message DeptTreeResp {
-    repeated DeptTreeData data = 1;
+message DeptListResp {
+    repeated DeptListData data = 1;
 }
 // dept end
 
@@ -426,6 +434,7 @@ service Sys {
     rpc MenuRole(MenuRoleReq) returns(MenuRoleResp);
 
     rpc DeptTree(DeptTreeReq) returns(DeptTreeResp);
+    rpc DeptList(DeptListReq) returns(DeptListResp);
 
     rpc DictDataOp(DictDataOpReq) returns(DictDataOpResp);
 

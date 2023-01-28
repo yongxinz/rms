@@ -10,10 +10,10 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func DeptTreeHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func DeptListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		l := dept.NewDeptTreeLogic(r.Context(), svcCtx)
-		resp, err := l.DeptTree()
+		l := dept.NewDeptListLogic(r.Context(), svcCtx)
+		resp, err := l.DeptList()
 		if err != nil {
 			httpx.Error(w, err)
 		} else {
