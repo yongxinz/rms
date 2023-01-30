@@ -110,6 +110,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: dept.DeptListHandler(serverCtx),
 			},
 			{
+				Method:  http.MethodGet,
+				Path:    "/dept/:deptId",
+				Handler: dept.DeptRetrieveHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodPost,
 				Path:    "/dept",
 				Handler: dept.DeptAddHandler(serverCtx),

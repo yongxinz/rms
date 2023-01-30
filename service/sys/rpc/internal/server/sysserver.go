@@ -112,6 +112,11 @@ func (s *SysServer) DeptList(ctx context.Context, in *sys.DeptListReq) (*sys.Dep
 	return l.DeptList(in)
 }
 
+func (s *SysServer) DeptRetrieve(ctx context.Context, in *sys.DeptRetrieveReq) (*sys.DeptRetrieveResp, error) {
+	l := logic.NewDeptRetrieveLogic(ctx, s.svcCtx)
+	return l.DeptRetrieve(in)
+}
+
 func (s *SysServer) DeptAdd(ctx context.Context, in *sys.DeptAddReq) (*sys.DeptAddResp, error) {
 	l := logic.NewDeptAddLogic(ctx, s.svcCtx)
 	return l.DeptAdd(in)

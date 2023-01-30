@@ -238,6 +238,21 @@ message DeptAddReq {
 }
 
 message DeptAddResp {}
+
+message DeptRetrieveReq {
+    int64 deptId = 1;
+}
+
+message DeptRetrieveResp {
+    int64 deptId = 1;
+    string deptName = 2;
+    string phone = 3;
+    string email = 4;
+    string leader = 5;
+    int64 sort = 6;
+    int64 status = 7;
+    int64 parentId = 8;
+}
 // dept end
 
 // menu start
@@ -449,6 +464,7 @@ service Sys {
 
     rpc DeptTree(DeptTreeReq) returns(DeptTreeResp);
     rpc DeptList(DeptListReq) returns(DeptListResp);
+    rpc DeptRetrieve(DeptRetrieveReq) returns(DeptRetrieveResp);
     rpc DeptAdd(DeptAddReq) returns(DeptAddResp);
 
     rpc DictDataOp(DictDataOpReq) returns(DictDataOpResp);

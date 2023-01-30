@@ -50,6 +50,22 @@ type (
 )
 
 type (
+	DeptRetrieveReq {
+		DeptId    int64  `path:"deptId"`
+	}
+	DeptRetrieveResp {
+		DeptId   int64  `json:"deptId"`
+		DeptName string `json:"deptName"`
+		Phone    string `json:"phone"`
+		Email    string `json:"email"`
+		Leader   string `json:"leader"`
+		Sort     int64  `json:"sort"`
+		Status   int64  `json:"status"`
+		ParentId int64  `json:"parentId"`
+	}
+)
+
+type (
 	DeptAddReq {
 		DeptName string `json:"deptName"`
 		Phone    string `json:"phone,optional"`
@@ -79,6 +95,11 @@ service sys {
 	)
 	@handler DeptList
 	get /dept returns ([]*DeptListResp)
+	@doc(
+		summary: "获取单个部门"
+	)
+	@handler DeptRetrieve
+	get /dept/:deptId (DeptRetrieveReq) returns (DeptRetrieveResp)
 	@doc(
 		summary: "新增部门"
 	)

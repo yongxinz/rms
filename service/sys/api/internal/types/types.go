@@ -201,6 +201,21 @@ type DeptListResp struct {
 	Children  []DeptListData `json:"children"`
 }
 
+type DeptRetrieveReq struct {
+	DeptId int64 `path:"deptId"`
+}
+
+type DeptRetrieveResp struct {
+	DeptId   int64  `json:"deptId"`
+	DeptName string `json:"deptName"`
+	Phone    string `json:"phone"`
+	Email    string `json:"email"`
+	Leader   string `json:"leader"`
+	Sort     int64  `json:"sort"`
+	Status   int64  `json:"status"`
+	ParentId int64  `json:"parentId"`
+}
+
 type DeptAddReq struct {
 	DeptName string `json:"deptName"`
 	Phone    string `json:"phone,optional"`

@@ -20,6 +20,8 @@ type (
 	DeptListData         = sys.DeptListData
 	DeptListReq          = sys.DeptListReq
 	DeptListResp         = sys.DeptListResp
+	DeptRetrieveReq      = sys.DeptRetrieveReq
+	DeptRetrieveResp     = sys.DeptRetrieveResp
 	DeptTreeData         = sys.DeptTreeData
 	DeptTreeReq          = sys.DeptTreeReq
 	DeptTreeResp         = sys.DeptTreeResp
@@ -92,6 +94,7 @@ type (
 		MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
 		DeptTree(ctx context.Context, in *DeptTreeReq, opts ...grpc.CallOption) (*DeptTreeResp, error)
 		DeptList(ctx context.Context, in *DeptListReq, opts ...grpc.CallOption) (*DeptListResp, error)
+		DeptRetrieve(ctx context.Context, in *DeptRetrieveReq, opts ...grpc.CallOption) (*DeptRetrieveResp, error)
 		DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.CallOption) (*DeptAddResp, error)
 		DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
 		PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error)
@@ -200,6 +203,11 @@ func (m *defaultSys) DeptTree(ctx context.Context, in *DeptTreeReq, opts ...grpc
 func (m *defaultSys) DeptList(ctx context.Context, in *DeptListReq, opts ...grpc.CallOption) (*DeptListResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.DeptList(ctx, in, opts...)
+}
+
+func (m *defaultSys) DeptRetrieve(ctx context.Context, in *DeptRetrieveReq, opts ...grpc.CallOption) (*DeptRetrieveResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.DeptRetrieve(ctx, in, opts...)
 }
 
 func (m *defaultSys) DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.CallOption) (*DeptAddResp, error) {
