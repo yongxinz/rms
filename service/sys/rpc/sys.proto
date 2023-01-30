@@ -225,20 +225,6 @@ message DeptListResp {
     repeated DeptListData data = 1;
 }
 
-message DeptAddReq {
-    string deptName = 1;
-    string phone = 2;
-    string email = 3;
-    string leader = 4;
-    int64 sort = 5;
-    int64 status = 6;
-    int64 parentId = 7;
-    int64 createBy = 8;
-    int64 updateBy = 9;
-}
-
-message DeptAddResp {}
-
 message DeptRetrieveReq {
     int64 deptId = 1;
 }
@@ -253,6 +239,34 @@ message DeptRetrieveResp {
     int64 status = 7;
     int64 parentId = 8;
 }
+
+message DeptAddReq {
+    string deptName = 1;
+    string phone = 2;
+    string email = 3;
+    string leader = 4;
+    int64 sort = 5;
+    int64 status = 6;
+    int64 parentId = 7;
+    int64 createBy = 8;
+    int64 updateBy = 9;
+}
+
+message DeptAddResp {}
+
+message DeptUpdateReq {
+    int64 deptId = 1;
+    string deptName = 2;
+    string phone = 3;
+    string email = 4;
+    string leader = 5;
+    int64 sort = 6;
+    int64 status = 7;
+    int64 parentId = 8;
+    int64 updateBy = 9;
+}
+
+message DeptUpdateResp {}
 // dept end
 
 // menu start
@@ -466,6 +480,7 @@ service Sys {
     rpc DeptList(DeptListReq) returns(DeptListResp);
     rpc DeptRetrieve(DeptRetrieveReq) returns(DeptRetrieveResp);
     rpc DeptAdd(DeptAddReq) returns(DeptAddResp);
+    rpc DeptUpdate(DeptUpdateReq) returns(DeptUpdateResp);
 
     rpc DictDataOp(DictDataOpReq) returns(DictDataOpResp);
 

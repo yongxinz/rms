@@ -79,6 +79,20 @@ type (
 	}
 )
 
+type (
+	DeptUpdateReq {
+		DeptId   int64  `json:"deptId"`
+		DeptName string `json:"deptName"`
+		Phone    string `json:"phone,optional"`
+		Email    string `json:"email,optional"`
+		Leader   string `json:"leader"`
+		Sort     int64  `json:"sort,optional"`
+		Status   int64  `json:"status,optional"`
+		ParentId int64  `json:"parentId"`
+		UpdateBy int64  `json:"updateBy,optional"`
+	}
+)
+
 @server(
 	jwt: Auth
 	group: dept
@@ -105,4 +119,9 @@ service sys {
 	)
 	@handler DeptAdd
 	post /dept (DeptAddReq)
+	@doc(
+		summary: "更新部门"
+	)
+	@handler DeptUpdate
+	put /dept (DeptUpdateReq)
 }

@@ -228,6 +228,18 @@ type DeptAddReq struct {
 	UpdateBy int64  `json:"updateBy,optional"`
 }
 
+type DeptUpdateReq struct {
+	DeptId   int64  `json:"deptId"`
+	DeptName string `json:"deptName"`
+	Phone    string `json:"phone,optional"`
+	Email    string `json:"email,optional"`
+	Leader   string `json:"leader"`
+	Sort     int64  `json:"sort,optional"`
+	Status   int64  `json:"status,optional"`
+	ParentId int64  `json:"parentId"`
+	UpdateBy int64  `json:"updateBy,optional"`
+}
+
 type SysConfigResp struct {
 	SysAppName string `json:"sys_app_name"`
 	SysAppLogo string `json:"sys_app_logo"`

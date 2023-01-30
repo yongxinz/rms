@@ -2234,6 +2234,156 @@ func (x *DeptListResp) GetData() []*DeptListData {
 	return nil
 }
 
+type DeptRetrieveReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	DeptId int64 `protobuf:"varint,1,opt,name=deptId,proto3" json:"deptId,omitempty"`
+}
+
+func (x *DeptRetrieveReq) Reset() {
+	*x = DeptRetrieveReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_sys_proto_msgTypes[31]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeptRetrieveReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeptRetrieveReq) ProtoMessage() {}
+
+func (x *DeptRetrieveReq) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[31]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeptRetrieveReq.ProtoReflect.Descriptor instead.
+func (*DeptRetrieveReq) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *DeptRetrieveReq) GetDeptId() int64 {
+	if x != nil {
+		return x.DeptId
+	}
+	return 0
+}
+
+type DeptRetrieveResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	DeptId   int64  `protobuf:"varint,1,opt,name=deptId,proto3" json:"deptId,omitempty"`
+	DeptName string `protobuf:"bytes,2,opt,name=deptName,proto3" json:"deptName,omitempty"`
+	Phone    string `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
+	Email    string `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
+	Leader   string `protobuf:"bytes,5,opt,name=leader,proto3" json:"leader,omitempty"`
+	Sort     int64  `protobuf:"varint,6,opt,name=sort,proto3" json:"sort,omitempty"`
+	Status   int64  `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`
+	ParentId int64  `protobuf:"varint,8,opt,name=parentId,proto3" json:"parentId,omitempty"`
+}
+
+func (x *DeptRetrieveResp) Reset() {
+	*x = DeptRetrieveResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_sys_proto_msgTypes[32]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeptRetrieveResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeptRetrieveResp) ProtoMessage() {}
+
+func (x *DeptRetrieveResp) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[32]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeptRetrieveResp.ProtoReflect.Descriptor instead.
+func (*DeptRetrieveResp) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *DeptRetrieveResp) GetDeptId() int64 {
+	if x != nil {
+		return x.DeptId
+	}
+	return 0
+}
+
+func (x *DeptRetrieveResp) GetDeptName() string {
+	if x != nil {
+		return x.DeptName
+	}
+	return ""
+}
+
+func (x *DeptRetrieveResp) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *DeptRetrieveResp) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *DeptRetrieveResp) GetLeader() string {
+	if x != nil {
+		return x.Leader
+	}
+	return ""
+}
+
+func (x *DeptRetrieveResp) GetSort() int64 {
+	if x != nil {
+		return x.Sort
+	}
+	return 0
+}
+
+func (x *DeptRetrieveResp) GetStatus() int64 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *DeptRetrieveResp) GetParentId() int64 {
+	if x != nil {
+		return x.ParentId
+	}
+	return 0
+}
+
 type DeptAddReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2253,7 +2403,7 @@ type DeptAddReq struct {
 func (x *DeptAddReq) Reset() {
 	*x = DeptAddReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[31]
+		mi := &file_sys_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2266,7 +2416,7 @@ func (x *DeptAddReq) String() string {
 func (*DeptAddReq) ProtoMessage() {}
 
 func (x *DeptAddReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[31]
+	mi := &file_sys_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2279,7 +2429,7 @@ func (x *DeptAddReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeptAddReq.ProtoReflect.Descriptor instead.
 func (*DeptAddReq) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{31}
+	return file_sys_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *DeptAddReq) GetDeptName() string {
@@ -2354,7 +2504,7 @@ type DeptAddResp struct {
 func (x *DeptAddResp) Reset() {
 	*x = DeptAddResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[32]
+		mi := &file_sys_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2367,7 +2517,7 @@ func (x *DeptAddResp) String() string {
 func (*DeptAddResp) ProtoMessage() {}
 
 func (x *DeptAddResp) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[32]
+	mi := &file_sys_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2380,57 +2530,10 @@ func (x *DeptAddResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeptAddResp.ProtoReflect.Descriptor instead.
 func (*DeptAddResp) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{32}
+	return file_sys_proto_rawDescGZIP(), []int{34}
 }
 
-type DeptRetrieveReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	DeptId int64 `protobuf:"varint,1,opt,name=deptId,proto3" json:"deptId,omitempty"`
-}
-
-func (x *DeptRetrieveReq) Reset() {
-	*x = DeptRetrieveReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[33]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *DeptRetrieveReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeptRetrieveReq) ProtoMessage() {}
-
-func (x *DeptRetrieveReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[33]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeptRetrieveReq.ProtoReflect.Descriptor instead.
-func (*DeptRetrieveReq) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{33}
-}
-
-func (x *DeptRetrieveReq) GetDeptId() int64 {
-	if x != nil {
-		return x.DeptId
-	}
-	return 0
-}
-
-type DeptRetrieveResp struct {
+type DeptUpdateReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -2443,25 +2546,26 @@ type DeptRetrieveResp struct {
 	Sort     int64  `protobuf:"varint,6,opt,name=sort,proto3" json:"sort,omitempty"`
 	Status   int64  `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`
 	ParentId int64  `protobuf:"varint,8,opt,name=parentId,proto3" json:"parentId,omitempty"`
+	UpdateBy int64  `protobuf:"varint,9,opt,name=updateBy,proto3" json:"updateBy,omitempty"`
 }
 
-func (x *DeptRetrieveResp) Reset() {
-	*x = DeptRetrieveResp{}
+func (x *DeptUpdateReq) Reset() {
+	*x = DeptUpdateReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[34]
+		mi := &file_sys_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *DeptRetrieveResp) String() string {
+func (x *DeptUpdateReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeptRetrieveResp) ProtoMessage() {}
+func (*DeptUpdateReq) ProtoMessage() {}
 
-func (x *DeptRetrieveResp) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[34]
+func (x *DeptUpdateReq) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2472,65 +2576,110 @@ func (x *DeptRetrieveResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeptRetrieveResp.ProtoReflect.Descriptor instead.
-func (*DeptRetrieveResp) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{34}
+// Deprecated: Use DeptUpdateReq.ProtoReflect.Descriptor instead.
+func (*DeptUpdateReq) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{35}
 }
 
-func (x *DeptRetrieveResp) GetDeptId() int64 {
+func (x *DeptUpdateReq) GetDeptId() int64 {
 	if x != nil {
 		return x.DeptId
 	}
 	return 0
 }
 
-func (x *DeptRetrieveResp) GetDeptName() string {
+func (x *DeptUpdateReq) GetDeptName() string {
 	if x != nil {
 		return x.DeptName
 	}
 	return ""
 }
 
-func (x *DeptRetrieveResp) GetPhone() string {
+func (x *DeptUpdateReq) GetPhone() string {
 	if x != nil {
 		return x.Phone
 	}
 	return ""
 }
 
-func (x *DeptRetrieveResp) GetEmail() string {
+func (x *DeptUpdateReq) GetEmail() string {
 	if x != nil {
 		return x.Email
 	}
 	return ""
 }
 
-func (x *DeptRetrieveResp) GetLeader() string {
+func (x *DeptUpdateReq) GetLeader() string {
 	if x != nil {
 		return x.Leader
 	}
 	return ""
 }
 
-func (x *DeptRetrieveResp) GetSort() int64 {
+func (x *DeptUpdateReq) GetSort() int64 {
 	if x != nil {
 		return x.Sort
 	}
 	return 0
 }
 
-func (x *DeptRetrieveResp) GetStatus() int64 {
+func (x *DeptUpdateReq) GetStatus() int64 {
 	if x != nil {
 		return x.Status
 	}
 	return 0
 }
 
-func (x *DeptRetrieveResp) GetParentId() int64 {
+func (x *DeptUpdateReq) GetParentId() int64 {
 	if x != nil {
 		return x.ParentId
 	}
 	return 0
+}
+
+func (x *DeptUpdateReq) GetUpdateBy() int64 {
+	if x != nil {
+		return x.UpdateBy
+	}
+	return 0
+}
+
+type DeptUpdateResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *DeptUpdateResp) Reset() {
+	*x = DeptUpdateResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_sys_proto_msgTypes[36]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeptUpdateResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeptUpdateResp) ProtoMessage() {}
+
+func (x *DeptUpdateResp) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[36]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeptUpdateResp.ProtoReflect.Descriptor instead.
+func (*DeptUpdateResp) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{36}
 }
 
 // menu start
@@ -2561,7 +2710,7 @@ type MenuAddReq struct {
 func (x *MenuAddReq) Reset() {
 	*x = MenuAddReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[35]
+		mi := &file_sys_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2574,7 +2723,7 @@ func (x *MenuAddReq) String() string {
 func (*MenuAddReq) ProtoMessage() {}
 
 func (x *MenuAddReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[35]
+	mi := &file_sys_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2587,7 +2736,7 @@ func (x *MenuAddReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuAddReq.ProtoReflect.Descriptor instead.
 func (*MenuAddReq) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{35}
+	return file_sys_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *MenuAddReq) GetMenuName() string {
@@ -2720,7 +2869,7 @@ type MenuAddResp struct {
 func (x *MenuAddResp) Reset() {
 	*x = MenuAddResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[36]
+		mi := &file_sys_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2733,7 +2882,7 @@ func (x *MenuAddResp) String() string {
 func (*MenuAddResp) ProtoMessage() {}
 
 func (x *MenuAddResp) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[36]
+	mi := &file_sys_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2746,7 +2895,7 @@ func (x *MenuAddResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuAddResp.ProtoReflect.Descriptor instead.
 func (*MenuAddResp) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{36}
+	return file_sys_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *MenuAddResp) GetPong() string {
@@ -2768,7 +2917,7 @@ type MenuListReq struct {
 func (x *MenuListReq) Reset() {
 	*x = MenuListReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[37]
+		mi := &file_sys_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2781,7 +2930,7 @@ func (x *MenuListReq) String() string {
 func (*MenuListReq) ProtoMessage() {}
 
 func (x *MenuListReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[37]
+	mi := &file_sys_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2794,7 +2943,7 @@ func (x *MenuListReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuListReq.ProtoReflect.Descriptor instead.
 func (*MenuListReq) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{37}
+	return file_sys_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *MenuListReq) GetMenuName() string {
@@ -2839,7 +2988,7 @@ type MenuListData struct {
 func (x *MenuListData) Reset() {
 	*x = MenuListData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[38]
+		mi := &file_sys_proto_msgTypes[40]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2852,7 +3001,7 @@ func (x *MenuListData) String() string {
 func (*MenuListData) ProtoMessage() {}
 
 func (x *MenuListData) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[38]
+	mi := &file_sys_proto_msgTypes[40]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2865,7 +3014,7 @@ func (x *MenuListData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuListData.ProtoReflect.Descriptor instead.
 func (*MenuListData) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{38}
+	return file_sys_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *MenuListData) GetMenuId() int64 {
@@ -3006,7 +3155,7 @@ type MenuListResp struct {
 func (x *MenuListResp) Reset() {
 	*x = MenuListResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[39]
+		mi := &file_sys_proto_msgTypes[41]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3019,7 +3168,7 @@ func (x *MenuListResp) String() string {
 func (*MenuListResp) ProtoMessage() {}
 
 func (x *MenuListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[39]
+	mi := &file_sys_proto_msgTypes[41]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3032,7 +3181,7 @@ func (x *MenuListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuListResp.ProtoReflect.Descriptor instead.
 func (*MenuListResp) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{39}
+	return file_sys_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *MenuListResp) GetTotal() int64 {
@@ -3077,7 +3226,7 @@ type MenuUpdateReq struct {
 func (x *MenuUpdateReq) Reset() {
 	*x = MenuUpdateReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[40]
+		mi := &file_sys_proto_msgTypes[42]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3090,7 +3239,7 @@ func (x *MenuUpdateReq) String() string {
 func (*MenuUpdateReq) ProtoMessage() {}
 
 func (x *MenuUpdateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[40]
+	mi := &file_sys_proto_msgTypes[42]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3103,7 +3252,7 @@ func (x *MenuUpdateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuUpdateReq.ProtoReflect.Descriptor instead.
 func (*MenuUpdateReq) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{40}
+	return file_sys_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *MenuUpdateReq) GetMenuName() string {
@@ -3243,7 +3392,7 @@ type MenuUpdateResp struct {
 func (x *MenuUpdateResp) Reset() {
 	*x = MenuUpdateResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[41]
+		mi := &file_sys_proto_msgTypes[43]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3256,7 +3405,7 @@ func (x *MenuUpdateResp) String() string {
 func (*MenuUpdateResp) ProtoMessage() {}
 
 func (x *MenuUpdateResp) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[41]
+	mi := &file_sys_proto_msgTypes[43]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3269,7 +3418,7 @@ func (x *MenuUpdateResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuUpdateResp.ProtoReflect.Descriptor instead.
 func (*MenuUpdateResp) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{41}
+	return file_sys_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *MenuUpdateResp) GetPong() string {
@@ -3290,7 +3439,7 @@ type MenuDeleteReq struct {
 func (x *MenuDeleteReq) Reset() {
 	*x = MenuDeleteReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[42]
+		mi := &file_sys_proto_msgTypes[44]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3303,7 +3452,7 @@ func (x *MenuDeleteReq) String() string {
 func (*MenuDeleteReq) ProtoMessage() {}
 
 func (x *MenuDeleteReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[42]
+	mi := &file_sys_proto_msgTypes[44]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3316,7 +3465,7 @@ func (x *MenuDeleteReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuDeleteReq.ProtoReflect.Descriptor instead.
 func (*MenuDeleteReq) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{42}
+	return file_sys_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *MenuDeleteReq) GetMenuId() int64 {
@@ -3337,7 +3486,7 @@ type MenuDeleteResp struct {
 func (x *MenuDeleteResp) Reset() {
 	*x = MenuDeleteResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[43]
+		mi := &file_sys_proto_msgTypes[45]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3350,7 +3499,7 @@ func (x *MenuDeleteResp) String() string {
 func (*MenuDeleteResp) ProtoMessage() {}
 
 func (x *MenuDeleteResp) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[43]
+	mi := &file_sys_proto_msgTypes[45]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3363,7 +3512,7 @@ func (x *MenuDeleteResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuDeleteResp.ProtoReflect.Descriptor instead.
 func (*MenuDeleteResp) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{43}
+	return file_sys_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *MenuDeleteResp) GetPong() string {
@@ -3384,7 +3533,7 @@ type MenuRoleReq struct {
 func (x *MenuRoleReq) Reset() {
 	*x = MenuRoleReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[44]
+		mi := &file_sys_proto_msgTypes[46]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3397,7 +3546,7 @@ func (x *MenuRoleReq) String() string {
 func (*MenuRoleReq) ProtoMessage() {}
 
 func (x *MenuRoleReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[44]
+	mi := &file_sys_proto_msgTypes[46]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3410,7 +3559,7 @@ func (x *MenuRoleReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuRoleReq.ProtoReflect.Descriptor instead.
 func (*MenuRoleReq) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{44}
+	return file_sys_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *MenuRoleReq) GetRoleId() int64 {
@@ -3432,7 +3581,7 @@ type MenuTree struct {
 func (x *MenuTree) Reset() {
 	*x = MenuTree{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[45]
+		mi := &file_sys_proto_msgTypes[47]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3445,7 +3594,7 @@ func (x *MenuTree) String() string {
 func (*MenuTree) ProtoMessage() {}
 
 func (x *MenuTree) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[45]
+	mi := &file_sys_proto_msgTypes[47]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3458,7 +3607,7 @@ func (x *MenuTree) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuTree.ProtoReflect.Descriptor instead.
 func (*MenuTree) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{45}
+	return file_sys_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *MenuTree) GetData() *MenuListData {
@@ -3486,7 +3635,7 @@ type MenuRoleResp struct {
 func (x *MenuRoleResp) Reset() {
 	*x = MenuRoleResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[46]
+		mi := &file_sys_proto_msgTypes[48]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3499,7 +3648,7 @@ func (x *MenuRoleResp) String() string {
 func (*MenuRoleResp) ProtoMessage() {}
 
 func (x *MenuRoleResp) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[46]
+	mi := &file_sys_proto_msgTypes[48]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3512,7 +3661,7 @@ func (x *MenuRoleResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuRoleResp.ProtoReflect.Descriptor instead.
 func (*MenuRoleResp) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{46}
+	return file_sys_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *MenuRoleResp) GetData() []*MenuTree {
@@ -3534,7 +3683,7 @@ type DictDataOpReq struct {
 func (x *DictDataOpReq) Reset() {
 	*x = DictDataOpReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[47]
+		mi := &file_sys_proto_msgTypes[49]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3547,7 +3696,7 @@ func (x *DictDataOpReq) String() string {
 func (*DictDataOpReq) ProtoMessage() {}
 
 func (x *DictDataOpReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[47]
+	mi := &file_sys_proto_msgTypes[49]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3560,7 +3709,7 @@ func (x *DictDataOpReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictDataOpReq.ProtoReflect.Descriptor instead.
 func (*DictDataOpReq) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{47}
+	return file_sys_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *DictDataOpReq) GetDictType() string {
@@ -3582,7 +3731,7 @@ type DictDataOp struct {
 func (x *DictDataOp) Reset() {
 	*x = DictDataOp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[48]
+		mi := &file_sys_proto_msgTypes[50]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3595,7 +3744,7 @@ func (x *DictDataOp) String() string {
 func (*DictDataOp) ProtoMessage() {}
 
 func (x *DictDataOp) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[48]
+	mi := &file_sys_proto_msgTypes[50]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3608,7 +3757,7 @@ func (x *DictDataOp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictDataOp.ProtoReflect.Descriptor instead.
 func (*DictDataOp) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{48}
+	return file_sys_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *DictDataOp) GetLabel() string {
@@ -3636,7 +3785,7 @@ type DictDataOpResp struct {
 func (x *DictDataOpResp) Reset() {
 	*x = DictDataOpResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[49]
+		mi := &file_sys_proto_msgTypes[51]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3649,7 +3798,7 @@ func (x *DictDataOpResp) String() string {
 func (*DictDataOpResp) ProtoMessage() {}
 
 func (x *DictDataOpResp) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[49]
+	mi := &file_sys_proto_msgTypes[51]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3662,7 +3811,7 @@ func (x *DictDataOpResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictDataOpResp.ProtoReflect.Descriptor instead.
 func (*DictDataOpResp) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{49}
+	return file_sys_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *DictDataOpResp) GetData() []*DictDataOp {
@@ -3685,7 +3834,7 @@ type PostListReq struct {
 func (x *PostListReq) Reset() {
 	*x = PostListReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[50]
+		mi := &file_sys_proto_msgTypes[52]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3698,7 +3847,7 @@ func (x *PostListReq) String() string {
 func (*PostListReq) ProtoMessage() {}
 
 func (x *PostListReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[50]
+	mi := &file_sys_proto_msgTypes[52]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3711,7 +3860,7 @@ func (x *PostListReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostListReq.ProtoReflect.Descriptor instead.
 func (*PostListReq) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{50}
+	return file_sys_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *PostListReq) GetPage() int64 {
@@ -3748,7 +3897,7 @@ type PostListData struct {
 func (x *PostListData) Reset() {
 	*x = PostListData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[51]
+		mi := &file_sys_proto_msgTypes[53]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3761,7 +3910,7 @@ func (x *PostListData) String() string {
 func (*PostListData) ProtoMessage() {}
 
 func (x *PostListData) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[51]
+	mi := &file_sys_proto_msgTypes[53]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3774,7 +3923,7 @@ func (x *PostListData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostListData.ProtoReflect.Descriptor instead.
 func (*PostListData) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{51}
+	return file_sys_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *PostListData) GetPostId() int64 {
@@ -3859,7 +4008,7 @@ type PostListResp struct {
 func (x *PostListResp) Reset() {
 	*x = PostListResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[52]
+		mi := &file_sys_proto_msgTypes[54]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3872,7 +4021,7 @@ func (x *PostListResp) String() string {
 func (*PostListResp) ProtoMessage() {}
 
 func (x *PostListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[52]
+	mi := &file_sys_proto_msgTypes[54]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3885,7 +4034,7 @@ func (x *PostListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostListResp.ProtoReflect.Descriptor instead.
 func (*PostListResp) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{52}
+	return file_sys_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *PostListResp) GetCount() int64 {
@@ -3913,7 +4062,7 @@ type PostRetrieveReq struct {
 func (x *PostRetrieveReq) Reset() {
 	*x = PostRetrieveReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[53]
+		mi := &file_sys_proto_msgTypes[55]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3926,7 +4075,7 @@ func (x *PostRetrieveReq) String() string {
 func (*PostRetrieveReq) ProtoMessage() {}
 
 func (x *PostRetrieveReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[53]
+	mi := &file_sys_proto_msgTypes[55]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3939,7 +4088,7 @@ func (x *PostRetrieveReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostRetrieveReq.ProtoReflect.Descriptor instead.
 func (*PostRetrieveReq) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{53}
+	return file_sys_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *PostRetrieveReq) GetPostId() int64 {
@@ -3965,7 +4114,7 @@ type PostRetrieveResp struct {
 func (x *PostRetrieveResp) Reset() {
 	*x = PostRetrieveResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[54]
+		mi := &file_sys_proto_msgTypes[56]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3978,7 +4127,7 @@ func (x *PostRetrieveResp) String() string {
 func (*PostRetrieveResp) ProtoMessage() {}
 
 func (x *PostRetrieveResp) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[54]
+	mi := &file_sys_proto_msgTypes[56]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3991,7 +4140,7 @@ func (x *PostRetrieveResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostRetrieveResp.ProtoReflect.Descriptor instead.
 func (*PostRetrieveResp) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{54}
+	return file_sys_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *PostRetrieveResp) GetPostId() int64 {
@@ -4053,7 +4202,7 @@ type PostAddReq struct {
 func (x *PostAddReq) Reset() {
 	*x = PostAddReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[55]
+		mi := &file_sys_proto_msgTypes[57]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4066,7 +4215,7 @@ func (x *PostAddReq) String() string {
 func (*PostAddReq) ProtoMessage() {}
 
 func (x *PostAddReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[55]
+	mi := &file_sys_proto_msgTypes[57]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4079,7 +4228,7 @@ func (x *PostAddReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostAddReq.ProtoReflect.Descriptor instead.
 func (*PostAddReq) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{55}
+	return file_sys_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *PostAddReq) GetPostName() string {
@@ -4140,7 +4289,7 @@ type PostAddResp struct {
 func (x *PostAddResp) Reset() {
 	*x = PostAddResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[56]
+		mi := &file_sys_proto_msgTypes[58]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4153,7 +4302,7 @@ func (x *PostAddResp) String() string {
 func (*PostAddResp) ProtoMessage() {}
 
 func (x *PostAddResp) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[56]
+	mi := &file_sys_proto_msgTypes[58]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4166,7 +4315,7 @@ func (x *PostAddResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostAddResp.ProtoReflect.Descriptor instead.
 func (*PostAddResp) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{56}
+	return file_sys_proto_rawDescGZIP(), []int{58}
 }
 
 type PostUpdateReq struct {
@@ -4186,7 +4335,7 @@ type PostUpdateReq struct {
 func (x *PostUpdateReq) Reset() {
 	*x = PostUpdateReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[57]
+		mi := &file_sys_proto_msgTypes[59]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4199,7 +4348,7 @@ func (x *PostUpdateReq) String() string {
 func (*PostUpdateReq) ProtoMessage() {}
 
 func (x *PostUpdateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[57]
+	mi := &file_sys_proto_msgTypes[59]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4212,7 +4361,7 @@ func (x *PostUpdateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostUpdateReq.ProtoReflect.Descriptor instead.
 func (*PostUpdateReq) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{57}
+	return file_sys_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *PostUpdateReq) GetPostId() int64 {
@@ -4273,7 +4422,7 @@ type PostUpdateResp struct {
 func (x *PostUpdateResp) Reset() {
 	*x = PostUpdateResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[58]
+		mi := &file_sys_proto_msgTypes[60]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4286,7 +4435,7 @@ func (x *PostUpdateResp) String() string {
 func (*PostUpdateResp) ProtoMessage() {}
 
 func (x *PostUpdateResp) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[58]
+	mi := &file_sys_proto_msgTypes[60]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4299,7 +4448,7 @@ func (x *PostUpdateResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostUpdateResp.ProtoReflect.Descriptor instead.
 func (*PostUpdateResp) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{58}
+	return file_sys_proto_rawDescGZIP(), []int{60}
 }
 
 type PostDeleteReq struct {
@@ -4313,7 +4462,7 @@ type PostDeleteReq struct {
 func (x *PostDeleteReq) Reset() {
 	*x = PostDeleteReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[59]
+		mi := &file_sys_proto_msgTypes[61]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4326,7 +4475,7 @@ func (x *PostDeleteReq) String() string {
 func (*PostDeleteReq) ProtoMessage() {}
 
 func (x *PostDeleteReq) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[59]
+	mi := &file_sys_proto_msgTypes[61]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4339,7 +4488,7 @@ func (x *PostDeleteReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostDeleteReq.ProtoReflect.Descriptor instead.
 func (*PostDeleteReq) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{59}
+	return file_sys_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *PostDeleteReq) GetPostIds() []int64 {
@@ -4358,7 +4507,7 @@ type PostDeleteResp struct {
 func (x *PostDeleteResp) Reset() {
 	*x = PostDeleteResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sys_proto_msgTypes[60]
+		mi := &file_sys_proto_msgTypes[62]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4371,7 +4520,7 @@ func (x *PostDeleteResp) String() string {
 func (*PostDeleteResp) ProtoMessage() {}
 
 func (x *PostDeleteResp) ProtoReflect() protoreflect.Message {
-	mi := &file_sys_proto_msgTypes[60]
+	mi := &file_sys_proto_msgTypes[62]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4384,7 +4533,7 @@ func (x *PostDeleteResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostDeleteResp.ProtoReflect.Descriptor instead.
 func (*PostDeleteResp) Descriptor() ([]byte, []int) {
-	return file_sys_proto_rawDescGZIP(), []int{60}
+	return file_sys_proto_rawDescGZIP(), []int{62}
 }
 
 var File_sys_proto protoreflect.FileDescriptor
@@ -4632,7 +4781,23 @@ var file_sys_proto_rawDesc = []byte{
 	0x70, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x2b, 0x0a, 0x04, 0x64, 0x61,
 	0x74, 0x61, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c,
 	0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x70, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x44, 0x61, 0x74,
-	0x61, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0xec, 0x01, 0x0a, 0x0a, 0x44, 0x65, 0x70, 0x74,
+	0x61, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x29, 0x0a, 0x0f, 0x44, 0x65, 0x70, 0x74, 0x52,
+	0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x64, 0x65,
+	0x70, 0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x64, 0x65, 0x70, 0x74,
+	0x49, 0x64, 0x22, 0xd2, 0x01, 0x0a, 0x10, 0x44, 0x65, 0x70, 0x74, 0x52, 0x65, 0x74, 0x72, 0x69,
+	0x65, 0x76, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x16, 0x0a, 0x06, 0x64, 0x65, 0x70, 0x74, 0x49,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x64, 0x65, 0x70, 0x74, 0x49, 0x64, 0x12,
+	0x1a, 0x0a, 0x08, 0x64, 0x65, 0x70, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x08, 0x64, 0x65, 0x70, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x70,
+	0x68, 0x6f, 0x6e, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x70, 0x68, 0x6f, 0x6e,
+	0x65, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x16, 0x0a, 0x06, 0x6c, 0x65, 0x61, 0x64, 0x65,
+	0x72, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x6c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x12,
+	0x12, 0x0a, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x73,
+	0x6f, 0x72, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x07, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x70,
+	0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x70,
+	0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x22, 0xec, 0x01, 0x0a, 0x0a, 0x44, 0x65, 0x70, 0x74,
 	0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x12, 0x1a, 0x0a, 0x08, 0x64, 0x65, 0x70, 0x74, 0x4e, 0x61,
 	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x64, 0x65, 0x70, 0x74, 0x4e, 0x61,
 	0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x68, 0x6f, 0x6e, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
@@ -4648,23 +4813,23 @@ var file_sys_proto_rawDesc = []byte{
 	0x52, 0x08, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x42, 0x79, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x70,
 	0x64, 0x61, 0x74, 0x65, 0x42, 0x79, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x75, 0x70,
 	0x64, 0x61, 0x74, 0x65, 0x42, 0x79, 0x22, 0x0d, 0x0a, 0x0b, 0x44, 0x65, 0x70, 0x74, 0x41, 0x64,
-	0x64, 0x52, 0x65, 0x73, 0x70, 0x22, 0x29, 0x0a, 0x0f, 0x44, 0x65, 0x70, 0x74, 0x52, 0x65, 0x74,
-	0x72, 0x69, 0x65, 0x76, 0x65, 0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x64, 0x65, 0x70, 0x74,
-	0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x64, 0x65, 0x70, 0x74, 0x49, 0x64,
-	0x22, 0xd2, 0x01, 0x0a, 0x10, 0x44, 0x65, 0x70, 0x74, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76,
-	0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x16, 0x0a, 0x06, 0x64, 0x65, 0x70, 0x74, 0x49, 0x64, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x64, 0x65, 0x70, 0x74, 0x49, 0x64, 0x12, 0x1a, 0x0a,
-	0x08, 0x64, 0x65, 0x70, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x08, 0x64, 0x65, 0x70, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x68, 0x6f,
-	0x6e, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x70, 0x68, 0x6f, 0x6e, 0x65, 0x12,
-	0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
-	0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x16, 0x0a, 0x06, 0x6c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x18,
-	0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x6c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x12, 0x12, 0x0a,
-	0x04, 0x73, 0x6f, 0x72, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x73, 0x6f, 0x72,
-	0x74, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28,
-	0x03, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x72,
-	0x65, 0x6e, 0x74, 0x49, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x70, 0x61, 0x72,
-	0x65, 0x6e, 0x74, 0x49, 0x64, 0x22, 0xcb, 0x03, 0x0a, 0x0a, 0x4d, 0x65, 0x6e, 0x75, 0x41, 0x64,
+	0x64, 0x52, 0x65, 0x73, 0x70, 0x22, 0xeb, 0x01, 0x0a, 0x0d, 0x44, 0x65, 0x70, 0x74, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x64, 0x65, 0x70, 0x74, 0x49,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x64, 0x65, 0x70, 0x74, 0x49, 0x64, 0x12,
+	0x1a, 0x0a, 0x08, 0x64, 0x65, 0x70, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x08, 0x64, 0x65, 0x70, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x70,
+	0x68, 0x6f, 0x6e, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x70, 0x68, 0x6f, 0x6e,
+	0x65, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x16, 0x0a, 0x06, 0x6c, 0x65, 0x61, 0x64, 0x65,
+	0x72, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x6c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x12,
+	0x12, 0x0a, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x73,
+	0x6f, 0x72, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x07, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x70,
+	0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x70,
+	0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x42, 0x79, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x75, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x42, 0x79, 0x22, 0x10, 0x0a, 0x0e, 0x44, 0x65, 0x70, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x52, 0x65, 0x73, 0x70, 0x22, 0xcb, 0x03, 0x0a, 0x0a, 0x4d, 0x65, 0x6e, 0x75, 0x41, 0x64,
 	0x64, 0x52, 0x65, 0x71, 0x12, 0x1b, 0x0a, 0x09, 0x6d, 0x65, 0x6e, 0x75, 0x5f, 0x6e, 0x61, 0x6d,
 	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6d, 0x65, 0x6e, 0x75, 0x4e, 0x61, 0x6d,
 	0x65, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
@@ -4865,7 +5030,7 @@ var file_sys_proto_rawDesc = []byte{
 	0x0a, 0x0d, 0x50, 0x6f, 0x73, 0x74, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x71, 0x12,
 	0x18, 0x0a, 0x07, 0x70, 0x6f, 0x73, 0x74, 0x49, 0x64, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x03,
 	0x52, 0x07, 0x70, 0x6f, 0x73, 0x74, 0x49, 0x64, 0x73, 0x22, 0x10, 0x0a, 0x0e, 0x50, 0x6f, 0x73,
-	0x74, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x32, 0x98, 0x0d, 0x0a, 0x03,
+	0x74, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x32, 0xdb, 0x0d, 0x0a, 0x03,
 	0x53, 0x79, 0x73, 0x12, 0x3a, 0x0a, 0x05, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x12, 0x17, 0x2e, 0x73,
 	0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e,
@@ -4947,32 +5112,36 @@ var file_sys_proto_rawDesc = []byte{
 	0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x70, 0x74, 0x41,
 	0x64, 0x64, 0x52, 0x65, 0x71, 0x1a, 0x16, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e,
 	0x74, 0x2e, 0x44, 0x65, 0x70, 0x74, 0x41, 0x64, 0x64, 0x52, 0x65, 0x73, 0x70, 0x12, 0x41, 0x0a,
-	0x0a, 0x44, 0x69, 0x63, 0x74, 0x44, 0x61, 0x74, 0x61, 0x4f, 0x70, 0x12, 0x18, 0x2e, 0x73, 0x79,
-	0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x69, 0x63, 0x74, 0x44, 0x61, 0x74, 0x61,
-	0x4f, 0x70, 0x52, 0x65, 0x71, 0x1a, 0x19, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e,
-	0x74, 0x2e, 0x44, 0x69, 0x63, 0x74, 0x44, 0x61, 0x74, 0x61, 0x4f, 0x70, 0x52, 0x65, 0x73, 0x70,
-	0x12, 0x3b, 0x0a, 0x08, 0x50, 0x6f, 0x73, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x16, 0x2e, 0x73,
-	0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x4c, 0x69, 0x73,
-	0x74, 0x52, 0x65, 0x71, 0x1a, 0x17, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74,
-	0x2e, 0x50, 0x6f, 0x73, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x47, 0x0a,
-	0x0c, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x12, 0x1a, 0x2e,
-	0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65,
-	0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x1b, 0x2e, 0x73, 0x79, 0x73, 0x63,
-	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65,
-	0x76, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x38, 0x0a, 0x07, 0x50, 0x6f, 0x73, 0x74, 0x41, 0x64,
-	0x64, 0x12, 0x15, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f,
-	0x73, 0x74, 0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x1a, 0x16, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c,
-	0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x41, 0x64, 0x64, 0x52, 0x65, 0x73, 0x70,
-	0x12, 0x41, 0x0a, 0x0a, 0x50, 0x6f, 0x73, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x12, 0x18,
-	0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x55,
-	0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x19, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c,
-	0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52,
-	0x65, 0x73, 0x70, 0x12, 0x41, 0x0a, 0x0a, 0x50, 0x6f, 0x73, 0x74, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x0a, 0x44, 0x65, 0x70, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x12, 0x18, 0x2e, 0x73, 0x79,
+	0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x70, 0x74, 0x55, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x19, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e,
+	0x74, 0x2e, 0x44, 0x65, 0x70, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70,
+	0x12, 0x41, 0x0a, 0x0a, 0x44, 0x69, 0x63, 0x74, 0x44, 0x61, 0x74, 0x61, 0x4f, 0x70, 0x12, 0x18,
+	0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x69, 0x63, 0x74, 0x44,
+	0x61, 0x74, 0x61, 0x4f, 0x70, 0x52, 0x65, 0x71, 0x1a, 0x19, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c,
+	0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x69, 0x63, 0x74, 0x44, 0x61, 0x74, 0x61, 0x4f, 0x70, 0x52,
+	0x65, 0x73, 0x70, 0x12, 0x3b, 0x0a, 0x08, 0x50, 0x6f, 0x73, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x12,
+	0x16, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x73, 0x74,
+	0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x17, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69,
+	0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70,
+	0x12, 0x47, 0x0a, 0x0c, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65,
+	0x12, 0x1a, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x73,
+	0x74, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x1b, 0x2e, 0x73,
+	0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x74,
+	0x72, 0x69, 0x65, 0x76, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x38, 0x0a, 0x07, 0x50, 0x6f, 0x73,
+	0x74, 0x41, 0x64, 0x64, 0x12, 0x15, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74,
+	0x2e, 0x50, 0x6f, 0x73, 0x74, 0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x1a, 0x16, 0x2e, 0x73, 0x79,
+	0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x41, 0x64, 0x64, 0x52,
+	0x65, 0x73, 0x70, 0x12, 0x41, 0x0a, 0x0a, 0x50, 0x6f, 0x73, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74,
 	0x65, 0x12, 0x18, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f,
-	0x73, 0x74, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x19, 0x2e, 0x73, 0x79,
-	0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x44, 0x65, 0x6c, 0x65,
-	0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x42, 0x07, 0x5a, 0x05, 0x2e, 0x2f, 0x73, 0x79, 0x73, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x19, 0x2e, 0x73, 0x79,
+	0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x55, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x41, 0x0a, 0x0a, 0x50, 0x6f, 0x73, 0x74, 0x44, 0x65,
+	0x6c, 0x65, 0x74, 0x65, 0x12, 0x18, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74,
+	0x2e, 0x50, 0x6f, 0x73, 0x74, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x19,
+	0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x44,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x42, 0x07, 0x5a, 0x05, 0x2e, 0x2f, 0x73,
+	0x79, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -4987,7 +5156,7 @@ func file_sys_proto_rawDescGZIP() []byte {
 	return file_sys_proto_rawDescData
 }
 
-var file_sys_proto_msgTypes = make([]protoimpl.MessageInfo, 61)
+var file_sys_proto_msgTypes = make([]protoimpl.MessageInfo, 63)
 var file_sys_proto_goTypes = []interface{}{
 	(*LoginRequest)(nil),         // 0: sysclient.LoginRequest
 	(*LoginResponse)(nil),        // 1: sysclient.LoginResponse
@@ -5020,36 +5189,38 @@ var file_sys_proto_goTypes = []interface{}{
 	(*DeptListReq)(nil),          // 28: sysclient.DeptListReq
 	(*DeptListData)(nil),         // 29: sysclient.DeptListData
 	(*DeptListResp)(nil),         // 30: sysclient.DeptListResp
-	(*DeptAddReq)(nil),           // 31: sysclient.DeptAddReq
-	(*DeptAddResp)(nil),          // 32: sysclient.DeptAddResp
-	(*DeptRetrieveReq)(nil),      // 33: sysclient.DeptRetrieveReq
-	(*DeptRetrieveResp)(nil),     // 34: sysclient.DeptRetrieveResp
-	(*MenuAddReq)(nil),           // 35: sysclient.MenuAddReq
-	(*MenuAddResp)(nil),          // 36: sysclient.MenuAddResp
-	(*MenuListReq)(nil),          // 37: sysclient.MenuListReq
-	(*MenuListData)(nil),         // 38: sysclient.MenuListData
-	(*MenuListResp)(nil),         // 39: sysclient.MenuListResp
-	(*MenuUpdateReq)(nil),        // 40: sysclient.MenuUpdateReq
-	(*MenuUpdateResp)(nil),       // 41: sysclient.MenuUpdateResp
-	(*MenuDeleteReq)(nil),        // 42: sysclient.MenuDeleteReq
-	(*MenuDeleteResp)(nil),       // 43: sysclient.MenuDeleteResp
-	(*MenuRoleReq)(nil),          // 44: sysclient.MenuRoleReq
-	(*MenuTree)(nil),             // 45: sysclient.MenuTree
-	(*MenuRoleResp)(nil),         // 46: sysclient.MenuRoleResp
-	(*DictDataOpReq)(nil),        // 47: sysclient.DictDataOpReq
-	(*DictDataOp)(nil),           // 48: sysclient.DictDataOp
-	(*DictDataOpResp)(nil),       // 49: sysclient.DictDataOpResp
-	(*PostListReq)(nil),          // 50: sysclient.PostListReq
-	(*PostListData)(nil),         // 51: sysclient.PostListData
-	(*PostListResp)(nil),         // 52: sysclient.PostListResp
-	(*PostRetrieveReq)(nil),      // 53: sysclient.PostRetrieveReq
-	(*PostRetrieveResp)(nil),     // 54: sysclient.PostRetrieveResp
-	(*PostAddReq)(nil),           // 55: sysclient.PostAddReq
-	(*PostAddResp)(nil),          // 56: sysclient.PostAddResp
-	(*PostUpdateReq)(nil),        // 57: sysclient.PostUpdateReq
-	(*PostUpdateResp)(nil),       // 58: sysclient.PostUpdateResp
-	(*PostDeleteReq)(nil),        // 59: sysclient.PostDeleteReq
-	(*PostDeleteResp)(nil),       // 60: sysclient.PostDeleteResp
+	(*DeptRetrieveReq)(nil),      // 31: sysclient.DeptRetrieveReq
+	(*DeptRetrieveResp)(nil),     // 32: sysclient.DeptRetrieveResp
+	(*DeptAddReq)(nil),           // 33: sysclient.DeptAddReq
+	(*DeptAddResp)(nil),          // 34: sysclient.DeptAddResp
+	(*DeptUpdateReq)(nil),        // 35: sysclient.DeptUpdateReq
+	(*DeptUpdateResp)(nil),       // 36: sysclient.DeptUpdateResp
+	(*MenuAddReq)(nil),           // 37: sysclient.MenuAddReq
+	(*MenuAddResp)(nil),          // 38: sysclient.MenuAddResp
+	(*MenuListReq)(nil),          // 39: sysclient.MenuListReq
+	(*MenuListData)(nil),         // 40: sysclient.MenuListData
+	(*MenuListResp)(nil),         // 41: sysclient.MenuListResp
+	(*MenuUpdateReq)(nil),        // 42: sysclient.MenuUpdateReq
+	(*MenuUpdateResp)(nil),       // 43: sysclient.MenuUpdateResp
+	(*MenuDeleteReq)(nil),        // 44: sysclient.MenuDeleteReq
+	(*MenuDeleteResp)(nil),       // 45: sysclient.MenuDeleteResp
+	(*MenuRoleReq)(nil),          // 46: sysclient.MenuRoleReq
+	(*MenuTree)(nil),             // 47: sysclient.MenuTree
+	(*MenuRoleResp)(nil),         // 48: sysclient.MenuRoleResp
+	(*DictDataOpReq)(nil),        // 49: sysclient.DictDataOpReq
+	(*DictDataOp)(nil),           // 50: sysclient.DictDataOp
+	(*DictDataOpResp)(nil),       // 51: sysclient.DictDataOpResp
+	(*PostListReq)(nil),          // 52: sysclient.PostListReq
+	(*PostListData)(nil),         // 53: sysclient.PostListData
+	(*PostListResp)(nil),         // 54: sysclient.PostListResp
+	(*PostRetrieveReq)(nil),      // 55: sysclient.PostRetrieveReq
+	(*PostRetrieveResp)(nil),     // 56: sysclient.PostRetrieveResp
+	(*PostAddReq)(nil),           // 57: sysclient.PostAddReq
+	(*PostAddResp)(nil),          // 58: sysclient.PostAddResp
+	(*PostUpdateReq)(nil),        // 59: sysclient.PostUpdateReq
+	(*PostUpdateResp)(nil),       // 60: sysclient.PostUpdateResp
+	(*PostDeleteReq)(nil),        // 61: sysclient.PostDeleteReq
+	(*PostDeleteResp)(nil),       // 62: sysclient.PostDeleteResp
 }
 var file_sys_proto_depIdxs = []int32{
 	29, // 0: sysclient.UserListData.dept:type_name -> sysclient.DeptListData
@@ -5059,12 +5230,12 @@ var file_sys_proto_depIdxs = []int32{
 	26, // 4: sysclient.DeptTreeResp.data:type_name -> sysclient.DeptTreeData
 	29, // 5: sysclient.DeptListData.children:type_name -> sysclient.DeptListData
 	29, // 6: sysclient.DeptListResp.data:type_name -> sysclient.DeptListData
-	38, // 7: sysclient.MenuListResp.list:type_name -> sysclient.MenuListData
-	38, // 8: sysclient.MenuTree.data:type_name -> sysclient.MenuListData
-	45, // 9: sysclient.MenuTree.children:type_name -> sysclient.MenuTree
-	45, // 10: sysclient.MenuRoleResp.data:type_name -> sysclient.MenuTree
-	48, // 11: sysclient.DictDataOpResp.data:type_name -> sysclient.DictDataOp
-	51, // 12: sysclient.PostListResp.data:type_name -> sysclient.PostListData
+	40, // 7: sysclient.MenuListResp.list:type_name -> sysclient.MenuListData
+	40, // 8: sysclient.MenuTree.data:type_name -> sysclient.MenuListData
+	47, // 9: sysclient.MenuTree.children:type_name -> sysclient.MenuTree
+	47, // 10: sysclient.MenuRoleResp.data:type_name -> sysclient.MenuTree
+	50, // 11: sysclient.DictDataOpResp.data:type_name -> sysclient.DictDataOp
+	53, // 12: sysclient.PostListResp.data:type_name -> sysclient.PostListData
 	0,  // 13: sysclient.Sys.Login:input_type -> sysclient.LoginRequest
 	2,  // 14: sysclient.Sys.SysConfig:input_type -> sysclient.SysConfigReq
 	4,  // 15: sysclient.Sys.ConfigPw:input_type -> sysclient.ConfigPwReq
@@ -5077,48 +5248,50 @@ var file_sys_proto_depIdxs = []int32{
 	18, // 22: sysclient.Sys.UserUpdatePwd:input_type -> sysclient.UserUpdatePwdReq
 	20, // 23: sysclient.Sys.UserDelete:input_type -> sysclient.UserDeleteReq
 	22, // 24: sysclient.Sys.RoleList:input_type -> sysclient.RoleListReq
-	35, // 25: sysclient.Sys.MenuAdd:input_type -> sysclient.MenuAddReq
-	37, // 26: sysclient.Sys.MenuList:input_type -> sysclient.MenuListReq
-	40, // 27: sysclient.Sys.MenuUpdate:input_type -> sysclient.MenuUpdateReq
-	44, // 28: sysclient.Sys.MenuRole:input_type -> sysclient.MenuRoleReq
+	37, // 25: sysclient.Sys.MenuAdd:input_type -> sysclient.MenuAddReq
+	39, // 26: sysclient.Sys.MenuList:input_type -> sysclient.MenuListReq
+	42, // 27: sysclient.Sys.MenuUpdate:input_type -> sysclient.MenuUpdateReq
+	46, // 28: sysclient.Sys.MenuRole:input_type -> sysclient.MenuRoleReq
 	25, // 29: sysclient.Sys.DeptTree:input_type -> sysclient.DeptTreeReq
 	28, // 30: sysclient.Sys.DeptList:input_type -> sysclient.DeptListReq
-	33, // 31: sysclient.Sys.DeptRetrieve:input_type -> sysclient.DeptRetrieveReq
-	31, // 32: sysclient.Sys.DeptAdd:input_type -> sysclient.DeptAddReq
-	47, // 33: sysclient.Sys.DictDataOp:input_type -> sysclient.DictDataOpReq
-	50, // 34: sysclient.Sys.PostList:input_type -> sysclient.PostListReq
-	53, // 35: sysclient.Sys.PostRetrieve:input_type -> sysclient.PostRetrieveReq
-	55, // 36: sysclient.Sys.PostAdd:input_type -> sysclient.PostAddReq
-	57, // 37: sysclient.Sys.PostUpdate:input_type -> sysclient.PostUpdateReq
-	59, // 38: sysclient.Sys.PostDelete:input_type -> sysclient.PostDeleteReq
-	1,  // 39: sysclient.Sys.Login:output_type -> sysclient.LoginResponse
-	3,  // 40: sysclient.Sys.SysConfig:output_type -> sysclient.SysConfigResp
-	5,  // 41: sysclient.Sys.ConfigPw:output_type -> sysclient.ConfigPwResp
-	7,  // 42: sysclient.Sys.UserInfo:output_type -> sysclient.UserInfoResp
-	11, // 43: sysclient.Sys.UserList:output_type -> sysclient.UserListResp
-	8,  // 44: sysclient.Sys.UserRetrieve:output_type -> sysclient.UserRetrieveResp
-	13, // 45: sysclient.Sys.UserAdd:output_type -> sysclient.UserAddResp
-	15, // 46: sysclient.Sys.UserUpdate:output_type -> sysclient.UserUpdateResp
-	17, // 47: sysclient.Sys.UserUpdateStatus:output_type -> sysclient.UserUpdateStatusResp
-	19, // 48: sysclient.Sys.UserUpdatePwd:output_type -> sysclient.UserUpdatePwdResp
-	21, // 49: sysclient.Sys.UserDelete:output_type -> sysclient.UserDeleteResp
-	24, // 50: sysclient.Sys.RoleList:output_type -> sysclient.RoleListResp
-	36, // 51: sysclient.Sys.MenuAdd:output_type -> sysclient.MenuAddResp
-	39, // 52: sysclient.Sys.MenuList:output_type -> sysclient.MenuListResp
-	41, // 53: sysclient.Sys.MenuUpdate:output_type -> sysclient.MenuUpdateResp
-	46, // 54: sysclient.Sys.MenuRole:output_type -> sysclient.MenuRoleResp
-	27, // 55: sysclient.Sys.DeptTree:output_type -> sysclient.DeptTreeResp
-	30, // 56: sysclient.Sys.DeptList:output_type -> sysclient.DeptListResp
-	34, // 57: sysclient.Sys.DeptRetrieve:output_type -> sysclient.DeptRetrieveResp
-	32, // 58: sysclient.Sys.DeptAdd:output_type -> sysclient.DeptAddResp
-	49, // 59: sysclient.Sys.DictDataOp:output_type -> sysclient.DictDataOpResp
-	52, // 60: sysclient.Sys.PostList:output_type -> sysclient.PostListResp
-	54, // 61: sysclient.Sys.PostRetrieve:output_type -> sysclient.PostRetrieveResp
-	56, // 62: sysclient.Sys.PostAdd:output_type -> sysclient.PostAddResp
-	58, // 63: sysclient.Sys.PostUpdate:output_type -> sysclient.PostUpdateResp
-	60, // 64: sysclient.Sys.PostDelete:output_type -> sysclient.PostDeleteResp
-	39, // [39:65] is the sub-list for method output_type
-	13, // [13:39] is the sub-list for method input_type
+	31, // 31: sysclient.Sys.DeptRetrieve:input_type -> sysclient.DeptRetrieveReq
+	33, // 32: sysclient.Sys.DeptAdd:input_type -> sysclient.DeptAddReq
+	35, // 33: sysclient.Sys.DeptUpdate:input_type -> sysclient.DeptUpdateReq
+	49, // 34: sysclient.Sys.DictDataOp:input_type -> sysclient.DictDataOpReq
+	52, // 35: sysclient.Sys.PostList:input_type -> sysclient.PostListReq
+	55, // 36: sysclient.Sys.PostRetrieve:input_type -> sysclient.PostRetrieveReq
+	57, // 37: sysclient.Sys.PostAdd:input_type -> sysclient.PostAddReq
+	59, // 38: sysclient.Sys.PostUpdate:input_type -> sysclient.PostUpdateReq
+	61, // 39: sysclient.Sys.PostDelete:input_type -> sysclient.PostDeleteReq
+	1,  // 40: sysclient.Sys.Login:output_type -> sysclient.LoginResponse
+	3,  // 41: sysclient.Sys.SysConfig:output_type -> sysclient.SysConfigResp
+	5,  // 42: sysclient.Sys.ConfigPw:output_type -> sysclient.ConfigPwResp
+	7,  // 43: sysclient.Sys.UserInfo:output_type -> sysclient.UserInfoResp
+	11, // 44: sysclient.Sys.UserList:output_type -> sysclient.UserListResp
+	8,  // 45: sysclient.Sys.UserRetrieve:output_type -> sysclient.UserRetrieveResp
+	13, // 46: sysclient.Sys.UserAdd:output_type -> sysclient.UserAddResp
+	15, // 47: sysclient.Sys.UserUpdate:output_type -> sysclient.UserUpdateResp
+	17, // 48: sysclient.Sys.UserUpdateStatus:output_type -> sysclient.UserUpdateStatusResp
+	19, // 49: sysclient.Sys.UserUpdatePwd:output_type -> sysclient.UserUpdatePwdResp
+	21, // 50: sysclient.Sys.UserDelete:output_type -> sysclient.UserDeleteResp
+	24, // 51: sysclient.Sys.RoleList:output_type -> sysclient.RoleListResp
+	38, // 52: sysclient.Sys.MenuAdd:output_type -> sysclient.MenuAddResp
+	41, // 53: sysclient.Sys.MenuList:output_type -> sysclient.MenuListResp
+	43, // 54: sysclient.Sys.MenuUpdate:output_type -> sysclient.MenuUpdateResp
+	48, // 55: sysclient.Sys.MenuRole:output_type -> sysclient.MenuRoleResp
+	27, // 56: sysclient.Sys.DeptTree:output_type -> sysclient.DeptTreeResp
+	30, // 57: sysclient.Sys.DeptList:output_type -> sysclient.DeptListResp
+	32, // 58: sysclient.Sys.DeptRetrieve:output_type -> sysclient.DeptRetrieveResp
+	34, // 59: sysclient.Sys.DeptAdd:output_type -> sysclient.DeptAddResp
+	36, // 60: sysclient.Sys.DeptUpdate:output_type -> sysclient.DeptUpdateResp
+	51, // 61: sysclient.Sys.DictDataOp:output_type -> sysclient.DictDataOpResp
+	54, // 62: sysclient.Sys.PostList:output_type -> sysclient.PostListResp
+	56, // 63: sysclient.Sys.PostRetrieve:output_type -> sysclient.PostRetrieveResp
+	58, // 64: sysclient.Sys.PostAdd:output_type -> sysclient.PostAddResp
+	60, // 65: sysclient.Sys.PostUpdate:output_type -> sysclient.PostUpdateResp
+	62, // 66: sysclient.Sys.PostDelete:output_type -> sysclient.PostDeleteResp
+	40, // [40:67] is the sub-list for method output_type
+	13, // [13:40] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name
 	13, // [13:13] is the sub-list for extension extendee
 	0,  // [0:13] is the sub-list for field type_name
@@ -5503,30 +5676,6 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeptAddReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_sys_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeptAddResp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_sys_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeptRetrieveReq); i {
 			case 0:
 				return &v.state
@@ -5538,7 +5687,7 @@ func file_sys_proto_init() {
 				return nil
 			}
 		}
-		file_sys_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+		file_sys_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeptRetrieveResp); i {
 			case 0:
 				return &v.state
@@ -5550,8 +5699,32 @@ func file_sys_proto_init() {
 				return nil
 			}
 		}
+		file_sys_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeptAddReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_sys_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeptAddResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 		file_sys_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MenuAddReq); i {
+			switch v := v.(*DeptUpdateReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5563,7 +5736,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MenuAddResp); i {
+			switch v := v.(*DeptUpdateResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5575,7 +5748,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MenuListReq); i {
+			switch v := v.(*MenuAddReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5587,7 +5760,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MenuListData); i {
+			switch v := v.(*MenuAddResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5599,7 +5772,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MenuListResp); i {
+			switch v := v.(*MenuListReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5611,7 +5784,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MenuUpdateReq); i {
+			switch v := v.(*MenuListData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5623,7 +5796,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MenuUpdateResp); i {
+			switch v := v.(*MenuListResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5635,7 +5808,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MenuDeleteReq); i {
+			switch v := v.(*MenuUpdateReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5647,7 +5820,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MenuDeleteResp); i {
+			switch v := v.(*MenuUpdateResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5659,7 +5832,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MenuRoleReq); i {
+			switch v := v.(*MenuDeleteReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5671,7 +5844,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MenuTree); i {
+			switch v := v.(*MenuDeleteResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5683,7 +5856,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MenuRoleResp); i {
+			switch v := v.(*MenuRoleReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5695,7 +5868,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DictDataOpReq); i {
+			switch v := v.(*MenuTree); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5707,7 +5880,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DictDataOp); i {
+			switch v := v.(*MenuRoleResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5719,7 +5892,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DictDataOpResp); i {
+			switch v := v.(*DictDataOpReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5731,7 +5904,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostListReq); i {
+			switch v := v.(*DictDataOp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5743,7 +5916,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostListData); i {
+			switch v := v.(*DictDataOpResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5755,7 +5928,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostListResp); i {
+			switch v := v.(*PostListReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5767,7 +5940,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostRetrieveReq); i {
+			switch v := v.(*PostListData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5779,7 +5952,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostRetrieveResp); i {
+			switch v := v.(*PostListResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5791,7 +5964,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostAddReq); i {
+			switch v := v.(*PostRetrieveReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5803,7 +5976,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostAddResp); i {
+			switch v := v.(*PostRetrieveResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5815,7 +5988,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostUpdateReq); i {
+			switch v := v.(*PostAddReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5827,7 +6000,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[58].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostUpdateResp); i {
+			switch v := v.(*PostAddResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5839,7 +6012,7 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[59].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostDeleteReq); i {
+			switch v := v.(*PostUpdateReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5851,6 +6024,30 @@ func file_sys_proto_init() {
 			}
 		}
 		file_sys_proto_msgTypes[60].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PostUpdateResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_sys_proto_msgTypes[61].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PostDeleteReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_sys_proto_msgTypes[62].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PostDeleteResp); i {
 			case 0:
 				return &v.state
@@ -5869,7 +6066,7 @@ func file_sys_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_sys_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   61,
+			NumMessages:   63,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
