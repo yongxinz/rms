@@ -162,6 +162,12 @@ type RoleListResp struct {
 	Pagination
 }
 
+type DeptTreeResp struct {
+	Id       int64          `json:"id"`
+	Label    string         `json:"label"`
+	Children []DeptTreeResp `json:"children"`
+}
+
 type DeptListData struct {
 	DeptId    int64  `json:"deptId"`
 	DeptPath  string `json:"deptPath"`
@@ -195,10 +201,16 @@ type DeptListResp struct {
 	Children  []DeptListData `json:"children"`
 }
 
-type DeptTreeResp struct {
-	Id       int64          `json:"id"`
-	Label    string         `json:"label"`
-	Children []DeptTreeResp `json:"children"`
+type DeptAddReq struct {
+	DeptName string `json:"deptName"`
+	Phone    string `json:"phone,optional"`
+	Email    string `json:"email,optional"`
+	Leader   string `json:"leader"`
+	Sort     int64  `json:"sort,optional"`
+	Status   int64  `json:"status,optional"`
+	ParentId int64  `json:"parentId"`
+	CreateBy int64  `json:"createBy,optional"`
+	UpdateBy int64  `json:"updateBy,optional"`
 }
 
 type SysConfigResp struct {

@@ -58,7 +58,7 @@ func (l *UserListLogic) UserList(in *sys.UserListReq) (*sys.UserListResp, error)
 			Dept: &sys.DeptListData{
 				DeptId:    user.SysDept.DeptId,
 				ParentId:  user.ParentId.Int64,
-				DeptPath:  user.DeptPath.String,
+				DeptPath:  user.DeptPath,
 				DeptName:  user.DeptName.String,
 				Sort:      user.Sort.Int64,
 				Leader:    user.Leader.String,

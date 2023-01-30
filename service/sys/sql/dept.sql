@@ -3,7 +3,7 @@
 CREATE TABLE `sys_dept` (
   `dept_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `parent_id` bigint(20) DEFAULT NULL,
-  `dept_path` varchar(255) DEFAULT NULL,
+  `dept_path` varchar(255) DEFAULT '',
   `dept_name` varchar(128) DEFAULT NULL,
   `sort` tinyint(4) DEFAULT NULL,
   `leader` varchar(128) DEFAULT NULL,

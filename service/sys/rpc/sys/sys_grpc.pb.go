@@ -40,6 +40,7 @@ type SysClient interface {
 	MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
 	DeptTree(ctx context.Context, in *DeptTreeReq, opts ...grpc.CallOption) (*DeptTreeResp, error)
 	DeptList(ctx context.Context, in *DeptListReq, opts ...grpc.CallOption) (*DeptListResp, error)
+	DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.CallOption) (*DeptAddResp, error)
 	DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
 	PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error)
 	PostRetrieve(ctx context.Context, in *PostRetrieveReq, opts ...grpc.CallOption) (*PostRetrieveResp, error)
@@ -218,6 +219,15 @@ func (c *sysClient) DeptList(ctx context.Context, in *DeptListReq, opts ...grpc.
 	return out, nil
 }
 
+func (c *sysClient) DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.CallOption) (*DeptAddResp, error) {
+	out := new(DeptAddResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/DeptAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *sysClient) DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error) {
 	out := new(DictDataOpResp)
 	err := c.cc.Invoke(ctx, "/sysclient.Sys/DictDataOp", in, out, opts...)
@@ -294,6 +304,7 @@ type SysServer interface {
 	MenuRole(context.Context, *MenuRoleReq) (*MenuRoleResp, error)
 	DeptTree(context.Context, *DeptTreeReq) (*DeptTreeResp, error)
 	DeptList(context.Context, *DeptListReq) (*DeptListResp, error)
+	DeptAdd(context.Context, *DeptAddReq) (*DeptAddResp, error)
 	DictDataOp(context.Context, *DictDataOpReq) (*DictDataOpResp, error)
 	PostList(context.Context, *PostListReq) (*PostListResp, error)
 	PostRetrieve(context.Context, *PostRetrieveReq) (*PostRetrieveResp, error)
@@ -360,6 +371,9 @@ func (UnimplementedSysServer) DeptTree(context.Context, *DeptTreeReq) (*DeptTree
 }
 func (UnimplementedSysServer) DeptList(context.Context, *DeptListReq) (*DeptListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeptList not implemented")
+}
+func (UnimplementedSysServer) DeptAdd(context.Context, *DeptAddReq) (*DeptAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeptAdd not implemented")
 }
 func (UnimplementedSysServer) DictDataOp(context.Context, *DictDataOpReq) (*DictDataOpResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DictDataOp not implemented")
@@ -716,6 +730,24 @@ func _Sys_DeptList_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sys_DeptAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeptAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).DeptAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/DeptAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).DeptAdd(ctx, req.(*DeptAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Sys_DictDataOp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DictDataOpReq)
 	if err := dec(in); err != nil {
@@ -902,6 +934,10 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeptList",
 			Handler:    _Sys_DeptList_Handler,
+		},
+		{
+			MethodName: "DeptAdd",
+			Handler:    _Sys_DeptAdd_Handler,
 		},
 		{
 			MethodName: "DictDataOp",

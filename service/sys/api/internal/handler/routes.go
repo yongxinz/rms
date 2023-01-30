@@ -109,6 +109,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/dept",
 				Handler: dept.DeptListHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/dept",
+				Handler: dept.DeptAddHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/v1"),

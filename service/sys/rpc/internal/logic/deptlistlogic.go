@@ -40,7 +40,7 @@ func (l *DeptListLogic) DeptList(in *sys.DeptListReq) (*sys.DeptListResp, error)
 		}
 		m := sys.DeptListData{
 			DeptId:    item.DeptId,
-			DeptPath:  item.DeptPath.String,
+			DeptPath:  item.DeptPath,
 			DeptName:  item.DeptName.String,
 			Phone:     item.Phone.String,
 			Email:     item.Email.String,
@@ -74,7 +74,7 @@ func deptListCall(deptList []*model.SysDept, dept *sys.DeptListData) *sys.DeptLi
 
 		mi := sys.DeptListData{
 			DeptId:    list[j].DeptId,
-			DeptPath:  list[j].DeptPath.String,
+			DeptPath:  list[j].DeptPath,
 			DeptName:  list[j].DeptName.String,
 			Phone:     list[j].Phone.String,
 			Email:     list[j].Email.String,

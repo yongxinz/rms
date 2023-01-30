@@ -18,8 +18,8 @@ import (
 var (
 	sysDeptFieldNames          = builder.RawFieldNames(&SysDept{})
 	sysDeptRows                = strings.Join(sysDeptFieldNames, ",")
-	sysDeptRowsExpectAutoSet   = strings.Join(stringx.Remove(sysDeptFieldNames, "`dept_id`", "`created_at`", "`create_time`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`"), ",")
-	sysDeptRowsWithPlaceHolder = strings.Join(stringx.Remove(sysDeptFieldNames, "`dept_id`", "`created_at`", "`create_time`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`"), "=?,") + "=?"
+	sysDeptRowsExpectAutoSet   = strings.Join(stringx.Remove(sysDeptFieldNames, "`dept_id`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`", "`create_time`"), ",")
+	sysDeptRowsWithPlaceHolder = strings.Join(stringx.Remove(sysDeptFieldNames, "`dept_id`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`", "`create_time`"), "=?,") + "=?"
 
 	cacheSysDeptDeptIdPrefix = "cache:sysDept:deptId:"
 )
@@ -40,7 +40,7 @@ type (
 	SysDept struct {
 		DeptId    int64          `db:"dept_id"`
 		ParentId  sql.NullInt64  `db:"parent_id"`
-		DeptPath  sql.NullString `db:"dept_path"`
+		DeptPath  string         `db:"dept_path"`
 		DeptName  sql.NullString `db:"dept_name"`
 		Sort      sql.NullInt64  `db:"sort"`
 		Leader    sql.NullString `db:"leader"`

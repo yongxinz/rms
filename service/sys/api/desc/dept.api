@@ -8,6 +8,14 @@ info(
 )
 
 type (
+	DeptTreeResp {
+		Id       int64          `json:"id"`
+		Label    string         `json:"label"`
+		Children []DeptTreeResp `json:"children"`
+	}
+)
+
+type (
 	DeptListData {
 		DeptId    int64  `json:"deptId"`
 		DeptPath  string `json:"deptPath"`
@@ -42,10 +50,16 @@ type (
 )
 
 type (
-	DeptTreeResp {
-		Id       int64          `json:"id"`
-		Label    string         `json:"label"`
-		Children []DeptTreeResp `json:"children"`
+	DeptAddReq {
+		DeptName string `json:"deptName"`
+		Phone    string `json:"phone,optional"`
+		Email    string `json:"email,optional"`
+		Leader   string `json:"leader"`
+		Sort     int64  `json:"sort,optional"`
+		Status   int64  `json:"status,optional"`
+		ParentId int64  `json:"parentId"`
+		CreateBy int64  `json:"createBy,optional"`
+		UpdateBy int64  `json:"updateBy,optional"`
 	}
 )
 
@@ -65,4 +79,9 @@ service sys {
 	)
 	@handler DeptList
 	get /dept returns ([]*DeptListResp)
+	@doc(
+		summary: "新增部门"
+	)
+	@handler DeptAdd
+	post /dept (DeptAddReq)
 }
