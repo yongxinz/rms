@@ -17,6 +17,8 @@ type (
 	ConfigPwResp         = sys.ConfigPwResp
 	DeptAddReq           = sys.DeptAddReq
 	DeptAddResp          = sys.DeptAddResp
+	DeptDeleteReq        = sys.DeptDeleteReq
+	DeptDeleteResp       = sys.DeptDeleteResp
 	DeptListData         = sys.DeptListData
 	DeptListReq          = sys.DeptListReq
 	DeptListResp         = sys.DeptListResp
@@ -99,6 +101,7 @@ type (
 		DeptRetrieve(ctx context.Context, in *DeptRetrieveReq, opts ...grpc.CallOption) (*DeptRetrieveResp, error)
 		DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.CallOption) (*DeptAddResp, error)
 		DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...grpc.CallOption) (*DeptUpdateResp, error)
+		DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error)
 		DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
 		PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error)
 		PostRetrieve(ctx context.Context, in *PostRetrieveReq, opts ...grpc.CallOption) (*PostRetrieveResp, error)
@@ -221,6 +224,11 @@ func (m *defaultSys) DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.C
 func (m *defaultSys) DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...grpc.CallOption) (*DeptUpdateResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.DeptUpdate(ctx, in, opts...)
+}
+
+func (m *defaultSys) DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.DeptDelete(ctx, in, opts...)
 }
 
 func (m *defaultSys) DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error) {

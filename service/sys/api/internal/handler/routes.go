@@ -124,6 +124,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/dept",
 				Handler: dept.DeptUpdateHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/dept",
+				Handler: dept.DeptDeleteHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/v1"),

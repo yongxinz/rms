@@ -240,6 +240,10 @@ type DeptUpdateReq struct {
 	UpdateBy int64  `json:"updateBy,optional"`
 }
 
+type DeptDeleteReq struct {
+	Ids []int64 `json:"ids"`
+}
+
 type SysConfigResp struct {
 	SysAppName string `json:"sys_app_name"`
 	SysAppLogo string `json:"sys_app_logo"`

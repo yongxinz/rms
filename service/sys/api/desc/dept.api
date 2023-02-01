@@ -93,6 +93,12 @@ type (
 	}
 )
 
+type (
+	DeptDeleteReq {
+		ids []int64 `json:"ids"`
+	}
+)
+
 @server(
 	jwt: Auth
 	group: dept
@@ -124,4 +130,9 @@ service sys {
 	)
 	@handler DeptUpdate
 	put /dept (DeptUpdateReq)
+	@doc(
+		summary: "删除部门"
+	)
+	@handler DeptDelete
+	delete /dept (DeptDeleteReq)
 }

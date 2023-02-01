@@ -43,6 +43,7 @@ type SysClient interface {
 	DeptRetrieve(ctx context.Context, in *DeptRetrieveReq, opts ...grpc.CallOption) (*DeptRetrieveResp, error)
 	DeptAdd(ctx context.Context, in *DeptAddReq, opts ...grpc.CallOption) (*DeptAddResp, error)
 	DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...grpc.CallOption) (*DeptUpdateResp, error)
+	DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error)
 	DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
 	PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error)
 	PostRetrieve(ctx context.Context, in *PostRetrieveReq, opts ...grpc.CallOption) (*PostRetrieveResp, error)
@@ -248,6 +249,15 @@ func (c *sysClient) DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...g
 	return out, nil
 }
 
+func (c *sysClient) DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error) {
+	out := new(DeptDeleteResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/DeptDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *sysClient) DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error) {
 	out := new(DictDataOpResp)
 	err := c.cc.Invoke(ctx, "/sysclient.Sys/DictDataOp", in, out, opts...)
@@ -327,6 +337,7 @@ type SysServer interface {
 	DeptRetrieve(context.Context, *DeptRetrieveReq) (*DeptRetrieveResp, error)
 	DeptAdd(context.Context, *DeptAddReq) (*DeptAddResp, error)
 	DeptUpdate(context.Context, *DeptUpdateReq) (*DeptUpdateResp, error)
+	DeptDelete(context.Context, *DeptDeleteReq) (*DeptDeleteResp, error)
 	DictDataOp(context.Context, *DictDataOpReq) (*DictDataOpResp, error)
 	PostList(context.Context, *PostListReq) (*PostListResp, error)
 	PostRetrieve(context.Context, *PostRetrieveReq) (*PostRetrieveResp, error)
@@ -402,6 +413,9 @@ func (UnimplementedSysServer) DeptAdd(context.Context, *DeptAddReq) (*DeptAddRes
 }
 func (UnimplementedSysServer) DeptUpdate(context.Context, *DeptUpdateReq) (*DeptUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeptUpdate not implemented")
+}
+func (UnimplementedSysServer) DeptDelete(context.Context, *DeptDeleteReq) (*DeptDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeptDelete not implemented")
 }
 func (UnimplementedSysServer) DictDataOp(context.Context, *DictDataOpReq) (*DictDataOpResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DictDataOp not implemented")
@@ -812,6 +826,24 @@ func _Sys_DeptUpdate_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sys_DeptDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeptDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).DeptDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/DeptDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).DeptDelete(ctx, req.(*DeptDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Sys_DictDataOp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DictDataOpReq)
 	if err := dec(in); err != nil {
@@ -1010,6 +1042,10 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeptUpdate",
 			Handler:    _Sys_DeptUpdate_Handler,
+		},
+		{
+			MethodName: "DeptDelete",
+			Handler:    _Sys_DeptDelete_Handler,
 		},
 		{
 			MethodName: "DictDataOp",
