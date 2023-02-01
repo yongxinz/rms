@@ -198,7 +198,7 @@ type DeptListResp struct {
 	UpdatedAt string         `json:"updatedAt"`
 	CreateBy  int64          `json:"createBy"`
 	UpdateBy  int64          `json:"updateBy"`
-	Children  []DeptListData `json:"children"`
+	Children  []DeptListResp `json:"children"`
 }
 
 type DeptRetrieveReq struct {
