@@ -185,6 +185,21 @@ message RoleListResp {
     int64 count = 1;
     repeated RoleListData data = 2;
 }
+
+message RoleMenuTreeReq {
+    int64 roleId = 1;
+}
+
+message RoleMenuTreeData {
+    int64 id = 1;
+    string label = 2;
+    repeated RoleMenuTreeData children = 3;
+}
+
+message RoleMenuTreeResp {
+    repeated RoleMenuTreeData menus = 1;
+    repeated int64 checkedKeys = 2;
+}
 // role end
 
 // dept start
@@ -474,6 +489,7 @@ service Sys {
     rpc UserUpdatePwd(UserUpdatePwdReq) returns(UserUpdatePwdResp);
     rpc UserDelete(UserDeleteReq) returns(UserDeleteResp);
 
+    rpc RoleMenuTree(RoleMenuTreeReq) returns(RoleMenuTreeResp);
     rpc RoleList(RoleListReq) returns(RoleListResp);
 
     rpc MenuAdd(MenuAddReq) returns(MenuAddResp);

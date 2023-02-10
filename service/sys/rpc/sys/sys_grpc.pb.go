@@ -33,6 +33,7 @@ type SysClient interface {
 	UserUpdateStatus(ctx context.Context, in *UserUpdateStatusReq, opts ...grpc.CallOption) (*UserUpdateStatusResp, error)
 	UserUpdatePwd(ctx context.Context, in *UserUpdatePwdReq, opts ...grpc.CallOption) (*UserUpdatePwdResp, error)
 	UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error)
+	RoleMenuTree(ctx context.Context, in *RoleMenuTreeReq, opts ...grpc.CallOption) (*RoleMenuTreeResp, error)
 	RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error)
 	MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
 	MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
@@ -153,6 +154,15 @@ func (c *sysClient) UserUpdatePwd(ctx context.Context, in *UserUpdatePwdReq, opt
 func (c *sysClient) UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error) {
 	out := new(UserDeleteResp)
 	err := c.cc.Invoke(ctx, "/sysclient.Sys/UserDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) RoleMenuTree(ctx context.Context, in *RoleMenuTreeReq, opts ...grpc.CallOption) (*RoleMenuTreeResp, error) {
+	out := new(RoleMenuTreeResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/RoleMenuTree", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -327,6 +337,7 @@ type SysServer interface {
 	UserUpdateStatus(context.Context, *UserUpdateStatusReq) (*UserUpdateStatusResp, error)
 	UserUpdatePwd(context.Context, *UserUpdatePwdReq) (*UserUpdatePwdResp, error)
 	UserDelete(context.Context, *UserDeleteReq) (*UserDeleteResp, error)
+	RoleMenuTree(context.Context, *RoleMenuTreeReq) (*RoleMenuTreeResp, error)
 	RoleList(context.Context, *RoleListReq) (*RoleListResp, error)
 	MenuAdd(context.Context, *MenuAddReq) (*MenuAddResp, error)
 	MenuList(context.Context, *MenuListReq) (*MenuListResp, error)
@@ -383,6 +394,9 @@ func (UnimplementedSysServer) UserUpdatePwd(context.Context, *UserUpdatePwdReq) 
 }
 func (UnimplementedSysServer) UserDelete(context.Context, *UserDeleteReq) (*UserDeleteResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserDelete not implemented")
+}
+func (UnimplementedSysServer) RoleMenuTree(context.Context, *RoleMenuTreeReq) (*RoleMenuTreeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RoleMenuTree not implemented")
 }
 func (UnimplementedSysServer) RoleList(context.Context, *RoleListReq) (*RoleListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RoleList not implemented")
@@ -642,6 +656,24 @@ func _Sys_UserDelete_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).UserDelete(ctx, req.(*UserDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_RoleMenuTree_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RoleMenuTreeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).RoleMenuTree(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/RoleMenuTree",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).RoleMenuTree(ctx, req.(*RoleMenuTreeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1002,6 +1034,10 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UserDelete",
 			Handler:    _Sys_UserDelete_Handler,
+		},
+		{
+			MethodName: "RoleMenuTree",
+			Handler:    _Sys_RoleMenuTree_Handler,
 		},
 		{
 			MethodName: "RoleList",

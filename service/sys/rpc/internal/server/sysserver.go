@@ -77,6 +77,11 @@ func (s *SysServer) UserDelete(ctx context.Context, in *sys.UserDeleteReq) (*sys
 	return l.UserDelete(in)
 }
 
+func (s *SysServer) RoleMenuTree(ctx context.Context, in *sys.RoleMenuTreeReq) (*sys.RoleMenuTreeResp, error) {
+	l := logic.NewRoleMenuTreeLogic(ctx, s.svcCtx)
+	return l.RoleMenuTree(in)
+}
+
 func (s *SysServer) RoleList(ctx context.Context, in *sys.RoleListReq) (*sys.RoleListResp, error) {
 	l := logic.NewRoleListLogic(ctx, s.svcCtx)
 	return l.RoleList(in)

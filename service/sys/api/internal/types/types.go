@@ -162,6 +162,21 @@ type RoleListResp struct {
 	Pagination
 }
 
+type RoleMenuTreeReq struct {
+	RoleId int64 `path:"roleId"`
+}
+
+type RoleMenuTreeData struct {
+	Id       int64              `json:"id"`
+	Label    string             `json:"label"`
+	Children []RoleMenuTreeData `json:"children"`
+}
+
+type RoleMenuTreeResp struct {
+	Menus       []RoleMenuTreeData `json:"menus"`
+	CheckedKeys []int64            `json:"checkedKeys"`
+}
+
 type DeptTreeResp struct {
 	Id       int64          `json:"id"`
 	Label    string         `json:"label"`

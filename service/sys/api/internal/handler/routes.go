@@ -92,6 +92,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/role",
 				Handler: role.RoleListHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/roleMenuTreeselect/:roleId",
+				Handler: role.RoleMenuTreeHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/v1"),
