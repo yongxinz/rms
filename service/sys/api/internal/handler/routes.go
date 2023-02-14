@@ -93,6 +93,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: role.RoleListHandler(serverCtx),
 			},
 			{
+				Method:  http.MethodGet,
+				Path:    "/role/:roleId",
+				Handler: role.RoleRetrieveHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodPost,
 				Path:    "/role",
 				Handler: role.RoleAddHandler(serverCtx),

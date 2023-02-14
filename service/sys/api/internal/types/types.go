@@ -162,6 +162,20 @@ type RoleListResp struct {
 	Pagination
 }
 
+type RoleRetrieveReq struct {
+	RoleId int64 `path:"roleId"`
+}
+
+type RoleRetrieveResp struct {
+	RoleId   int64   `json:"roleId"`
+	RoleName string  `json:"roleName"`
+	RoleKey  string  `json:"roleKey"`
+	RoleSort int64   `json:"roleSort"`
+	Status   int64   `json:"status"`
+	Remark   string  `json:"remark"`
+	MenuIds  []int64 `json:"menuIds"`
+}
+
 type RoleAddReq struct {
 	RoleName string  `json:"roleName"`
 	RoleKey  string  `json:"roleKey"`

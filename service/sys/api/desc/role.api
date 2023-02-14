@@ -35,15 +35,30 @@ type (
 )
 
 type (
+	RoleRetrieveReq {
+		RoleId int64 `path:"roleId"`
+	}
+	RoleRetrieveResp {
+		RoleId   int64   `json:"roleId"`
+		RoleName string  `json:"roleName"`
+		RoleKey  string  `json:"roleKey"`
+		RoleSort int64   `json:"roleSort"`
+		Status   int64   `json:"status"`
+		Remark   string  `json:"remark"`
+		MenuIds  []int64 `json:"menuIds"`
+	}
+)
+
+type (
 	RoleAddReq {
-		RoleName  string   `json:"roleName"`
-		RoleKey   string   `json:"roleKey"`
-		RoleSort  int64    `json:"roleSort"`
-		Status    string   `json:"status,optional"`
-		Remark    string   `json:"remark,optional"`
-		CreateBy  int64    `json:"createBy,optional"`
-		UpdateBy  int64    `json:"updateBy,optional"`
-		MenuIds   []int64  `json:"menuIds,optional"`
+		RoleName string  `json:"roleName"`
+		RoleKey  string  `json:"roleKey"`
+		RoleSort int64   `json:"roleSort"`
+		Status   string  `json:"status,optional"`
+		Remark   string  `json:"remark,optional"`
+		CreateBy int64   `json:"createBy,optional"`
+		UpdateBy int64   `json:"updateBy,optional"`
+		MenuIds  []int64 `json:"menuIds,optional"`
 	}
 )
 
@@ -73,6 +88,11 @@ service sys {
 	)
 	@handler RoleList
 	get /role (RoleListReq) returns (RoleListResp)
+	@doc(
+		summary: "获取单个角色"
+	)
+	@handler RoleRetrieve
+	get /role/:roleId (RoleRetrieveReq) returns (RoleRetrieveResp)
 	@doc(
 		summary: "新增角色"
 	)

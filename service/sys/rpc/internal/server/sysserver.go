@@ -92,6 +92,11 @@ func (s *SysServer) RoleAdd(ctx context.Context, in *sys.RoleAddReq) (*sys.RoleA
 	return l.RoleAdd(in)
 }
 
+func (s *SysServer) RoleRetrieve(ctx context.Context, in *sys.RoleRetrieveReq) (*sys.RoleRetrieveResp, error) {
+	l := logic.NewRoleRetrieveLogic(ctx, s.svcCtx)
+	return l.RoleRetrieve(in)
+}
+
 func (s *SysServer) MenuAdd(ctx context.Context, in *sys.MenuAddReq) (*sys.MenuAddResp, error) {
 	l := logic.NewMenuAddLogic(ctx, s.svcCtx)
 	return l.MenuAdd(in)
