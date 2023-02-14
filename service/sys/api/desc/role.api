@@ -63,6 +63,18 @@ type (
 )
 
 type (
+	RoleUpdateReq {
+		RoleId   int64  `json:"roleId"`
+		RoleName string `json:"roleName"`
+		RoleKey  string `json:"roleKey"`
+		RoleSort int64  `json:"roleSort"`
+		Status   int64  `json:"status,optional"`
+		Remark   string `json:"remark,optional"`
+		UpdateBy int64  `json:"updateBy,optional"`
+	}
+)
+
+type (
 	RoleMenuTreeReq {
 		RoleId int64 `path:"roleId"`
 	}
@@ -98,6 +110,11 @@ service sys {
 	)
 	@handler RoleAdd
 	post /role (RoleAddReq)
+	@doc(
+		summary: "更新角色"
+	)
+	@handler RoleUpdate
+	put /role/:roleId (RoleUpdateReq)
 	@doc(
 		summary: "角色对应菜单树"
 	)

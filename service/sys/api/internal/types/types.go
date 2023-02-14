@@ -187,6 +187,16 @@ type RoleAddReq struct {
 	MenuIds  []int64 `json:"menuIds,optional"`
 }
 
+type RoleUpdateReq struct {
+	RoleId   int64  `json:"roleId"`
+	RoleName string `json:"roleName"`
+	RoleKey  string `json:"roleKey"`
+	RoleSort int64  `json:"roleSort"`
+	Status   int64  `json:"status,optional"`
+	Remark   string `json:"remark,optional"`
+	UpdateBy int64  `json:"updateBy,optional"`
+}
+
 type RoleMenuTreeReq struct {
 	RoleId int64 `path:"roleId"`
 }

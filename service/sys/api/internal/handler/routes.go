@@ -103,6 +103,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: role.RoleAddHandler(serverCtx),
 			},
 			{
+				Method:  http.MethodPut,
+				Path:    "/role/:roleId",
+				Handler: role.RoleUpdateHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodGet,
 				Path:    "/roleMenuTreeselect/:roleId",
 				Handler: role.RoleMenuTreeHandler(serverCtx),
