@@ -186,6 +186,19 @@ message RoleListResp {
     repeated RoleListData data = 2;
 }
 
+message RoleAddReq {
+    string roleName = 1;
+    string roleKey = 2;
+    int64 roleSort = 3;
+    string remark = 4;
+    string status = 5;
+    int64 createBy = 6;
+    string createdAt = 7;
+    repeated int64 menuIds = 8;
+}
+
+message RoleAddResp {}
+
 message RoleMenuTreeReq {
     int64 roleId = 1;
 }
@@ -491,6 +504,7 @@ service Sys {
 
     rpc RoleMenuTree(RoleMenuTreeReq) returns(RoleMenuTreeResp);
     rpc RoleList(RoleListReq) returns(RoleListResp);
+    rpc RoleAdd(RoleAddReq) returns(RoleAddResp);
 
     rpc MenuAdd(MenuAddReq) returns(MenuAddResp);
     rpc MenuList(MenuListReq) returns(MenuListResp);

@@ -2,6 +2,7 @@ package model
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 
 	"github.com/zeromicro/go-zero/core/stores/cache"
@@ -17,6 +18,7 @@ type (
 	SysRoleMenuModel interface {
 		sysRoleMenuModel
 		FindMenuIds(context.Context, int64) ([]*SysRoleMenu, error)
+		DeleteByRoleId(context.Context, int64) error
 	}
 
 	customSysRoleMenuModel struct {
@@ -43,4 +45,15 @@ func (m *customSysRoleMenuModel) FindMenuIds(ctx context.Context, RoleId int64) 
 	default:
 		return nil, err
 	}
+}
+
+func (m *customSysRoleMenuModel) DeleteByRoleId(ctx context.Context, roleId int64) error {
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `role_id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, roleId)
+	})
+	if err != nil {
+		return err
+	}
+	return nil
 }

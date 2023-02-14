@@ -44,7 +44,7 @@ func (l *MenuRoleLogic) MenuRole(in *sys.MenuRoleReq) (*sys.MenuRoleResp, error)
 
 		var menuIds []int64
 		for _, item := range res {
-			menuIds = append(menuIds, item.MenuId.Int64)
+			menuIds = append(menuIds, item.MenuId)
 		}
 
 		menus, err = l.svcCtx.Menu.FindMenuList(l.ctx, menuIds)

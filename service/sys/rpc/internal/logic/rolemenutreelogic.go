@@ -48,7 +48,7 @@ func (l *RoleMenuTreeLogic) RoleMenuTree(in *sys.RoleMenuTreeReq) (*sys.RoleMenu
 			return nil, errorx.NewSystemError(errorx.ServerErrorCode, err.Error())
 		}
 		for _, item := range res {
-			menuIds = append(menuIds, item.MenuId.Int64)
+			menuIds = append(menuIds, item.MenuId)
 		}
 	}
 

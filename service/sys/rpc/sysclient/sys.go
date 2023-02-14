@@ -57,6 +57,8 @@ type (
 	PostRetrieveResp     = sys.PostRetrieveResp
 	PostUpdateReq        = sys.PostUpdateReq
 	PostUpdateResp       = sys.PostUpdateResp
+	RoleAddReq           = sys.RoleAddReq
+	RoleAddResp          = sys.RoleAddResp
 	RoleListData         = sys.RoleListData
 	RoleListReq          = sys.RoleListReq
 	RoleListResp         = sys.RoleListResp
@@ -96,6 +98,7 @@ type (
 		UserDelete(ctx context.Context, in *UserDeleteReq, opts ...grpc.CallOption) (*UserDeleteResp, error)
 		RoleMenuTree(ctx context.Context, in *RoleMenuTreeReq, opts ...grpc.CallOption) (*RoleMenuTreeResp, error)
 		RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error)
+		RoleAdd(ctx context.Context, in *RoleAddReq, opts ...grpc.CallOption) (*RoleAddResp, error)
 		MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
 		MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
 		MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
@@ -188,6 +191,11 @@ func (m *defaultSys) RoleMenuTree(ctx context.Context, in *RoleMenuTreeReq, opts
 func (m *defaultSys) RoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.RoleList(ctx, in, opts...)
+}
+
+func (m *defaultSys) RoleAdd(ctx context.Context, in *RoleAddReq, opts ...grpc.CallOption) (*RoleAddResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.RoleAdd(ctx, in, opts...)
 }
 
 func (m *defaultSys) MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error) {
