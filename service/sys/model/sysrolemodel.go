@@ -2,7 +2,9 @@ package model
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
+	"strings"
 
 	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
@@ -18,6 +20,7 @@ type (
 		sysRoleModel
 		FindAll(context.Context, int64, int64) ([]*SysRole, error)
 		Count(context.Context) (int64, error)
+		DeleteMulti(context.Context, []int64) error
 	}
 
 	customSysRoleModel struct {
@@ -56,4 +59,20 @@ func (m *customSysRoleModel) Count(ctx context.Context) (int64, error) {
 	default:
 		return count, err
 	}
+}
+
+func (m *customSysRoleModel) DeleteMulti(ctx context.Context, roleIds []int64) error {
+	args := make([]interface{}, len(roleIds))
+	for i, id := range roleIds {
+		args[i] = id
+	}
+
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf(`delete from %s where role_id in (?`+strings.Repeat(",?", len(roleIds)-1)+`)`, m.table)
+		return conn.ExecCtx(ctx, query, args...)
+	})
+	if err != nil {
+		return err
+	}
+	return nil
 }

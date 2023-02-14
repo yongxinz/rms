@@ -197,6 +197,10 @@ type RoleUpdateReq struct {
 	UpdateBy int64  `json:"updateBy,optional"`
 }
 
+type RoleDeleteReq struct {
+	Ids []int64 `json:"ids"`
+}
+
 type RoleMenuTreeReq struct {
 	RoleId int64 `path:"roleId"`
 }

@@ -102,6 +102,11 @@ func (s *SysServer) RoleUpdate(ctx context.Context, in *sys.RoleUpdateReq) (*sys
 	return l.RoleUpdate(in)
 }
 
+func (s *SysServer) RoleDelete(ctx context.Context, in *sys.RoleDeleteReq) (*sys.RoleDeleteResp, error) {
+	l := logic.NewRoleDeleteLogic(ctx, s.svcCtx)
+	return l.RoleDelete(in)
+}
+
 func (s *SysServer) MenuAdd(ctx context.Context, in *sys.MenuAddReq) (*sys.MenuAddResp, error) {
 	l := logic.NewMenuAddLogic(ctx, s.svcCtx)
 	return l.MenuAdd(in)
