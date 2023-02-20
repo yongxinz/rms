@@ -521,6 +521,27 @@ message PostDeleteReq {
 message PostDeleteResp {}
 // post end
 
+// dict type start
+message DictTypeListReq {
+    int64 page = 1;
+    int64 size = 2;
+}
+
+message DictTypeListData{
+    int64 dictId = 1;
+    string dictName = 2;
+    string dictType = 3;
+    int64 status = 4;
+    string remark = 5;
+    string createdAt = 6;
+}
+
+message DictTypeListResp {
+    int64 count = 1;
+    repeated DictTypeListData data = 2;
+}
+// dict type end
+
 service Sys {
     rpc Login(LoginRequest) returns(LoginResponse);
 
@@ -557,6 +578,8 @@ service Sys {
     rpc DeptDelete(DeptDeleteReq) returns(DeptDeleteResp);
 
     rpc DictDataOp(DictDataOpReq) returns(DictDataOpResp);
+
+    rpc DictTypeList(DictTypeListReq) returns(DictTypeListResp);
 
     rpc PostList(PostListReq) returns(PostListResp);
     rpc PostRetrieve(PostRetrieveReq) returns(PostRetrieveResp);

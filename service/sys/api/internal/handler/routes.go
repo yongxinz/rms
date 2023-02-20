@@ -6,6 +6,7 @@ import (
 
 	dept "rms/service/sys/api/internal/handler/dept"
 	dictdata "rms/service/sys/api/internal/handler/dictdata"
+	dicttype "rms/service/sys/api/internal/handler/dicttype"
 	menu "rms/service/sys/api/internal/handler/menu"
 	post "rms/service/sys/api/internal/handler/post"
 	role "rms/service/sys/api/internal/handler/role"
@@ -200,6 +201,18 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodGet,
 				Path:    "/dict-data/option-select",
 				Handler: dictdata.DictDataOpHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/dict/type",
+				Handler: dicttype.DictTypeListHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

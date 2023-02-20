@@ -350,6 +350,24 @@ type DictDataOpResp struct {
 	Value string `json:"value"`
 }
 
+type DictTypeListReq struct {
+	PageReq
+}
+
+type DictTypeListData struct {
+	DictId    int64  `json:"dictId"`
+	DictName  string `json:"dictName"`
+	DictType  string `json:"dictType"`
+	Status    int64  `json:"status"`
+	Remark    string `json:"remark"`
+	CreatedAt string `json:"createdAt"`
+}
+
+type DictTypeListResp struct {
+	List []DictTypeListData `json:"list"`
+	Pagination
+}
+
 type PostListReq struct {
 	PageReq
 }

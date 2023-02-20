@@ -32,6 +32,9 @@ type (
 	DictDataOp           = sys.DictDataOp
 	DictDataOpReq        = sys.DictDataOpReq
 	DictDataOpResp       = sys.DictDataOpResp
+	DictTypeListData     = sys.DictTypeListData
+	DictTypeListReq      = sys.DictTypeListReq
+	DictTypeListResp     = sys.DictTypeListResp
 	LoginRequest         = sys.LoginRequest
 	LoginResponse        = sys.LoginResponse
 	MenuAddReq           = sys.MenuAddReq
@@ -119,6 +122,7 @@ type (
 		DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...grpc.CallOption) (*DeptUpdateResp, error)
 		DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error)
 		DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
+		DictTypeList(ctx context.Context, in *DictTypeListReq, opts ...grpc.CallOption) (*DictTypeListResp, error)
 		PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error)
 		PostRetrieve(ctx context.Context, in *PostRetrieveReq, opts ...grpc.CallOption) (*PostRetrieveResp, error)
 		PostAdd(ctx context.Context, in *PostAddReq, opts ...grpc.CallOption) (*PostAddResp, error)
@@ -275,6 +279,11 @@ func (m *defaultSys) DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...
 func (m *defaultSys) DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.DictDataOp(ctx, in, opts...)
+}
+
+func (m *defaultSys) DictTypeList(ctx context.Context, in *DictTypeListReq, opts ...grpc.CallOption) (*DictTypeListResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.DictTypeList(ctx, in, opts...)
 }
 
 func (m *defaultSys) PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error) {

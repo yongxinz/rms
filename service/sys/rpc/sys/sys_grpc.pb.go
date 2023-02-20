@@ -50,6 +50,7 @@ type SysClient interface {
 	DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...grpc.CallOption) (*DeptUpdateResp, error)
 	DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error)
 	DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
+	DictTypeList(ctx context.Context, in *DictTypeListReq, opts ...grpc.CallOption) (*DictTypeListResp, error)
 	PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error)
 	PostRetrieve(ctx context.Context, in *PostRetrieveReq, opts ...grpc.CallOption) (*PostRetrieveResp, error)
 	PostAdd(ctx context.Context, in *PostAddReq, opts ...grpc.CallOption) (*PostAddResp, error)
@@ -317,6 +318,15 @@ func (c *sysClient) DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...g
 	return out, nil
 }
 
+func (c *sysClient) DictTypeList(ctx context.Context, in *DictTypeListReq, opts ...grpc.CallOption) (*DictTypeListResp, error) {
+	out := new(DictTypeListResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/DictTypeList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *sysClient) PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error) {
 	out := new(PostListResp)
 	err := c.cc.Invoke(ctx, "/sysclient.Sys/PostList", in, out, opts...)
@@ -394,6 +404,7 @@ type SysServer interface {
 	DeptUpdate(context.Context, *DeptUpdateReq) (*DeptUpdateResp, error)
 	DeptDelete(context.Context, *DeptDeleteReq) (*DeptDeleteResp, error)
 	DictDataOp(context.Context, *DictDataOpReq) (*DictDataOpResp, error)
+	DictTypeList(context.Context, *DictTypeListReq) (*DictTypeListResp, error)
 	PostList(context.Context, *PostListReq) (*PostListResp, error)
 	PostRetrieve(context.Context, *PostRetrieveReq) (*PostRetrieveResp, error)
 	PostAdd(context.Context, *PostAddReq) (*PostAddResp, error)
@@ -489,6 +500,9 @@ func (UnimplementedSysServer) DeptDelete(context.Context, *DeptDeleteReq) (*Dept
 }
 func (UnimplementedSysServer) DictDataOp(context.Context, *DictDataOpReq) (*DictDataOpResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DictDataOp not implemented")
+}
+func (UnimplementedSysServer) DictTypeList(context.Context, *DictTypeListReq) (*DictTypeListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DictTypeList not implemented")
 }
 func (UnimplementedSysServer) PostList(context.Context, *PostListReq) (*PostListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostList not implemented")
@@ -1022,6 +1036,24 @@ func _Sys_DictDataOp_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sys_DictTypeList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictTypeListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).DictTypeList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/DictTypeList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).DictTypeList(ctx, req.(*DictTypeListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Sys_PostList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PostListReq)
 	if err := dec(in); err != nil {
@@ -1230,6 +1262,10 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DictDataOp",
 			Handler:    _Sys_DictDataOp_Handler,
+		},
+		{
+			MethodName: "DictTypeList",
+			Handler:    _Sys_DictTypeList_Handler,
 		},
 		{
 			MethodName: "PostList",

@@ -1,0 +1,39 @@
+syntax = "v1"
+
+info(
+	title: "字典管理"
+	desc: "字典管理"
+	author: "yongxinz"
+	github: "https://github.com/yongxinz"
+)
+
+type (
+	DictTypeListReq {
+		PageReq
+	}
+	DictTypeListData {
+		DictId    int64  `json:"dictId"`
+		DictName  string `json:"dictName"`
+		DictType  string `json:"dictType"`
+		Status    int64  `json:"status"`
+		Remark    string `json:"remark"`
+		CreatedAt string `json:"createdAt"`
+	}
+	DictTypeListResp {
+		list []DictTypeListData `json:"list"`
+		Pagination
+	}
+)
+
+@server(
+	jwt: Auth
+	group: dicttype
+	prefix: /api/v1
+)
+service sys {
+	@doc(
+		summary: "参数下拉框 options"
+	)
+	@handler DictTypeList
+	get /dict/type(DictTypeListReq) returns ([]*DictTypeListResp)
+}

@@ -16,6 +16,7 @@ type ServiceContext struct {
 	Role           model.SysRoleModel
 	Dept           model.SysDeptModel
 	DictData       model.SysDictDataModel
+	DictType       model.SysDictTypeModel
 	Post           model.SysPostModel
 }
 
@@ -31,5 +32,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Dept:           model.NewSysDeptModel(conn, c.CacheRedis),
 		DictData:       model.NewSysDictDataModel(conn, c.CacheRedis),
 		Post:           model.NewSysPostModel(conn, c.CacheRedis),
+		DictType:       model.NewSysDictTypeModel(conn, c.CacheRedis),
 	}
 }
