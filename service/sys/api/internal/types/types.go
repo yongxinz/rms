@@ -368,6 +368,18 @@ type DictTypeListResp struct {
 	Pagination
 }
 
+type DictTypeRetrieveReq struct {
+	DictId int64 `path:"dictId"`
+}
+
+type DictTypeRetrieveResp struct {
+	DictId   int64  `json:"dictId"`
+	DictName string `json:"dictName"`
+	DictType string `json:"dictType"`
+	Status   int64  `json:"status"`
+	Remark   string `json:"remark"`
+}
+
 type PostListReq struct {
 	PageReq
 }

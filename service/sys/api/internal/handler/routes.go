@@ -214,6 +214,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/dict/type",
 				Handler: dicttype.DictTypeListHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/dict/type/:dictId",
+				Handler: dicttype.DictTypeRetrieveHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/v1"),

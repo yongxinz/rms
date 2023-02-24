@@ -25,6 +25,19 @@ type (
 	}
 )
 
+type (
+	DictTypeRetrieveReq {
+		DictId    int64  `path:"dictId"`
+	}
+	DictTypeRetrieveResp {
+		DictId    int64  `json:"dictId"`
+		DictName  string `json:"dictName"`
+		DictType  string `json:"dictType"`
+		Status    int64  `json:"status"`
+		Remark    string `json:"remark"`
+	}
+)
+
 @server(
 	jwt: Auth
 	group: dicttype
@@ -32,8 +45,13 @@ type (
 )
 service sys {
 	@doc(
-		summary: "参数下拉框 options"
+		summary: "字典列表"
 	)
 	@handler DictTypeList
 	get /dict/type(DictTypeListReq) returns ([]*DictTypeListResp)
+	@doc(
+		summary: "获取单个字典"
+	)
+	@handler DictTypeRetrieve
+	get /dict/type/:dictId(DictTypeRetrieveReq) returns (DictTypeRetrieveResp)
 }
