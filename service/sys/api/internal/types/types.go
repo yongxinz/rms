@@ -380,6 +380,28 @@ type DictTypeRetrieveResp struct {
 	Remark   string `json:"remark"`
 }
 
+type DictTypeAddReq struct {
+	DictName string `json:"dictName"`
+	DictType string `json:"dictType"`
+	Status   int64  `json:"status,optional"`
+	Remark   string `json:"remark,optional"`
+	CreateBy int64  `json:"createBy,optional"`
+	UpdateBy int64  `json:"updateBy,optional"`
+}
+
+type DictTypeUpdateReq struct {
+	DictId   int64  `json:"dictId"`
+	DictName string `json:"dictName"`
+	DictType string `json:"dictType"`
+	Status   int64  `json:"status,optional"`
+	Remark   string `json:"remark,optional"`
+	UpdateBy int64  `json:"updateBy,optional"`
+}
+
+type DictTypeDeleteReq struct {
+	Ids []int64 `json:"ids"`
+}
+
 type PostListReq struct {
 	PageReq
 }

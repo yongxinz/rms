@@ -32,11 +32,17 @@ type (
 	DictDataOp           = sys.DictDataOp
 	DictDataOpReq        = sys.DictDataOpReq
 	DictDataOpResp       = sys.DictDataOpResp
+	DictTypeAddReq       = sys.DictTypeAddReq
+	DictTypeAddResp      = sys.DictTypeAddResp
+	DictTypeDeleteReq    = sys.DictTypeDeleteReq
+	DictTypeDeleteResp   = sys.DictTypeDeleteResp
 	DictTypeListData     = sys.DictTypeListData
 	DictTypeListReq      = sys.DictTypeListReq
 	DictTypeListResp     = sys.DictTypeListResp
 	DictTypeRetrieveReq  = sys.DictTypeRetrieveReq
 	DictTypeRetrieveResp = sys.DictTypeRetrieveResp
+	DictTypeUpdateReq    = sys.DictTypeUpdateReq
+	DictTypeUpdateResp   = sys.DictTypeUpdateResp
 	LoginRequest         = sys.LoginRequest
 	LoginResponse        = sys.LoginResponse
 	MenuAddReq           = sys.MenuAddReq
@@ -126,6 +132,9 @@ type (
 		DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
 		DictTypeList(ctx context.Context, in *DictTypeListReq, opts ...grpc.CallOption) (*DictTypeListResp, error)
 		DictTypeRetrieve(ctx context.Context, in *DictTypeRetrieveReq, opts ...grpc.CallOption) (*DictTypeRetrieveResp, error)
+		DictTypeAdd(ctx context.Context, in *DictTypeAddReq, opts ...grpc.CallOption) (*DictTypeAddResp, error)
+		DictTypeUpdate(ctx context.Context, in *DictTypeUpdateReq, opts ...grpc.CallOption) (*DictTypeUpdateResp, error)
+		DictTypeDelete(ctx context.Context, in *DictTypeDeleteReq, opts ...grpc.CallOption) (*DictTypeDeleteResp, error)
 		PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error)
 		PostRetrieve(ctx context.Context, in *PostRetrieveReq, opts ...grpc.CallOption) (*PostRetrieveResp, error)
 		PostAdd(ctx context.Context, in *PostAddReq, opts ...grpc.CallOption) (*PostAddResp, error)
@@ -292,6 +301,21 @@ func (m *defaultSys) DictTypeList(ctx context.Context, in *DictTypeListReq, opts
 func (m *defaultSys) DictTypeRetrieve(ctx context.Context, in *DictTypeRetrieveReq, opts ...grpc.CallOption) (*DictTypeRetrieveResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.DictTypeRetrieve(ctx, in, opts...)
+}
+
+func (m *defaultSys) DictTypeAdd(ctx context.Context, in *DictTypeAddReq, opts ...grpc.CallOption) (*DictTypeAddResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.DictTypeAdd(ctx, in, opts...)
+}
+
+func (m *defaultSys) DictTypeUpdate(ctx context.Context, in *DictTypeUpdateReq, opts ...grpc.CallOption) (*DictTypeUpdateResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.DictTypeUpdate(ctx, in, opts...)
+}
+
+func (m *defaultSys) DictTypeDelete(ctx context.Context, in *DictTypeDeleteReq, opts ...grpc.CallOption) (*DictTypeDeleteResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.DictTypeDelete(ctx, in, opts...)
 }
 
 func (m *defaultSys) PostList(ctx context.Context, in *PostListReq, opts ...grpc.CallOption) (*PostListResp, error) {

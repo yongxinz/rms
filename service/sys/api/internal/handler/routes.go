@@ -219,6 +219,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/dict/type/:dictId",
 				Handler: dicttype.DictTypeRetrieveHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/dict/type",
+				Handler: dicttype.DictTypeAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/dict/type/:dictId",
+				Handler: dicttype.DictTypeUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/dict/type",
+				Handler: dicttype.DictTypeDeleteHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/v1"),

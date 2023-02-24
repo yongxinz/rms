@@ -38,6 +38,34 @@ type (
 	}
 )
 
+type (
+	DictTypeAddReq {
+		DictName  string `json:"dictName"`
+		DictType  string `json:"dictType"`
+		Status    int64  `json:"status,optional"`
+		Remark    string `json:"remark,optional"`
+		CreateBy  int64  `json:"createBy,optional"`
+		UpdateBy  int64  `json:"updateBy,optional"`
+	}
+)
+
+type (
+	DictTypeUpdateReq {
+		DictId    int64  `json:"dictId"`
+		DictName  string `json:"dictName"`
+		DictType  string `json:"dictType"`
+		Status    int64  `json:"status,optional"`
+		Remark    string `json:"remark,optional"`
+		UpdateBy  int64  `json:"updateBy,optional"`
+	}
+)
+
+type (
+	DictTypeDeleteReq {
+		ids []int64 `json:"ids"`
+	}
+)
+
 @server(
 	jwt: Auth
 	group: dicttype
@@ -54,4 +82,19 @@ service sys {
 	)
 	@handler DictTypeRetrieve
 	get /dict/type/:dictId(DictTypeRetrieveReq) returns (DictTypeRetrieveResp)
+	@doc(
+		summary: "新增字典"
+	)
+	@handler DictTypeAdd
+	post /dict/type(DictTypeAddReq)
+	@doc(
+		summary: "更新字典"
+	)
+	@handler DictTypeUpdate
+	put /dict/type/:dictId(DictTypeUpdateReq)
+	@doc(
+		summary: "删除字典"
+	)
+	@handler DictTypeDelete
+	delete /dict/type(DictTypeDeleteReq)
 }

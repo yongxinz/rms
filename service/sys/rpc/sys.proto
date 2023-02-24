@@ -552,6 +552,34 @@ message DictTypeRetrieveResp {
     int64 status = 4;
     string remark = 5;
 }
+
+message DictTypeAddReq {
+    string dictName = 1;
+    string dictType = 2;
+    int64 status = 3;
+    string remark = 4;
+    int64 createBy = 5;
+    int64 updateBy = 6;
+}
+
+message DictTypeAddResp {}
+
+message DictTypeUpdateReq {
+    int64 dictId = 1;
+    string dictName = 2;
+    string dictType = 3;
+    int64 status = 4;
+    string remark = 5;
+    int64 updateBy = 6;
+}
+
+message DictTypeUpdateResp {}
+
+message DictTypeDeleteReq {
+    repeated int64 dictIds = 1;
+}
+
+message DictTypeDeleteResp {}
 // dict type end
 
 service Sys {
@@ -593,6 +621,9 @@ service Sys {
 
     rpc DictTypeList(DictTypeListReq) returns(DictTypeListResp);
     rpc DictTypeRetrieve(DictTypeRetrieveReq) returns(DictTypeRetrieveResp);
+    rpc DictTypeAdd(DictTypeAddReq) returns(DictTypeAddResp);
+    rpc DictTypeUpdate(DictTypeUpdateReq) returns(DictTypeUpdateResp);
+    rpc DictTypeDelete(DictTypeDeleteReq) returns(DictTypeDeleteResp);
 
     rpc PostList(PostListReq) returns(PostListResp);
     rpc PostRetrieve(PostRetrieveReq) returns(PostRetrieveResp);

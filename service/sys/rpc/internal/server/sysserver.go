@@ -172,6 +172,21 @@ func (s *SysServer) DictTypeRetrieve(ctx context.Context, in *sys.DictTypeRetrie
 	return l.DictTypeRetrieve(in)
 }
 
+func (s *SysServer) DictTypeAdd(ctx context.Context, in *sys.DictTypeAddReq) (*sys.DictTypeAddResp, error) {
+	l := logic.NewDictTypeAddLogic(ctx, s.svcCtx)
+	return l.DictTypeAdd(in)
+}
+
+func (s *SysServer) DictTypeUpdate(ctx context.Context, in *sys.DictTypeUpdateReq) (*sys.DictTypeUpdateResp, error) {
+	l := logic.NewDictTypeUpdateLogic(ctx, s.svcCtx)
+	return l.DictTypeUpdate(in)
+}
+
+func (s *SysServer) DictTypeDelete(ctx context.Context, in *sys.DictTypeDeleteReq) (*sys.DictTypeDeleteResp, error) {
+	l := logic.NewDictTypeDeleteLogic(ctx, s.svcCtx)
+	return l.DictTypeDelete(in)
+}
+
 func (s *SysServer) PostList(ctx context.Context, in *sys.PostListReq) (*sys.PostListResp, error) {
 	l := logic.NewPostListLogic(ctx, s.svcCtx)
 	return l.PostList(in)
