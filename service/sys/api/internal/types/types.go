@@ -350,6 +350,67 @@ type DictDataOpResp struct {
 	Value string `json:"value"`
 }
 
+type DictDataListReq struct {
+	PageReq
+	DictType string `form:"dictType"`
+}
+
+type DictDataListData struct {
+	DictCode  int64  `json:"dictCode"`
+	DictLabel string `json:"dictLabel"`
+	DictValue string `json:"dictValue"`
+	DictType  string `json:"dictType"`
+	DictSort  int64  `json:"dictSort"`
+	Status    int64  `json:"status"`
+	Remark    string `json:"remark"`
+	CreatedAt string `json:"createdAt"`
+}
+
+type DictDataListResp struct {
+	List []DictDataListData `json:"list"`
+	Pagination
+}
+
+type DictDataRetrieveReq struct {
+	DictCode int64 `path:"dictCode"`
+}
+
+type DictDataRetrieveResp struct {
+	DictCode  int64  `json:"dictCode"`
+	DictLabel string `json:"dictLabel"`
+	DictValue string `json:"dictValue"`
+	DictType  string `json:"dictType"`
+	DictSort  int64  `json:"dictSort"`
+	Status    int64  `json:"status"`
+	Remark    string `json:"remark"`
+}
+
+type DictDataAddReq struct {
+	DictLabel string `json:"dictLabel"`
+	DictValue string `json:"dictValue"`
+	DictType  string `json:"dictType"`
+	DictSort  int64  `json:"dictSort"`
+	Status    int64  `json:"status,optional"`
+	Remark    string `json:"remark,optional"`
+	CreateBy  int64  `json:"createBy,optional"`
+	UpdateBy  int64  `json:"updateBy,optional"`
+}
+
+type DictDataUpdateReq struct {
+	DictCode  int64  `json:"dictCode"`
+	DictLabel string `json:"dictLabel"`
+	DictValue string `json:"dictValue"`
+	DictType  string `json:"dictType"`
+	DictSort  int64  `json:"dictSort"`
+	Status    int64  `json:"status,optional"`
+	Remark    string `json:"remark,optional"`
+	UpdateBy  int64  `json:"updateBy,optional"`
+}
+
+type DictDataDeleteReq struct {
+	Ids []int64 `json:"ids"`
+}
+
 type DictTypeListReq struct {
 	PageReq
 }

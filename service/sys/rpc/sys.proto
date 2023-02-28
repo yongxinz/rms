@@ -440,19 +440,6 @@ message MenuRoleResp {
 }
 // menu end
 
-// dict_data start
-message DictDataOpReq {
-    string dictType = 1;
-}
-message DictDataOp {
-    string label = 1;
-    string value = 2;
-}
-message DictDataOpResp {
-    repeated DictDataOp data = 1;
-}
-// dict_data end
-
 // post start
 message PostListReq {
     int64 page = 1;
@@ -582,6 +569,87 @@ message DictTypeDeleteReq {
 message DictTypeDeleteResp {}
 // dict type end
 
+// dict_data start
+message DictDataOpReq {
+    string dictType = 1;
+}
+message DictDataOp {
+    string label = 1;
+    string value = 2;
+}
+message DictDataOpResp {
+    repeated DictDataOp data = 1;
+}
+
+message DictDataListReq {
+    int64 page = 1;
+    int64 size = 2;
+    string dictType = 3;
+}
+
+message DictDataListData{
+    int64 dictCode = 1;
+    string dictLabel = 2;
+    string dictValue = 3;
+    string dictType = 4;
+    int64 dictSort = 5;
+    int64 status = 6;
+    string remark = 7;
+    string createdAt = 8;
+}
+
+message DictDataListResp {
+    int64 count = 1;
+    repeated DictDataListData data = 2;
+}
+
+message DictDataRetrieveReq {
+    int64 dictCode = 1;
+}
+
+message DictDataRetrieveResp {
+    int64 dictCode = 1;
+    string dictLabel = 2;
+    string dictValue = 3;
+    string dictType = 4;
+    int64 dictSort = 5;
+    int64 status = 6;
+    string remark = 7;
+}
+
+message DictDataAddReq {
+    string dictLabel = 1;
+    string dictValue = 2;
+    string dictType = 3;
+    int64 dictSort = 4;
+    int64 status = 5;
+    string remark = 6;
+    int64 createBy = 7;
+    int64 updateBy = 8;
+}
+
+message DictDataAddResp {}
+
+message DictDataUpdateReq {
+    int64 dictCode = 1;
+    string dictLabel = 2;
+    string dictValue = 3;
+    string dictType = 4;
+    int64 dictSort = 5;
+    int64 status = 6;
+    string remark = 7;
+    int64 updateBy = 8;
+}
+
+message DictDataUpdateResp {}
+
+message DictDataDeleteReq {
+    repeated int64 dictIds = 1;
+}
+
+message DictDataDeleteResp {}
+// dict_data end
+
 service Sys {
     rpc Login(LoginRequest) returns(LoginResponse);
 
@@ -618,6 +686,11 @@ service Sys {
     rpc DeptDelete(DeptDeleteReq) returns(DeptDeleteResp);
 
     rpc DictDataOp(DictDataOpReq) returns(DictDataOpResp);
+    rpc DictDataList(DictDataListReq) returns(DictDataListResp);
+    rpc DictDataRetrieve(DictDataRetrieveReq) returns(DictDataRetrieveResp);
+    rpc DictDataAdd(DictDataAddReq) returns(DictDataAddResp);
+    rpc DictDataUpdate(DictDataUpdateReq) returns(DictDataUpdateResp);
+    rpc DictDataDelete(DictDataDeleteReq) returns(DictDataDeleteResp);
 
     rpc DictTypeList(DictTypeListReq) returns(DictTypeListResp);
     rpc DictTypeRetrieve(DictTypeRetrieveReq) returns(DictTypeRetrieveResp);

@@ -29,9 +29,20 @@ type (
 	DeptTreeResp         = sys.DeptTreeResp
 	DeptUpdateReq        = sys.DeptUpdateReq
 	DeptUpdateResp       = sys.DeptUpdateResp
+	DictDataAddReq       = sys.DictDataAddReq
+	DictDataAddResp      = sys.DictDataAddResp
+	DictDataDeleteReq    = sys.DictDataDeleteReq
+	DictDataDeleteResp   = sys.DictDataDeleteResp
+	DictDataListData     = sys.DictDataListData
+	DictDataListReq      = sys.DictDataListReq
+	DictDataListResp     = sys.DictDataListResp
 	DictDataOp           = sys.DictDataOp
 	DictDataOpReq        = sys.DictDataOpReq
 	DictDataOpResp       = sys.DictDataOpResp
+	DictDataRetrieveReq  = sys.DictDataRetrieveReq
+	DictDataRetrieveResp = sys.DictDataRetrieveResp
+	DictDataUpdateReq    = sys.DictDataUpdateReq
+	DictDataUpdateResp   = sys.DictDataUpdateResp
 	DictTypeAddReq       = sys.DictTypeAddReq
 	DictTypeAddResp      = sys.DictTypeAddResp
 	DictTypeDeleteReq    = sys.DictTypeDeleteReq
@@ -130,6 +141,11 @@ type (
 		DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...grpc.CallOption) (*DeptUpdateResp, error)
 		DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error)
 		DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
+		DictDataList(ctx context.Context, in *DictDataListReq, opts ...grpc.CallOption) (*DictDataListResp, error)
+		DictDataRetrieve(ctx context.Context, in *DictDataRetrieveReq, opts ...grpc.CallOption) (*DictDataRetrieveResp, error)
+		DictDataAdd(ctx context.Context, in *DictDataAddReq, opts ...grpc.CallOption) (*DictDataAddResp, error)
+		DictDataUpdate(ctx context.Context, in *DictDataUpdateReq, opts ...grpc.CallOption) (*DictDataUpdateResp, error)
+		DictDataDelete(ctx context.Context, in *DictDataDeleteReq, opts ...grpc.CallOption) (*DictDataDeleteResp, error)
 		DictTypeList(ctx context.Context, in *DictTypeListReq, opts ...grpc.CallOption) (*DictTypeListResp, error)
 		DictTypeRetrieve(ctx context.Context, in *DictTypeRetrieveReq, opts ...grpc.CallOption) (*DictTypeRetrieveResp, error)
 		DictTypeAdd(ctx context.Context, in *DictTypeAddReq, opts ...grpc.CallOption) (*DictTypeAddResp, error)
@@ -291,6 +307,31 @@ func (m *defaultSys) DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...
 func (m *defaultSys) DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.DictDataOp(ctx, in, opts...)
+}
+
+func (m *defaultSys) DictDataList(ctx context.Context, in *DictDataListReq, opts ...grpc.CallOption) (*DictDataListResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.DictDataList(ctx, in, opts...)
+}
+
+func (m *defaultSys) DictDataRetrieve(ctx context.Context, in *DictDataRetrieveReq, opts ...grpc.CallOption) (*DictDataRetrieveResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.DictDataRetrieve(ctx, in, opts...)
+}
+
+func (m *defaultSys) DictDataAdd(ctx context.Context, in *DictDataAddReq, opts ...grpc.CallOption) (*DictDataAddResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.DictDataAdd(ctx, in, opts...)
+}
+
+func (m *defaultSys) DictDataUpdate(ctx context.Context, in *DictDataUpdateReq, opts ...grpc.CallOption) (*DictDataUpdateResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.DictDataUpdate(ctx, in, opts...)
+}
+
+func (m *defaultSys) DictDataDelete(ctx context.Context, in *DictDataDeleteReq, opts ...grpc.CallOption) (*DictDataDeleteResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.DictDataDelete(ctx, in, opts...)
 }
 
 func (m *defaultSys) DictTypeList(ctx context.Context, in *DictTypeListReq, opts ...grpc.CallOption) (*DictTypeListResp, error) {

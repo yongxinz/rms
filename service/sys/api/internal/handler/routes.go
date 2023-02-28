@@ -202,6 +202,31 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/dict-data/option-select",
 				Handler: dictdata.DictDataOpHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/dict/data",
+				Handler: dictdata.DictDataListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/dict/data/:dictCode",
+				Handler: dictdata.DictDataRetrieveHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/dict/data",
+				Handler: dictdata.DictDataAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/dict/data/:dictCode",
+				Handler: dictdata.DictDataUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/dict/data",
+				Handler: dictdata.DictDataDeleteHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/v1"),

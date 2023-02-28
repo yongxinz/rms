@@ -162,6 +162,31 @@ func (s *SysServer) DictDataOp(ctx context.Context, in *sys.DictDataOpReq) (*sys
 	return l.DictDataOp(in)
 }
 
+func (s *SysServer) DictDataList(ctx context.Context, in *sys.DictDataListReq) (*sys.DictDataListResp, error) {
+	l := logic.NewDictDataListLogic(ctx, s.svcCtx)
+	return l.DictDataList(in)
+}
+
+func (s *SysServer) DictDataRetrieve(ctx context.Context, in *sys.DictDataRetrieveReq) (*sys.DictDataRetrieveResp, error) {
+	l := logic.NewDictDataRetrieveLogic(ctx, s.svcCtx)
+	return l.DictDataRetrieve(in)
+}
+
+func (s *SysServer) DictDataAdd(ctx context.Context, in *sys.DictDataAddReq) (*sys.DictDataAddResp, error) {
+	l := logic.NewDictDataAddLogic(ctx, s.svcCtx)
+	return l.DictDataAdd(in)
+}
+
+func (s *SysServer) DictDataUpdate(ctx context.Context, in *sys.DictDataUpdateReq) (*sys.DictDataUpdateResp, error) {
+	l := logic.NewDictDataUpdateLogic(ctx, s.svcCtx)
+	return l.DictDataUpdate(in)
+}
+
+func (s *SysServer) DictDataDelete(ctx context.Context, in *sys.DictDataDeleteReq) (*sys.DictDataDeleteResp, error) {
+	l := logic.NewDictDataDeleteLogic(ctx, s.svcCtx)
+	return l.DictDataDelete(in)
+}
+
 func (s *SysServer) DictTypeList(ctx context.Context, in *sys.DictTypeListReq) (*sys.DictTypeListResp, error) {
 	l := logic.NewDictTypeListLogic(ctx, s.svcCtx)
 	return l.DictTypeList(in)

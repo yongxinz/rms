@@ -50,6 +50,11 @@ type SysClient interface {
 	DeptUpdate(ctx context.Context, in *DeptUpdateReq, opts ...grpc.CallOption) (*DeptUpdateResp, error)
 	DeptDelete(ctx context.Context, in *DeptDeleteReq, opts ...grpc.CallOption) (*DeptDeleteResp, error)
 	DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...grpc.CallOption) (*DictDataOpResp, error)
+	DictDataList(ctx context.Context, in *DictDataListReq, opts ...grpc.CallOption) (*DictDataListResp, error)
+	DictDataRetrieve(ctx context.Context, in *DictDataRetrieveReq, opts ...grpc.CallOption) (*DictDataRetrieveResp, error)
+	DictDataAdd(ctx context.Context, in *DictDataAddReq, opts ...grpc.CallOption) (*DictDataAddResp, error)
+	DictDataUpdate(ctx context.Context, in *DictDataUpdateReq, opts ...grpc.CallOption) (*DictDataUpdateResp, error)
+	DictDataDelete(ctx context.Context, in *DictDataDeleteReq, opts ...grpc.CallOption) (*DictDataDeleteResp, error)
 	DictTypeList(ctx context.Context, in *DictTypeListReq, opts ...grpc.CallOption) (*DictTypeListResp, error)
 	DictTypeRetrieve(ctx context.Context, in *DictTypeRetrieveReq, opts ...grpc.CallOption) (*DictTypeRetrieveResp, error)
 	DictTypeAdd(ctx context.Context, in *DictTypeAddReq, opts ...grpc.CallOption) (*DictTypeAddResp, error)
@@ -322,6 +327,51 @@ func (c *sysClient) DictDataOp(ctx context.Context, in *DictDataOpReq, opts ...g
 	return out, nil
 }
 
+func (c *sysClient) DictDataList(ctx context.Context, in *DictDataListReq, opts ...grpc.CallOption) (*DictDataListResp, error) {
+	out := new(DictDataListResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/DictDataList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) DictDataRetrieve(ctx context.Context, in *DictDataRetrieveReq, opts ...grpc.CallOption) (*DictDataRetrieveResp, error) {
+	out := new(DictDataRetrieveResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/DictDataRetrieve", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) DictDataAdd(ctx context.Context, in *DictDataAddReq, opts ...grpc.CallOption) (*DictDataAddResp, error) {
+	out := new(DictDataAddResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/DictDataAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) DictDataUpdate(ctx context.Context, in *DictDataUpdateReq, opts ...grpc.CallOption) (*DictDataUpdateResp, error) {
+	out := new(DictDataUpdateResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/DictDataUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) DictDataDelete(ctx context.Context, in *DictDataDeleteReq, opts ...grpc.CallOption) (*DictDataDeleteResp, error) {
+	out := new(DictDataDeleteResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/DictDataDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *sysClient) DictTypeList(ctx context.Context, in *DictTypeListReq, opts ...grpc.CallOption) (*DictTypeListResp, error) {
 	out := new(DictTypeListResp)
 	err := c.cc.Invoke(ctx, "/sysclient.Sys/DictTypeList", in, out, opts...)
@@ -444,6 +494,11 @@ type SysServer interface {
 	DeptUpdate(context.Context, *DeptUpdateReq) (*DeptUpdateResp, error)
 	DeptDelete(context.Context, *DeptDeleteReq) (*DeptDeleteResp, error)
 	DictDataOp(context.Context, *DictDataOpReq) (*DictDataOpResp, error)
+	DictDataList(context.Context, *DictDataListReq) (*DictDataListResp, error)
+	DictDataRetrieve(context.Context, *DictDataRetrieveReq) (*DictDataRetrieveResp, error)
+	DictDataAdd(context.Context, *DictDataAddReq) (*DictDataAddResp, error)
+	DictDataUpdate(context.Context, *DictDataUpdateReq) (*DictDataUpdateResp, error)
+	DictDataDelete(context.Context, *DictDataDeleteReq) (*DictDataDeleteResp, error)
 	DictTypeList(context.Context, *DictTypeListReq) (*DictTypeListResp, error)
 	DictTypeRetrieve(context.Context, *DictTypeRetrieveReq) (*DictTypeRetrieveResp, error)
 	DictTypeAdd(context.Context, *DictTypeAddReq) (*DictTypeAddResp, error)
@@ -544,6 +599,21 @@ func (UnimplementedSysServer) DeptDelete(context.Context, *DeptDeleteReq) (*Dept
 }
 func (UnimplementedSysServer) DictDataOp(context.Context, *DictDataOpReq) (*DictDataOpResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DictDataOp not implemented")
+}
+func (UnimplementedSysServer) DictDataList(context.Context, *DictDataListReq) (*DictDataListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DictDataList not implemented")
+}
+func (UnimplementedSysServer) DictDataRetrieve(context.Context, *DictDataRetrieveReq) (*DictDataRetrieveResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DictDataRetrieve not implemented")
+}
+func (UnimplementedSysServer) DictDataAdd(context.Context, *DictDataAddReq) (*DictDataAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DictDataAdd not implemented")
+}
+func (UnimplementedSysServer) DictDataUpdate(context.Context, *DictDataUpdateReq) (*DictDataUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DictDataUpdate not implemented")
+}
+func (UnimplementedSysServer) DictDataDelete(context.Context, *DictDataDeleteReq) (*DictDataDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DictDataDelete not implemented")
 }
 func (UnimplementedSysServer) DictTypeList(context.Context, *DictTypeListReq) (*DictTypeListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DictTypeList not implemented")
@@ -1092,6 +1162,96 @@ func _Sys_DictDataOp_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sys_DictDataList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictDataListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).DictDataList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/DictDataList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).DictDataList(ctx, req.(*DictDataListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_DictDataRetrieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictDataRetrieveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).DictDataRetrieve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/DictDataRetrieve",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).DictDataRetrieve(ctx, req.(*DictDataRetrieveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_DictDataAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictDataAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).DictDataAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/DictDataAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).DictDataAdd(ctx, req.(*DictDataAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_DictDataUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictDataUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).DictDataUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/DictDataUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).DictDataUpdate(ctx, req.(*DictDataUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_DictDataDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictDataDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).DictDataDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/DictDataDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).DictDataDelete(ctx, req.(*DictDataDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Sys_DictTypeList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DictTypeListReq)
 	if err := dec(in); err != nil {
@@ -1390,6 +1550,26 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DictDataOp",
 			Handler:    _Sys_DictDataOp_Handler,
+		},
+		{
+			MethodName: "DictDataList",
+			Handler:    _Sys_DictDataList_Handler,
+		},
+		{
+			MethodName: "DictDataRetrieve",
+			Handler:    _Sys_DictDataRetrieve_Handler,
+		},
+		{
+			MethodName: "DictDataAdd",
+			Handler:    _Sys_DictDataAdd_Handler,
+		},
+		{
+			MethodName: "DictDataUpdate",
+			Handler:    _Sys_DictDataUpdate_Handler,
+		},
+		{
+			MethodName: "DictDataDelete",
+			Handler:    _Sys_DictDataDelete_Handler,
 		},
 		{
 			MethodName: "DictTypeList",

@@ -1,5 +1,7 @@
 syntax = "v1"
 
+// import "common.api"
+
 info(
 	title: "参数字典"
 	desc: "参数字典"
@@ -17,6 +19,74 @@ type (
 	}
 )
 
+type (
+	DictDataListReq {
+		PageReq
+		DictType string `form:"dictType"`
+	}
+	DictDataListData {
+		DictCode  int64  `json:"dictCode"`
+		DictLabel string `json:"dictLabel"`
+		DictValue string `json:"dictValue"`
+		DictType  string `json:"dictType"`
+		DictSort  int64  `json:"dictSort"`
+		Status    int64  `json:"status"`
+		Remark    string `json:"remark"`
+		CreatedAt string `json:"createdAt"`
+	}
+	DictDataListResp {
+		List []DictDataListData `json:"list"`
+		Pagination
+	}
+)
+
+type (
+	DictDataRetrieveReq {
+		DictCode int64 `path:"dictCode"`
+	}
+	DictDataRetrieveResp {
+		DictCode  int64  `json:"dictCode"`
+		DictLabel string `json:"dictLabel"`
+		DictValue string `json:"dictValue"`
+		DictType  string `json:"dictType"`
+		DictSort  int64  `json:"dictSort"`
+		Status    int64  `json:"status"`
+		Remark    string `json:"remark"`
+	}
+)
+
+type (
+	DictDataAddReq {
+		DictLabel string `json:"dictLabel"`
+		DictValue string `json:"dictValue"`
+		DictType  string `json:"dictType"`
+		DictSort  int64  `json:"dictSort"`
+		Status    int64  `json:"status,optional"`
+		Remark    string `json:"remark,optional"`
+		CreateBy  int64  `json:"createBy,optional"`
+		UpdateBy  int64  `json:"updateBy,optional"`
+	}
+)
+
+type (
+	DictDataUpdateReq {
+		DictCode  int64  `json:"dictCode"`
+		DictLabel string `json:"dictLabel"`
+		DictValue string `json:"dictValue"`
+		DictType  string `json:"dictType"`
+		DictSort  int64  `json:"dictSort"`
+		Status    int64  `json:"status,optional"`
+		Remark    string `json:"remark,optional"`
+		UpdateBy  int64  `json:"updateBy,optional"`
+	}
+)
+
+type (
+	DictDataDeleteReq {
+		Ids []int64 `json:"ids"`
+	}
+)
+
 @server(
 	jwt: Auth
 	group: dictdata
@@ -28,4 +98,29 @@ service sys {
 	)
 	@handler DictDataOp
 	get /dict-data/option-select(DictDataOpReq) returns ([]*DictDataOpResp)
+	@doc(
+		summary: "字典列表"
+	)
+	@handler DictDataList
+	get /dict/data(DictDataListReq) returns ([]*DictDataListResp)
+	@doc(
+		summary: "获取单个字典"
+	)
+	@handler DictDataRetrieve
+	get /dict/data/:dictCode(DictDataRetrieveReq) returns (DictDataRetrieveResp)
+	@doc(
+		summary: "新增字典"
+	)
+	@handler DictDataAdd
+	post /dict/data(DictDataAddReq)
+	@doc(
+		summary: "更新字典"
+	)
+	@handler DictDataUpdate
+	put /dict/data/:dictCode(DictDataUpdateReq)
+	@doc(
+		summary: "删除字典"
+	)
+	@handler DictDataDelete
+	delete /dict/data(DictDataDeleteReq)
 }
