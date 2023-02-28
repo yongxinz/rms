@@ -312,6 +312,69 @@ type ConfigPwResp struct {
 	ConfigValue string `json:"configValue"`
 }
 
+type ConfigListReq struct {
+	PageReq
+}
+
+type ConfigListData struct {
+	Id          int64  `json:"id"`
+	ConfigName  string `json:"configName"`
+	ConfigKey   string `json:"configKey"`
+	ConfigValue string `json:"configValue"`
+	ConfigType  string `json:"configType"`
+	IsFrontend  string `json:"isFrontend"`
+	Remark      string `json:"remark"`
+	CreatedAt   string `json:"createdAt"`
+	UpdatedAt   string `json:"updatedAt"`
+	CreateBy    int64  `json:"createBy"`
+	UpdateBy    int64  `json:"updateBy"`
+}
+
+type ConfigListResp struct {
+	List []ConfigListData `json:"list"`
+	Pagination
+}
+
+type ConfigRetrieveReq struct {
+	Id int64 `path:"id"`
+}
+
+type ConfigRetrieveResp struct {
+	Id          int64  `json:"id"`
+	ConfigName  string `json:"configName"`
+	ConfigKey   string `json:"configKey"`
+	ConfigValue string `json:"configValue"`
+	ConfigType  string `json:"configType"`
+	IsFrontend  string `json:"isFrontend"`
+	Remark      string `json:"remark"`
+}
+
+type ConfigAddReq struct {
+	ConfigName  string `json:"configName"`
+	ConfigKey   string `json:"configKey"`
+	ConfigValue string `json:"configValue"`
+	ConfigType  string `json:"configType"`
+	IsFrontend  string `json:"isFrontend"`
+	Remark      string `json:"remark,optional"`
+	CreateBy    int64  `json:"createBy,optional"`
+	UpdateBy    int64  `json:"updateBy,optional"`
+}
+
+type ConfigUpdateReq struct {
+	Id          int64  `json:"id"`
+	ConfigName  string `json:"configName"`
+	ConfigKey   string `json:"configKey"`
+	ConfigValue string `json:"configValue"`
+	ConfigType  string `json:"configType"`
+	IsFrontend  string `json:"isFrontend"`
+	Remark      string `json:"remark"`
+	UpdateBy    int64  `json:"updateBy,optional"`
+}
+
+type ConfigDeleteReq struct {
+	Ids []int64 `json:"ids"`
+}
+
 type MenuRoleResp struct {
 	MenuId     int64          `json:"menuId"`
 	MenuName   string         `json:"menuName"`

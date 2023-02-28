@@ -1,4 +1,4 @@
-package handler
+package sysconfig
 
 import (
 	"net/http"

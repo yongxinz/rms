@@ -1,4 +1,4 @@
-package logic
+package sysconfig
 
 import (
 	"context"

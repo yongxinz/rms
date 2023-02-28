@@ -1,5 +1,7 @@
 syntax = "v1"
 
+// import "common.api"
+
 info(
 	title: "系统配置"
 	desc: "系统配置"
@@ -21,6 +23,76 @@ type (
 	ConfigPwResp {
 		ConfigKey   string `json:"configKey"`
 		ConfigValue string `json:"configValue"`
+	}
+)
+
+type (
+	ConfigListReq {
+		PageReq
+	}
+	ConfigListData {
+		Id          int64  `json:"id"`
+		ConfigName  string `json:"configName"`
+		ConfigKey   string `json:"configKey"`
+		ConfigValue string `json:"configValue"`
+		ConfigType  string `json:"configType"`
+		IsFrontend  string `json:"isFrontend"`
+		Remark      string `json:"remark"`
+		CreatedAt   string `json:"createdAt"`
+		UpdatedAt   string `json:"updatedAt"`
+		CreateBy    int64  `json:"createBy"`
+		UpdateBy    int64  `json:"updateBy"`
+	}
+	ConfigListResp {
+		List []ConfigListData `json:"list"`
+		Pagination
+	}
+)
+
+type (
+	ConfigRetrieveReq {
+		Id int64 `path:"id"`
+	}
+	ConfigRetrieveResp {
+		Id          int64  `json:"id"`
+		ConfigName  string `json:"configName"`
+		ConfigKey   string `json:"configKey"`
+		ConfigValue string `json:"configValue"`
+		ConfigType  string `json:"configType"`
+		IsFrontend  string `json:"isFrontend"`
+		Remark      string `json:"remark"`
+	}
+)
+
+type (
+	ConfigAddReq {
+		ConfigName  string `json:"configName"`
+		ConfigKey   string `json:"configKey"`
+		ConfigValue string `json:"configValue"`
+		ConfigType  string `json:"configType"`
+		IsFrontend  string `json:"isFrontend"`
+		Remark      string `json:"remark,optional"`
+		CreateBy    int64  `json:"createBy,optional"`
+		UpdateBy    int64  `json:"updateBy,optional"`
+	}
+)
+
+type (
+	ConfigUpdateReq {
+		Id          int64  `json:"id"`
+		ConfigName  string `json:"configName"`
+		ConfigKey   string `json:"configKey"`
+		ConfigValue string `json:"configValue"`
+		ConfigType  string `json:"configType"`
+		IsFrontend  string `json:"isFrontend"`
+		Remark      string `json:"remark"`
+		UpdateBy    int64  `json:"updateBy,optional"`
+	}
+)
+
+type (
+	ConfigDeleteReq {
+		Ids []int64 `json:"ids"`
 	}
 )
 
@@ -47,4 +119,29 @@ service sys {
 	)
 	@handler ConfigPw
 	get /configKey/:configKey(ConfigPwReq) returns (ConfigPwResp)
+	@doc(
+		summary: "配置列表"
+	)
+	@handler ConfigList
+	get /config(ConfigListReq) returns ([]*ConfigListResp)
+	@doc(
+		summary: "获取单个配置"
+	)
+	@handler ConfigRetrieve
+	get /config/:id(ConfigRetrieveReq) returns (ConfigRetrieveResp)
+	@doc(
+		summary: "新增配置"
+	)
+	@handler ConfigAdd
+	post /config(ConfigAddReq)
+	@doc(
+		summary: "更新配置"
+	)
+	@handler ConfigUpdate
+	put /config/:id(ConfigUpdateReq)
+	@doc(
+		summary: "删除配置"
+	)
+	@handler ConfigDelete
+	delete /config(ConfigDeleteReq)
 }

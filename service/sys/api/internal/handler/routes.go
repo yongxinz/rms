@@ -178,6 +178,31 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/configKey/:configKey",
 				Handler: sysconfig.ConfigPwHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/config",
+				Handler: sysconfig.ConfigListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/config/:id",
+				Handler: sysconfig.ConfigRetrieveHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/config",
+				Handler: sysconfig.ConfigAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/config/:id",
+				Handler: sysconfig.ConfigUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/config",
+				Handler: sysconfig.ConfigDeleteHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/v1"),

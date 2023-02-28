@@ -25,6 +25,11 @@ type SysClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	SysConfig(ctx context.Context, in *SysConfigReq, opts ...grpc.CallOption) (*SysConfigResp, error)
 	ConfigPw(ctx context.Context, in *ConfigPwReq, opts ...grpc.CallOption) (*ConfigPwResp, error)
+	ConfigList(ctx context.Context, in *ConfigListReq, opts ...grpc.CallOption) (*ConfigListResp, error)
+	ConfigRetrieve(ctx context.Context, in *ConfigRetrieveReq, opts ...grpc.CallOption) (*ConfigRetrieveResp, error)
+	ConfigAdd(ctx context.Context, in *ConfigAddReq, opts ...grpc.CallOption) (*ConfigAddResp, error)
+	ConfigUpdate(ctx context.Context, in *ConfigUpdateReq, opts ...grpc.CallOption) (*ConfigUpdateResp, error)
+	ConfigDelete(ctx context.Context, in *ConfigDeleteReq, opts ...grpc.CallOption) (*ConfigDeleteResp, error)
 	UserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoResp, error)
 	UserList(ctx context.Context, in *UserListReq, opts ...grpc.CallOption) (*UserListResp, error)
 	UserRetrieve(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserRetrieveResp, error)
@@ -96,6 +101,51 @@ func (c *sysClient) SysConfig(ctx context.Context, in *SysConfigReq, opts ...grp
 func (c *sysClient) ConfigPw(ctx context.Context, in *ConfigPwReq, opts ...grpc.CallOption) (*ConfigPwResp, error) {
 	out := new(ConfigPwResp)
 	err := c.cc.Invoke(ctx, "/sysclient.Sys/ConfigPw", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) ConfigList(ctx context.Context, in *ConfigListReq, opts ...grpc.CallOption) (*ConfigListResp, error) {
+	out := new(ConfigListResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/ConfigList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) ConfigRetrieve(ctx context.Context, in *ConfigRetrieveReq, opts ...grpc.CallOption) (*ConfigRetrieveResp, error) {
+	out := new(ConfigRetrieveResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/ConfigRetrieve", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) ConfigAdd(ctx context.Context, in *ConfigAddReq, opts ...grpc.CallOption) (*ConfigAddResp, error) {
+	out := new(ConfigAddResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/ConfigAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) ConfigUpdate(ctx context.Context, in *ConfigUpdateReq, opts ...grpc.CallOption) (*ConfigUpdateResp, error) {
+	out := new(ConfigUpdateResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/ConfigUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) ConfigDelete(ctx context.Context, in *ConfigDeleteReq, opts ...grpc.CallOption) (*ConfigDeleteResp, error) {
+	out := new(ConfigDeleteResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/ConfigDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -469,6 +519,11 @@ type SysServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	SysConfig(context.Context, *SysConfigReq) (*SysConfigResp, error)
 	ConfigPw(context.Context, *ConfigPwReq) (*ConfigPwResp, error)
+	ConfigList(context.Context, *ConfigListReq) (*ConfigListResp, error)
+	ConfigRetrieve(context.Context, *ConfigRetrieveReq) (*ConfigRetrieveResp, error)
+	ConfigAdd(context.Context, *ConfigAddReq) (*ConfigAddResp, error)
+	ConfigUpdate(context.Context, *ConfigUpdateReq) (*ConfigUpdateResp, error)
+	ConfigDelete(context.Context, *ConfigDeleteReq) (*ConfigDeleteResp, error)
 	UserInfo(context.Context, *UserInfoReq) (*UserInfoResp, error)
 	UserList(context.Context, *UserListReq) (*UserListResp, error)
 	UserRetrieve(context.Context, *UserInfoReq) (*UserRetrieveResp, error)
@@ -524,6 +579,21 @@ func (UnimplementedSysServer) SysConfig(context.Context, *SysConfigReq) (*SysCon
 }
 func (UnimplementedSysServer) ConfigPw(context.Context, *ConfigPwReq) (*ConfigPwResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConfigPw not implemented")
+}
+func (UnimplementedSysServer) ConfigList(context.Context, *ConfigListReq) (*ConfigListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigList not implemented")
+}
+func (UnimplementedSysServer) ConfigRetrieve(context.Context, *ConfigRetrieveReq) (*ConfigRetrieveResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigRetrieve not implemented")
+}
+func (UnimplementedSysServer) ConfigAdd(context.Context, *ConfigAddReq) (*ConfigAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigAdd not implemented")
+}
+func (UnimplementedSysServer) ConfigUpdate(context.Context, *ConfigUpdateReq) (*ConfigUpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigUpdate not implemented")
+}
+func (UnimplementedSysServer) ConfigDelete(context.Context, *ConfigDeleteReq) (*ConfigDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigDelete not implemented")
 }
 func (UnimplementedSysServer) UserInfo(context.Context, *UserInfoReq) (*UserInfoResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserInfo not implemented")
@@ -708,6 +778,96 @@ func _Sys_ConfigPw_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).ConfigPw(ctx, req.(*ConfigPwReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_ConfigList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).ConfigList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/ConfigList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).ConfigList(ctx, req.(*ConfigListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_ConfigRetrieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigRetrieveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).ConfigRetrieve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/ConfigRetrieve",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).ConfigRetrieve(ctx, req.(*ConfigRetrieveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_ConfigAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).ConfigAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/ConfigAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).ConfigAdd(ctx, req.(*ConfigAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_ConfigUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).ConfigUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/ConfigUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).ConfigUpdate(ctx, req.(*ConfigUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_ConfigDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).ConfigDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/ConfigDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).ConfigDelete(ctx, req.(*ConfigDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1450,6 +1610,26 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ConfigPw",
 			Handler:    _Sys_ConfigPw_Handler,
+		},
+		{
+			MethodName: "ConfigList",
+			Handler:    _Sys_ConfigList_Handler,
+		},
+		{
+			MethodName: "ConfigRetrieve",
+			Handler:    _Sys_ConfigRetrieve_Handler,
+		},
+		{
+			MethodName: "ConfigAdd",
+			Handler:    _Sys_ConfigAdd_Handler,
+		},
+		{
+			MethodName: "ConfigUpdate",
+			Handler:    _Sys_ConfigUpdate_Handler,
+		},
+		{
+			MethodName: "ConfigDelete",
+			Handler:    _Sys_ConfigDelete_Handler,
 		},
 		{
 			MethodName: "UserInfo",

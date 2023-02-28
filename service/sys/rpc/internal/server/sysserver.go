@@ -37,6 +37,31 @@ func (s *SysServer) ConfigPw(ctx context.Context, in *sys.ConfigPwReq) (*sys.Con
 	return l.ConfigPw(in)
 }
 
+func (s *SysServer) ConfigList(ctx context.Context, in *sys.ConfigListReq) (*sys.ConfigListResp, error) {
+	l := logic.NewConfigListLogic(ctx, s.svcCtx)
+	return l.ConfigList(in)
+}
+
+func (s *SysServer) ConfigRetrieve(ctx context.Context, in *sys.ConfigRetrieveReq) (*sys.ConfigRetrieveResp, error) {
+	l := logic.NewConfigRetrieveLogic(ctx, s.svcCtx)
+	return l.ConfigRetrieve(in)
+}
+
+func (s *SysServer) ConfigAdd(ctx context.Context, in *sys.ConfigAddReq) (*sys.ConfigAddResp, error) {
+	l := logic.NewConfigAddLogic(ctx, s.svcCtx)
+	return l.ConfigAdd(in)
+}
+
+func (s *SysServer) ConfigUpdate(ctx context.Context, in *sys.ConfigUpdateReq) (*sys.ConfigUpdateResp, error) {
+	l := logic.NewConfigUpdateLogic(ctx, s.svcCtx)
+	return l.ConfigUpdate(in)
+}
+
+func (s *SysServer) ConfigDelete(ctx context.Context, in *sys.ConfigDeleteReq) (*sys.ConfigDeleteResp, error) {
+	l := logic.NewConfigDeleteLogic(ctx, s.svcCtx)
+	return l.ConfigDelete(in)
+}
+
 func (s *SysServer) UserInfo(ctx context.Context, in *sys.UserInfoReq) (*sys.UserInfoResp, error) {
 	l := logic.NewUserInfoLogic(ctx, s.svcCtx)
 	return l.UserInfo(in)

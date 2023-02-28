@@ -34,6 +34,73 @@ message ConfigPwResp {
     string configKey = 1;
     string configValue = 2;
 }
+
+message ConfigListReq {
+    int64 page = 1;
+    int64 size = 2;
+}
+
+message ConfigListData{
+    int64 id = 1;
+    string configName = 2;
+    string configKey = 3;
+    string configValue = 4;
+    string configType = 5;
+    string isFrontend = 6;
+    string remark = 7;
+    string createdAt = 8;
+}
+
+message ConfigListResp {
+    int64 count = 1;
+    repeated ConfigListData data = 2;
+}
+
+message ConfigRetrieveReq {
+    int64 id = 1;
+}
+
+message ConfigRetrieveResp {
+    int64 id = 1;
+    string configName = 2;
+    string configKey = 3;
+    string configValue = 4;
+    string configType = 5;
+    string isFrontend = 6;
+    string remark = 7;
+}
+
+message ConfigAddReq {
+    string configName = 1;
+    string configKey = 2;
+    string configValue = 3;
+    string configType = 4;
+    string isFrontend = 5;
+    string remark = 6;
+    int64 createBy = 7;
+    int64 updateBy = 8;
+}
+
+message ConfigAddResp {}
+
+message ConfigUpdateReq {
+    int64 id = 1;
+    string configName = 2;
+    string configKey = 3;
+    string configValue = 4;
+    string configType = 5;
+    string isFrontend = 6;
+    string remark = 7;
+    int64 updateBy = 8;
+}
+
+message ConfigUpdateResp {}
+
+message ConfigDeleteReq {
+    repeated int64 ids = 1;
+}
+
+message ConfigDeleteResp {}
 // sys-config end
 
 // user start
@@ -655,6 +722,11 @@ service Sys {
 
     rpc SysConfig(SysConfigReq) returns(SysConfigResp);
     rpc ConfigPw(ConfigPwReq) returns(ConfigPwResp);
+    rpc ConfigList(ConfigListReq) returns(ConfigListResp);
+    rpc ConfigRetrieve(ConfigRetrieveReq) returns(ConfigRetrieveResp);
+    rpc ConfigAdd(ConfigAddReq) returns(ConfigAddResp);
+    rpc ConfigUpdate(ConfigUpdateReq) returns(ConfigUpdateResp);
+    rpc ConfigDelete(ConfigDeleteReq) returns(ConfigDeleteResp);
 
     rpc UserInfo(UserInfoReq) returns(UserInfoResp);
     rpc UserList(UserListReq) returns(UserListResp);

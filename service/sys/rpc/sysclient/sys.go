@@ -13,8 +13,19 @@ import (
 )
 
 type (
+	ConfigAddReq         = sys.ConfigAddReq
+	ConfigAddResp        = sys.ConfigAddResp
+	ConfigDeleteReq      = sys.ConfigDeleteReq
+	ConfigDeleteResp     = sys.ConfigDeleteResp
+	ConfigListData       = sys.ConfigListData
+	ConfigListReq        = sys.ConfigListReq
+	ConfigListResp       = sys.ConfigListResp
 	ConfigPwReq          = sys.ConfigPwReq
 	ConfigPwResp         = sys.ConfigPwResp
+	ConfigRetrieveReq    = sys.ConfigRetrieveReq
+	ConfigRetrieveResp   = sys.ConfigRetrieveResp
+	ConfigUpdateReq      = sys.ConfigUpdateReq
+	ConfigUpdateResp     = sys.ConfigUpdateResp
 	DeptAddReq           = sys.DeptAddReq
 	DeptAddResp          = sys.DeptAddResp
 	DeptDeleteReq        = sys.DeptDeleteReq
@@ -116,6 +127,11 @@ type (
 		Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 		SysConfig(ctx context.Context, in *SysConfigReq, opts ...grpc.CallOption) (*SysConfigResp, error)
 		ConfigPw(ctx context.Context, in *ConfigPwReq, opts ...grpc.CallOption) (*ConfigPwResp, error)
+		ConfigList(ctx context.Context, in *ConfigListReq, opts ...grpc.CallOption) (*ConfigListResp, error)
+		ConfigRetrieve(ctx context.Context, in *ConfigRetrieveReq, opts ...grpc.CallOption) (*ConfigRetrieveResp, error)
+		ConfigAdd(ctx context.Context, in *ConfigAddReq, opts ...grpc.CallOption) (*ConfigAddResp, error)
+		ConfigUpdate(ctx context.Context, in *ConfigUpdateReq, opts ...grpc.CallOption) (*ConfigUpdateResp, error)
+		ConfigDelete(ctx context.Context, in *ConfigDeleteReq, opts ...grpc.CallOption) (*ConfigDeleteResp, error)
 		UserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoResp, error)
 		UserList(ctx context.Context, in *UserListReq, opts ...grpc.CallOption) (*UserListResp, error)
 		UserRetrieve(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserRetrieveResp, error)
@@ -182,6 +198,31 @@ func (m *defaultSys) SysConfig(ctx context.Context, in *SysConfigReq, opts ...gr
 func (m *defaultSys) ConfigPw(ctx context.Context, in *ConfigPwReq, opts ...grpc.CallOption) (*ConfigPwResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.ConfigPw(ctx, in, opts...)
+}
+
+func (m *defaultSys) ConfigList(ctx context.Context, in *ConfigListReq, opts ...grpc.CallOption) (*ConfigListResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.ConfigList(ctx, in, opts...)
+}
+
+func (m *defaultSys) ConfigRetrieve(ctx context.Context, in *ConfigRetrieveReq, opts ...grpc.CallOption) (*ConfigRetrieveResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.ConfigRetrieve(ctx, in, opts...)
+}
+
+func (m *defaultSys) ConfigAdd(ctx context.Context, in *ConfigAddReq, opts ...grpc.CallOption) (*ConfigAddResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.ConfigAdd(ctx, in, opts...)
+}
+
+func (m *defaultSys) ConfigUpdate(ctx context.Context, in *ConfigUpdateReq, opts ...grpc.CallOption) (*ConfigUpdateResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.ConfigUpdate(ctx, in, opts...)
+}
+
+func (m *defaultSys) ConfigDelete(ctx context.Context, in *ConfigDeleteReq, opts ...grpc.CallOption) (*ConfigDeleteResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.ConfigDelete(ctx, in, opts...)
 }
 
 func (m *defaultSys) UserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoResp, error) {
