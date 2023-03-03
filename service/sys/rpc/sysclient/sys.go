@@ -74,6 +74,8 @@ type (
 	MenuListData         = sys.MenuListData
 	MenuListReq          = sys.MenuListReq
 	MenuListResp         = sys.MenuListResp
+	MenuRetrieveReq      = sys.MenuRetrieveReq
+	MenuRetrieveResp     = sys.MenuRetrieveResp
 	MenuRoleReq          = sys.MenuRoleReq
 	MenuRoleResp         = sys.MenuRoleResp
 	MenuTree             = sys.MenuTree
@@ -148,7 +150,9 @@ type (
 		RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error)
 		MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
 		MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
+		MenuRetrieve(ctx context.Context, in *MenuRetrieveReq, opts ...grpc.CallOption) (*MenuRetrieveResp, error)
 		MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
+		MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error)
 		MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
 		DeptTree(ctx context.Context, in *DeptTreeReq, opts ...grpc.CallOption) (*DeptTreeResp, error)
 		DeptList(ctx context.Context, in *DeptListReq, opts ...grpc.CallOption) (*DeptListResp, error)
@@ -305,9 +309,19 @@ func (m *defaultSys) MenuList(ctx context.Context, in *MenuListReq, opts ...grpc
 	return client.MenuList(ctx, in, opts...)
 }
 
+func (m *defaultSys) MenuRetrieve(ctx context.Context, in *MenuRetrieveReq, opts ...grpc.CallOption) (*MenuRetrieveResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.MenuRetrieve(ctx, in, opts...)
+}
+
 func (m *defaultSys) MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error) {
 	client := sys.NewSysClient(m.cli.Conn())
 	return client.MenuUpdate(ctx, in, opts...)
+}
+
+func (m *defaultSys) MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error) {
+	client := sys.NewSysClient(m.cli.Conn())
+	return client.MenuDelete(ctx, in, opts...)
 }
 
 func (m *defaultSys) MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error) {

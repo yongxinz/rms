@@ -215,6 +215,31 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/menurole",
 				Handler: menu.MenuRoleHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/menu",
+				Handler: menu.MenuListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/menu/:menuId",
+				Handler: menu.MenuRetrieveHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/menu",
+				Handler: menu.MenuAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/menu/:menuId",
+				Handler: menu.MenuUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/menu",
+				Handler: menu.MenuDeleteHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/v1"),

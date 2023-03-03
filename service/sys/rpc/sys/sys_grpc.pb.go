@@ -46,7 +46,9 @@ type SysClient interface {
 	RoleDelete(ctx context.Context, in *RoleDeleteReq, opts ...grpc.CallOption) (*RoleDeleteResp, error)
 	MenuAdd(ctx context.Context, in *MenuAddReq, opts ...grpc.CallOption) (*MenuAddResp, error)
 	MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.CallOption) (*MenuListResp, error)
+	MenuRetrieve(ctx context.Context, in *MenuRetrieveReq, opts ...grpc.CallOption) (*MenuRetrieveResp, error)
 	MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error)
+	MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error)
 	MenuRole(ctx context.Context, in *MenuRoleReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
 	DeptTree(ctx context.Context, in *DeptTreeReq, opts ...grpc.CallOption) (*DeptTreeResp, error)
 	DeptList(ctx context.Context, in *DeptListReq, opts ...grpc.CallOption) (*DeptListResp, error)
@@ -296,9 +298,27 @@ func (c *sysClient) MenuList(ctx context.Context, in *MenuListReq, opts ...grpc.
 	return out, nil
 }
 
+func (c *sysClient) MenuRetrieve(ctx context.Context, in *MenuRetrieveReq, opts ...grpc.CallOption) (*MenuRetrieveResp, error) {
+	out := new(MenuRetrieveResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/MenuRetrieve", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *sysClient) MenuUpdate(ctx context.Context, in *MenuUpdateReq, opts ...grpc.CallOption) (*MenuUpdateResp, error) {
 	out := new(MenuUpdateResp)
 	err := c.cc.Invoke(ctx, "/sysclient.Sys/MenuUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysClient) MenuDelete(ctx context.Context, in *MenuDeleteReq, opts ...grpc.CallOption) (*MenuDeleteResp, error) {
+	out := new(MenuDeleteResp)
+	err := c.cc.Invoke(ctx, "/sysclient.Sys/MenuDelete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -540,7 +560,9 @@ type SysServer interface {
 	RoleDelete(context.Context, *RoleDeleteReq) (*RoleDeleteResp, error)
 	MenuAdd(context.Context, *MenuAddReq) (*MenuAddResp, error)
 	MenuList(context.Context, *MenuListReq) (*MenuListResp, error)
+	MenuRetrieve(context.Context, *MenuRetrieveReq) (*MenuRetrieveResp, error)
 	MenuUpdate(context.Context, *MenuUpdateReq) (*MenuUpdateResp, error)
+	MenuDelete(context.Context, *MenuDeleteReq) (*MenuDeleteResp, error)
 	MenuRole(context.Context, *MenuRoleReq) (*MenuRoleResp, error)
 	DeptTree(context.Context, *DeptTreeReq) (*DeptTreeResp, error)
 	DeptList(context.Context, *DeptListReq) (*DeptListResp, error)
@@ -643,8 +665,14 @@ func (UnimplementedSysServer) MenuAdd(context.Context, *MenuAddReq) (*MenuAddRes
 func (UnimplementedSysServer) MenuList(context.Context, *MenuListReq) (*MenuListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MenuList not implemented")
 }
+func (UnimplementedSysServer) MenuRetrieve(context.Context, *MenuRetrieveReq) (*MenuRetrieveResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MenuRetrieve not implemented")
+}
 func (UnimplementedSysServer) MenuUpdate(context.Context, *MenuUpdateReq) (*MenuUpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MenuUpdate not implemented")
+}
+func (UnimplementedSysServer) MenuDelete(context.Context, *MenuDeleteReq) (*MenuDeleteResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MenuDelete not implemented")
 }
 func (UnimplementedSysServer) MenuRole(context.Context, *MenuRoleReq) (*MenuRoleResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MenuRole not implemented")
@@ -1160,6 +1188,24 @@ func _Sys_MenuList_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sys_MenuRetrieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MenuRetrieveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).MenuRetrieve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/MenuRetrieve",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).MenuRetrieve(ctx, req.(*MenuRetrieveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Sys_MenuUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MenuUpdateReq)
 	if err := dec(in); err != nil {
@@ -1174,6 +1220,24 @@ func _Sys_MenuUpdate_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServer).MenuUpdate(ctx, req.(*MenuUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Sys_MenuDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MenuDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).MenuDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/sysclient.Sys/MenuDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).MenuDelete(ctx, req.(*MenuDeleteReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1696,8 +1760,16 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Sys_MenuList_Handler,
 		},
 		{
+			MethodName: "MenuRetrieve",
+			Handler:    _Sys_MenuRetrieve_Handler,
+		},
+		{
 			MethodName: "MenuUpdate",
 			Handler:    _Sys_MenuUpdate_Handler,
+		},
+		{
+			MethodName: "MenuDelete",
+			Handler:    _Sys_MenuDelete_Handler,
 		},
 		{
 			MethodName: "MenuRole",

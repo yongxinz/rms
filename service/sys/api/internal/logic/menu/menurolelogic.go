@@ -1,4 +1,4 @@
-package logic
+package menu
 
 import (
 	"context"

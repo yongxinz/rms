@@ -18,8 +18,8 @@ import (
 var (
 	sysMenuFieldNames          = builder.RawFieldNames(&SysMenu{})
 	sysMenuRows                = strings.Join(sysMenuFieldNames, ",")
-	sysMenuRowsExpectAutoSet   = strings.Join(stringx.Remove(sysMenuFieldNames, "`menu_id`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`", "`create_time`"), ",")
-	sysMenuRowsWithPlaceHolder = strings.Join(stringx.Remove(sysMenuFieldNames, "`menu_id`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`", "`create_time`"), "=?,") + "=?"
+	sysMenuRowsExpectAutoSet   = strings.Join(stringx.Remove(sysMenuFieldNames, "`menu_id`", "`created_at`", "`create_time`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`"), ",")
+	sysMenuRowsWithPlaceHolder = strings.Join(stringx.Remove(sysMenuFieldNames, "`menu_id`", "`created_at`", "`create_time`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`"), "=?,") + "=?"
 
 	cacheSysMenuMenuIdPrefix = "cache:sysMenu:menuId:"
 )
@@ -43,7 +43,7 @@ type (
 		Title      sql.NullString `db:"title"`
 		Icon       sql.NullString `db:"icon"`
 		Path       sql.NullString `db:"path"`
-		Paths      sql.NullString `db:"paths"`
+		Paths      string         `db:"paths"`
 		MenuType   sql.NullString `db:"menu_type"`
 		Action     sql.NullString `db:"action"`
 		Permission sql.NullString `db:"permission"`

@@ -142,9 +142,19 @@ func (s *SysServer) MenuList(ctx context.Context, in *sys.MenuListReq) (*sys.Men
 	return l.MenuList(in)
 }
 
+func (s *SysServer) MenuRetrieve(ctx context.Context, in *sys.MenuRetrieveReq) (*sys.MenuRetrieveResp, error) {
+	l := logic.NewMenuRetrieveLogic(ctx, s.svcCtx)
+	return l.MenuRetrieve(in)
+}
+
 func (s *SysServer) MenuUpdate(ctx context.Context, in *sys.MenuUpdateReq) (*sys.MenuUpdateResp, error) {
 	l := logic.NewMenuUpdateLogic(ctx, s.svcCtx)
 	return l.MenuUpdate(in)
+}
+
+func (s *SysServer) MenuDelete(ctx context.Context, in *sys.MenuDeleteReq) (*sys.MenuDeleteResp, error) {
+	l := logic.NewMenuDeleteLogic(ctx, s.svcCtx)
+	return l.MenuDelete(in)
 }
 
 func (s *SysServer) MenuRole(ctx context.Context, in *sys.MenuRoleReq) (*sys.MenuRoleResp, error) {

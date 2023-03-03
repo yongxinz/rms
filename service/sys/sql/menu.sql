@@ -6,7 +6,7 @@ CREATE TABLE `sys_menu` (
   `title` varchar(128) DEFAULT NULL,
   `icon` varchar(128) DEFAULT NULL,
   `path` varchar(128) DEFAULT NULL,
-  `paths` varchar(128) DEFAULT NULL,
+  `paths` varchar(128) DEFAULT '',
   `menu_type` varchar(1) DEFAULT NULL,
   `action` varchar(16) DEFAULT NULL,
   `permission` varchar(255) DEFAULT NULL,

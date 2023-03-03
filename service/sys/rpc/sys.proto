@@ -406,92 +406,110 @@ message DeptDeleteResp {}
 
 // menu start
 message MenuAddReq {
-    string menu_name = 1;
+    string menuName = 1;
     string title = 2;
     string icon = 3;
     string path = 4;
     string paths = 5;
-    string menu_type = 6;
+    string menuType = 6;
     string action = 7;
     string permission = 8;
     string breadcrumb =9;
     string component =10;
     string visible =11;
-    string is_frame =12;
-    int64 parent_id = 13;
-    int64 no_cache = 14;
+    string isFrame =12;
+    int64 parentId = 13;
+    int64 noCache = 14;
     int64 sort = 15;
-    string create_by =16;
-    string update_by =17;
+    int64 createBy =16;
+    int64 updateBy =17;
 }
 
-message MenuAddResp {
-    string pong = 1;
-}
+message MenuAddResp {}
 
-message MenuListReq {
-    string menu_name = 1;
-    string path = 2;
-}
+message MenuListReq {}
 
 message MenuListData {
-    int64 menu_id = 1;
-    string menu_name = 2;
+    int64 menuId = 1;
+    string menuName = 2;
     string title = 3;
     string icon = 4;
     string path = 5;
     string paths = 6;
-    string menu_type = 7;
+    string menuType = 7;
     string action = 8;
     string permission = 9;
     string breadcrumb =10;
     string component =11;
     string visible =12;
-    string is_frame =13;
-    int64 parent_id = 14;
-    int64 no_cache = 15;
+    string isFrame =13;
+    int64 parentId = 14;
+    int64 noCache = 15;
     int64 sort = 16;
-    string create_by =17;
-    string update_by =18;
+    int64 createBy =17;
+    int64 updateBy =18;
+    string createdAt = 19;
+    string updatedAt = 20;
+    repeated MenuListData children = 21;
 }
 
 message MenuListResp{
-    int64 total = 1;
-    repeated MenuListData list = 2;
+    repeated MenuListData data = 1;
+}
+
+message MenuRetrieveReq {
+    int64 menuId = 1;
+}
+
+message MenuRetrieveResp {
+    int64 menuId = 1;
+    string menuName = 2;
+    string title = 3;
+    string icon = 4;
+    string path = 5;
+    string paths = 6;
+    string menuType = 7;
+    string action = 8;
+    string permission = 9;
+    string breadcrumb =10;
+    string component =11;
+    string visible =12;
+    string isFrame =13;
+    int64 parentId = 14;
+    int64 noCache = 15;
+    int64 sort = 16;
+    int64 createBy =17;
+    int64 updateBy =18;
 }
 
 message MenuUpdateReq {
-    string menu_name = 1;
+    string menuName = 1;
     string title = 2;
     string icon = 3;
     string path = 4;
     string paths = 5;
-    string menu_type = 6;
+    string menuType = 6;
     string action = 7;
     string permission = 8;
     string breadcrumb =9;
     string component =10;
     string visible =11;
-    string is_frame =12;
-    int64 parent_id = 13;
-    int64 no_cache = 14;
+    string isFrame =12;
+    int64 parentId = 13;
+    int64 noCache = 14;
     int64 sort = 15;
-    string create_by =16;
-    string update_by =17;
-    int64 menu_id =18;
+    int64 createBy =16;
+    int64 updateBy =17;
+    int64 menuId =18;
 }
 
-message MenuUpdateResp {
-    string pong = 1;
-}
+message MenuUpdateResp {}
 
 message MenuDeleteReq {
-    int64 menu_id = 1;
+    int64 menuId = 1;
 }
 
-message MenuDeleteResp {
-    string pong = 1;
-}
+message MenuDeleteResp {}
 
 message MenuRoleReq {
     int64 role_id = 1;
@@ -746,7 +764,9 @@ service Sys {
 
     rpc MenuAdd(MenuAddReq) returns(MenuAddResp);
     rpc MenuList(MenuListReq) returns(MenuListResp);
+    rpc MenuRetrieve(MenuRetrieveReq) returns(MenuRetrieveResp);
     rpc MenuUpdate(MenuUpdateReq) returns(MenuUpdateResp);
+    rpc MenuDelete(MenuDeleteReq) returns(MenuDeleteResp);
 
     rpc MenuRole(MenuRoleReq) returns(MenuRoleResp);
 

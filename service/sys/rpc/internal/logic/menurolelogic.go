@@ -66,7 +66,7 @@ func (l *MenuRoleLogic) MenuRole(in *sys.MenuRoleReq) (*sys.MenuRoleResp, error)
 				Title:      menu.Title.String,
 				Icon:       menu.Icon.String,
 				Path:       menu.Path.String,
-				Paths:      menu.Paths.String,
+				Paths:      menu.Paths,
 				Action:     menu.Action.String,
 				Permission: menu.Permission.String,
 				ParentId:   menu.ParentId.Int64,
@@ -106,7 +106,7 @@ func menuCall(menuList []*model.SysMenu, menu *sys.MenuTree) *sys.MenuTree {
 		mi.Data.Title = list[j].Title.String
 		mi.Data.Icon = list[j].Icon.String
 		mi.Data.Path = list[j].Path.String
-		mi.Data.Paths = list[j].Paths.String
+		mi.Data.Paths = list[j].Paths
 		mi.Data.Action = list[j].Action.String
 		mi.Data.Permission = list[j].Permission.String
 		mi.Data.ParentId = list[j].ParentId.Int64
