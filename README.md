@@ -11,13 +11,13 @@
 
 1、拉取 gonivinck 项目，按需修改 .env 配置
 
-2、启动全部服务
+2、启动基础环境服务
 
 ```shell
 docker-compose up -d
 ```
 
-3、启动 rpc 服务
+3、启动项目 rpc 服务
 
 ```shell
 # 进入 golang 容器
@@ -28,7 +28,7 @@ cd service/sys/rpc
 go run sys.go -f etc/sys.yaml
 ```
 
-4、启动 http 服务
+4、启动项目 http 服务
 
 ```shell
 # 进入 golang 容器
