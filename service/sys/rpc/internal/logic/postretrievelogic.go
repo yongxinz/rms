@@ -36,10 +36,10 @@ func (l *PostRetrieveLogic) PostRetrieve(in *sys.PostRetrieveReq) (*sys.PostRetr
 
 	return &sys.PostRetrieveResp{
 		PostId:   res.PostId,
-		PostName: res.PostName.String,
-		PostCode: res.PostCode.String,
-		Sort:     res.Sort.Int64,
-		Status:   res.Status.Int64,
-		Remark:   res.Remark.String,
+		PostName: res.PostName,
+		PostCode: res.PostCode,
+		Sort:     res.Sort,
+		Status:   res.Status,
+		Remark:   res.Remark,
 	}, nil
 }

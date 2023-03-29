@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/cache"
@@ -38,17 +39,16 @@ type (
 	}
 
 	SysPost struct {
-		PostId    int64          `db:"post_id"`
-		PostName  sql.NullString `db:"post_name"`
-		PostCode  sql.NullString `db:"post_code"`
-		Sort      sql.NullInt64  `db:"sort"`
-		Status    sql.NullInt64  `db:"status"`
-		Remark    sql.NullString `db:"remark"`
-		CreateBy  sql.NullInt64  `db:"create_by"`  // 创建者
-		UpdateBy  sql.NullInt64  `db:"update_by"`  // 更新者
-		CreatedAt sql.NullTime   `db:"created_at"` // 创建时间
-		UpdatedAt sql.NullTime   `db:"updated_at"` // 最后更新时间
-		DeletedAt sql.NullTime   `db:"deleted_at"` // 删除时间
+		PostId    int64     `db:"post_id"`    // 编码
+		PostName  string    `db:"post_name"`  // 岗位名称
+		PostCode  string    `db:"post_code"`  // 岗位编码
+		Sort      int64     `db:"sort"`       // 排序
+		Remark    string    `db:"remark"`     // 备注
+		Status    int64     `db:"status"`     // 状态
+		CreateBy  int64     `db:"create_by"`  // 创建者
+		UpdateBy  int64     `db:"update_by"`  // 更新者
+		CreatedAt time.Time `db:"created_at"` // 创建时间
+		UpdatedAt time.Time `db:"updated_at"` // 更新时间
 	}
 )
 
@@ -88,8 +88,8 @@ func (m *defaultSysPostModel) FindOne(ctx context.Context, postId int64) (*SysPo
 func (m *defaultSysPostModel) Insert(ctx context.Context, data *SysPost) (sql.Result, error) {
 	sysPostPostIdKey := fmt.Sprintf("%s%v", cacheSysPostPostIdPrefix, data.PostId)
 	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?)", m.table, sysPostRowsExpectAutoSet)
-		return conn.ExecCtx(ctx, query, data.PostName, data.PostCode, data.Sort, data.Status, data.Remark, data.CreateBy, data.UpdateBy, data.DeletedAt)
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?)", m.table, sysPostRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.PostName, data.PostCode, data.Sort, data.Remark, data.Status, data.CreateBy, data.UpdateBy)
 	}, sysPostPostIdKey)
 	return ret, err
 }
@@ -98,7 +98,7 @@ func (m *defaultSysPostModel) Update(ctx context.Context, data *SysPost) error {
 	sysPostPostIdKey := fmt.Sprintf("%s%v", cacheSysPostPostIdPrefix, data.PostId)
 	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `post_id` = ?", m.table, sysPostRowsWithPlaceHolder)
-		return conn.ExecCtx(ctx, query, data.PostName, data.PostCode, data.Sort, data.Status, data.Remark, data.CreateBy, data.UpdateBy, data.DeletedAt, data.PostId)
+		return conn.ExecCtx(ctx, query, data.PostName, data.PostCode, data.Sort, data.Remark, data.Status, data.CreateBy, data.UpdateBy, data.PostId)
 	}, sysPostPostIdKey)
 	return err
 }

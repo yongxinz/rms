@@ -40,14 +40,14 @@ func (l *PostListLogic) PostList(in *sys.PostListReq) (*sys.PostListResp, error)
 	for _, item := range res {
 		data = append(data, &sys.PostListData{
 			PostId:    item.PostId,
-			PostName:  item.PostName.String,
-			PostCode:  item.PostCode.String,
-			Sort:      item.Sort.Int64,
-			Status:    item.Status.Int64,
-			CreateBy:  item.CreateBy.Int64,
-			UpdateBy:  item.UpdateBy.Int64,
-			CreatedAt: item.CreatedAt.Time.Format(globalkey.SysDateFormat),
-			UpdatedAt: item.UpdatedAt.Time.Format(globalkey.SysDateFormat),
+			PostName:  item.PostName,
+			PostCode:  item.PostCode,
+			Sort:      item.Sort,
+			Status:    item.Status,
+			CreateBy:  item.CreateBy,
+			UpdateBy:  item.UpdateBy,
+			CreatedAt: item.CreatedAt.Format(globalkey.SysDateFormat),
+			UpdatedAt: item.UpdatedAt.Format(globalkey.SysDateFormat),
 		})
 	}
 
