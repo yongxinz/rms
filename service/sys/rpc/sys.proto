@@ -230,16 +230,13 @@ message RoleListData{
     int64 roleId = 1;
     string roleName = 2;
     string roleKey = 3;
-    int64 roleSort = 4;
-    string flag = 5;
-    string remark = 6;
-    int64 admin = 7;
-    string status = 8;
-    string dataScope = 9;
-    int64 createBy = 10;
-    string createdAt = 11;
-    int64 updateBy = 12;
-    string updatedAt = 13;
+    int64 sort = 4;
+    string remark = 5;
+    int64 status = 6;
+    int64 createBy = 7;
+    string createdAt = 8;
+    int64 updateBy = 9;
+    string updatedAt = 10;
 }
 
 message RoleListResp {
@@ -250,9 +247,9 @@ message RoleListResp {
 message RoleAddReq {
     string roleName = 1;
     string roleKey = 2;
-    int64 roleSort = 3;
+    int64 sort = 3;
     string remark = 4;
-    string status = 5;
+    int64 status = 5;
     int64 createBy = 6;
     string createdAt = 7;
     repeated int64 menuIds = 8;
@@ -268,9 +265,9 @@ message RoleRetrieveResp {
     int64 roleId = 1;
     string roleName = 2;
     string roleKey = 3;
-    int64 roleSort = 4;
+    int64 sort = 4;
     string remark = 5;
-    string status = 6;
+    int64 status = 6;
     string createdAt = 7;
     repeated int64 menuIds = 8;
 }
@@ -279,9 +276,9 @@ message RoleUpdateReq {
     int64 roleId = 1;
     string roleName = 2;
     string roleKey = 3;
-    int64 roleSort = 4;
+    int64 sort = 4;
     string remark = 5;
-    string status = 6;
+    int64 status = 6;
     int64 updateBy = 7;
     repeated int64 menuIds = 8;
 }

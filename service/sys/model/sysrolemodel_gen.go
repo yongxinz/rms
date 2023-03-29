@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/cache"
@@ -18,8 +19,8 @@ import (
 var (
 	sysRoleFieldNames          = builder.RawFieldNames(&SysRole{})
 	sysRoleRows                = strings.Join(sysRoleFieldNames, ",")
-	sysRoleRowsExpectAutoSet   = strings.Join(stringx.Remove(sysRoleFieldNames, "`role_id`", "`create_time`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`"), ",")
-	sysRoleRowsWithPlaceHolder = strings.Join(stringx.Remove(sysRoleFieldNames, "`role_id`", "`create_time`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`"), "=?,") + "=?"
+	sysRoleRowsExpectAutoSet   = strings.Join(stringx.Remove(sysRoleFieldNames, "`role_id`", "`created_at`", "`create_time`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`"), ",")
+	sysRoleRowsWithPlaceHolder = strings.Join(stringx.Remove(sysRoleFieldNames, "`role_id`", "`created_at`", "`create_time`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`"), "=?,") + "=?"
 
 	cacheSysRoleRoleIdPrefix = "cache:sysRole:roleId:"
 )
@@ -38,20 +39,16 @@ type (
 	}
 
 	SysRole struct {
-		RoleId    int64          `db:"role_id"`
-		RoleName  sql.NullString `db:"role_name"`
-		Status    sql.NullString `db:"status"`
-		RoleKey   sql.NullString `db:"role_key"`
-		RoleSort  sql.NullInt64  `db:"role_sort"`
-		Flag      sql.NullString `db:"flag"`
-		Remark    sql.NullString `db:"remark"`
-		Admin     sql.NullInt64  `db:"admin"`
-		DataScope sql.NullString `db:"data_scope"`
-		CreateBy  sql.NullInt64  `db:"create_by"`  // 创建者
-		UpdateBy  sql.NullInt64  `db:"update_by"`  // 更新者
-		CreatedAt sql.NullTime   `db:"created_at"` // 创建时间
-		UpdatedAt sql.NullTime   `db:"updated_at"` // 最后更新时间
-		DeletedAt sql.NullTime   `db:"deleted_at"` // 删除时间
+		RoleId    int64     `db:"role_id"`    // 编码
+		RoleName  string    `db:"role_name"`  // 角色名称
+		RoleKey   string    `db:"role_key"`   // 权限字符
+		Sort      int64     `db:"sort"`       // 排序
+		Remark    string    `db:"remark"`     // 备注
+		Status    int64     `db:"status"`     // 状态
+		CreateBy  int64     `db:"create_by"`  // 创建者
+		UpdateBy  int64     `db:"update_by"`  // 更新者
+		CreatedAt time.Time `db:"created_at"` // 创建时间
+		UpdatedAt time.Time `db:"updated_at"` // 更新时间
 	}
 )
 
@@ -91,8 +88,8 @@ func (m *defaultSysRoleModel) FindOne(ctx context.Context, roleId int64) (*SysRo
 func (m *defaultSysRoleModel) Insert(ctx context.Context, data *SysRole) (sql.Result, error) {
 	sysRoleRoleIdKey := fmt.Sprintf("%s%v", cacheSysRoleRoleIdPrefix, data.RoleId)
 	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, sysRoleRowsExpectAutoSet)
-		return conn.ExecCtx(ctx, query, data.RoleName, data.Status, data.RoleKey, data.RoleSort, data.Flag, data.Remark, data.Admin, data.DataScope, data.CreateBy, data.UpdateBy, data.DeletedAt)
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?)", m.table, sysRoleRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.RoleName, data.RoleKey, data.Sort, data.Remark, data.Status, data.CreateBy, data.UpdateBy)
 	}, sysRoleRoleIdKey)
 	return ret, err
 }
@@ -101,7 +98,7 @@ func (m *defaultSysRoleModel) Update(ctx context.Context, data *SysRole) error {
 	sysRoleRoleIdKey := fmt.Sprintf("%s%v", cacheSysRoleRoleIdPrefix, data.RoleId)
 	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `role_id` = ?", m.table, sysRoleRowsWithPlaceHolder)
-		return conn.ExecCtx(ctx, query, data.RoleName, data.Status, data.RoleKey, data.RoleSort, data.Flag, data.Remark, data.Admin, data.DataScope, data.CreateBy, data.UpdateBy, data.DeletedAt, data.RoleId)
+		return conn.ExecCtx(ctx, query, data.RoleName, data.RoleKey, data.Sort, data.Remark, data.Status, data.CreateBy, data.UpdateBy, data.RoleId)
 	}, sysRoleRoleIdKey)
 	return err
 }

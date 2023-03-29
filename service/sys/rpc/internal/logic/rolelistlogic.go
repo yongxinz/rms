@@ -40,18 +40,15 @@ func (l *RoleListLogic) RoleList(in *sys.RoleListReq) (*sys.RoleListResp, error)
 	for _, item := range res {
 		data = append(data, &sys.RoleListData{
 			RoleId:    item.RoleId,
-			RoleName:  item.RoleName.String,
-			RoleKey:   item.RoleKey.String,
-			RoleSort:  item.RoleSort.Int64,
-			Flag:      item.Flag.String,
-			Remark:    item.Remark.String,
-			Admin:     item.Admin.Int64,
-			DataScope: item.DataScope.String,
-			Status:    item.Status.String,
-			CreateBy:  item.CreateBy.Int64,
-			UpdateBy:  item.UpdateBy.Int64,
-			CreatedAt: item.CreatedAt.Time.Format(globalkey.SysDateFormat),
-			UpdatedAt: item.UpdatedAt.Time.Format(globalkey.SysDateFormat),
+			RoleName:  item.RoleName,
+			RoleKey:   item.RoleKey,
+			Sort:      item.Sort,
+			Remark:    item.Remark,
+			Status:    item.Status,
+			CreateBy:  item.CreateBy,
+			UpdateBy:  item.UpdateBy,
+			CreatedAt: item.CreatedAt.Format(globalkey.SysDateFormat),
+			UpdatedAt: item.UpdatedAt.Format(globalkey.SysDateFormat),
 		})
 	}
 

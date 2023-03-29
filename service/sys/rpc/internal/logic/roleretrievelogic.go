@@ -46,11 +46,11 @@ func (l *RoleRetrieveLogic) RoleRetrieve(in *sys.RoleRetrieveReq) (*sys.RoleRetr
 
 	return &sys.RoleRetrieveResp{
 		RoleId:   res.RoleId,
-		RoleKey:  res.RoleKey.String,
-		RoleName: res.RoleName.String,
-		RoleSort: res.RoleSort.Int64,
-		Status:   res.Status.String,
-		Remark:   res.Remark.String,
+		RoleKey:  res.RoleKey,
+		RoleName: res.RoleName,
+		Sort:     res.Sort,
+		Status:   res.Status,
+		Remark:   res.Remark,
 		MenuIds:  menuIds,
 	}, nil
 }

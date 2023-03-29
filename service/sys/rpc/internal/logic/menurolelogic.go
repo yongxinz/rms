@@ -30,7 +30,7 @@ func (l *MenuRoleLogic) MenuRole(in *sys.MenuRoleReq) (*sys.MenuRoleResp, error)
 	var menus []*model.SysMenu
 
 	roleInfo, _ := l.svcCtx.Role.FindOne(l.ctx, in.RoleId)
-	if roleInfo.RoleKey.String == "admin" {
+	if roleInfo.RoleKey == "admin" {
 		count, _ := l.svcCtx.Menu.Count(l.ctx)
 		menus, err = l.svcCtx.Menu.FindAll(l.ctx, 1, count)
 		if err != nil {

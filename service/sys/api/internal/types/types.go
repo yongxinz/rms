@@ -140,10 +140,7 @@ type RoleListData struct {
 	RoleId    int64  `json:"roleId"`
 	RoleName  string `json:"roleName"`
 	RoleKey   string `json:"roleKey"`
-	RoleSort  int64  `json:"roleSort"`
-	Flag      string `json:"flag"`
-	DataScope string `json:"dataScope"`
-	Admin     int64  `json:"admin"`
+	Sort      int64  `json:"sort"`
 	Status    int64  `json:"status"`
 	Remark    string `json:"remark"`
 	CreatedAt string `json:"createdAt"`
@@ -165,7 +162,7 @@ type RoleRetrieveResp struct {
 	RoleId   int64   `json:"roleId"`
 	RoleName string  `json:"roleName"`
 	RoleKey  string  `json:"roleKey"`
-	RoleSort int64   `json:"roleSort"`
+	Sort     int64   `json:"sort"`
 	Status   int64   `json:"status"`
 	Remark   string  `json:"remark"`
 	MenuIds  []int64 `json:"menuIds"`
@@ -174,8 +171,8 @@ type RoleRetrieveResp struct {
 type RoleAddReq struct {
 	RoleName string  `json:"roleName"`
 	RoleKey  string  `json:"roleKey"`
-	RoleSort int64   `json:"roleSort"`
-	Status   string  `json:"status,optional"`
+	Sort     int64   `json:"sort"`
+	Status   int64   `json:"status,optional"`
 	Remark   string  `json:"remark,optional"`
 	CreateBy int64   `json:"createBy,optional"`
 	UpdateBy int64   `json:"updateBy,optional"`
@@ -186,7 +183,7 @@ type RoleUpdateReq struct {
 	RoleId   int64  `json:"roleId"`
 	RoleName string `json:"roleName"`
 	RoleKey  string `json:"roleKey"`
-	RoleSort int64  `json:"roleSort"`
+	Sort     int64  `json:"sort"`
 	Status   int64  `json:"status,optional"`
 	Remark   string `json:"remark,optional"`
 	UpdateBy int64  `json:"updateBy,optional"`
