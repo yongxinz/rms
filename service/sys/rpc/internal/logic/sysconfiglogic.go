@@ -36,10 +36,10 @@ func (l *SysConfigLogic) SysConfig(in *sys.SysConfigReq) (*sys.SysConfigResp, er
 
 	sysAppLogo, sysAppName := "", ""
 	for _, item := range res {
-		if item.ConfigKey.String == "sys_app_logo" {
-			sysAppLogo = item.ConfigValue.String
-		} else if item.ConfigKey.String == "sys_app_name" {
-			sysAppName = item.ConfigValue.String
+		if item.ConfigKey == "sys_app_logo" {
+			sysAppLogo = item.ConfigValue
+		} else if item.ConfigKey == "sys_app_name" {
+			sysAppName = item.ConfigValue
 		}
 	}
 

@@ -36,8 +36,8 @@ func (l *DictDataOpLogic) DictDataOp(in *sys.DictDataOpReq) (*sys.DictDataOpResp
 	var data []*sys.DictDataOp
 	for _, item := range res {
 		data = append(data, &sys.DictDataOp{
-			Label: item.DictLabel.String,
-			Value: item.DictValue.String,
+			Label: item.DictLabel,
+			Value: item.DictValue,
 		})
 	}
 

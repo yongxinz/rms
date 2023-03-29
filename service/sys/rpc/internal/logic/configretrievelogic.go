@@ -36,11 +36,11 @@ func (l *ConfigRetrieveLogic) ConfigRetrieve(in *sys.ConfigRetrieveReq) (*sys.Co
 
 	return &sys.ConfigRetrieveResp{
 		Id:          res.Id,
-		ConfigName:  res.ConfigName.String,
-		ConfigKey:   res.ConfigKey.String,
-		ConfigValue: res.ConfigValue.String,
-		ConfigType:  res.ConfigType.String,
-		IsFrontend:  res.IsFrontend.String,
-		Remark:      res.Remark.String,
+		ConfigName:  res.ConfigName,
+		ConfigKey:   res.ConfigKey,
+		ConfigValue: res.ConfigValue,
+		ConfigType:  res.ConfigType,
+		IsFrontend:  res.IsFrontend,
+		Remark:      res.Remark,
 	}, nil
 }

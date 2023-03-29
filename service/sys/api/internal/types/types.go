@@ -49,13 +49,11 @@ type UserListReq struct {
 type UserListData struct {
 	UserId    int64        `json:"userId"`
 	UserName  string       `json:"username"`
-	NickName  string       `json:"nickName"`
 	Phone     string       `json:"phone"`
-	Status    string       `json:"status"`
+	Status    int64        `json:"status"`
 	Email     string       `json:"email"`
-	Salt      string       `json:"salt"`
 	Avatar    string       `json:"avatar"`
-	Sex       string       `json:"sex"`
+	Sex       int64        `json:"sex"`
 	Remark    string       `json:"remark"`
 	CreatedAt string       `json:"createdAt"`
 	UpdatedAt string       `json:"updatedAt"`
@@ -75,11 +73,10 @@ type UserListResp struct {
 type UserAddReq struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
-	NickName string `json:"nickName"`
 	Phone    string `json:"phone"`
-	Status   string `json:"status"`
+	Status   int64  `json:"status"`
 	Email    string `json:"email"`
-	Sex      string `json:"sex,optional"`
+	Sex      int64  `json:"sex,optional"`
 	Remark   string `json:"remark,optional"`
 	RoleId   int64  `json:"roleId,optional"`
 	DeptId   int64  `json:"deptId"`
@@ -95,11 +92,10 @@ type UserRetrieveReq struct {
 type UserRetrieveResp struct {
 	UserId   int64  `json:"userId"`
 	Username string `json:"username"`
-	NickName string `json:"nickName"`
 	Phone    string `json:"phone"`
-	Status   string `json:"status"`
+	Status   int64  `json:"status"`
 	Email    string `json:"email"`
-	Sex      string `json:"sex"`
+	Sex      int64  `json:"sex"`
 	Remark   string `json:"remark"`
 	RoleId   int64  `json:"roleId"`
 	DeptId   int64  `json:"deptId"`
@@ -109,11 +105,10 @@ type UserRetrieveResp struct {
 type UserUpdateReq struct {
 	UserId   int64  `json:"userId"`
 	Username string `json:"username"`
-	NickName string `json:"nickName"`
 	Phone    string `json:"phone"`
-	Status   string `json:"status"`
+	Status   int64  `json:"status"`
 	Email    string `json:"email"`
-	Sex      string `json:"sex,optional"`
+	Sex      int64  `json:"sex,optional"`
 	Remark   string `json:"remark,optional"`
 	RoleId   int64  `json:"roleId,optional"`
 	DeptId   int64  `json:"deptId"`
@@ -122,9 +117,9 @@ type UserUpdateReq struct {
 }
 
 type UserUpdateStatusReq struct {
-	UserId   int64  `json:"userId"`
-	Status   string `json:"status"`
-	UpdateBy int64  `json:"updateBy,optional"`
+	UserId   int64 `json:"userId"`
+	Status   int64 `json:"status"`
+	UpdateBy int64 `json:"updateBy,optional"`
 }
 
 type UserUpdatePwdReq struct {
@@ -321,8 +316,8 @@ type ConfigListData struct {
 	ConfigName  string `json:"configName"`
 	ConfigKey   string `json:"configKey"`
 	ConfigValue string `json:"configValue"`
-	ConfigType  string `json:"configType"`
-	IsFrontend  string `json:"isFrontend"`
+	ConfigType  int64  `json:"configType"`
+	IsFrontend  int64  `json:"isFrontend"`
 	Remark      string `json:"remark"`
 	CreatedAt   string `json:"createdAt"`
 	UpdatedAt   string `json:"updatedAt"`
@@ -344,8 +339,8 @@ type ConfigRetrieveResp struct {
 	ConfigName  string `json:"configName"`
 	ConfigKey   string `json:"configKey"`
 	ConfigValue string `json:"configValue"`
-	ConfigType  string `json:"configType"`
-	IsFrontend  string `json:"isFrontend"`
+	ConfigType  int64  `json:"configType"`
+	IsFrontend  int64  `json:"isFrontend"`
 	Remark      string `json:"remark"`
 }
 
@@ -353,8 +348,8 @@ type ConfigAddReq struct {
 	ConfigName  string `json:"configName"`
 	ConfigKey   string `json:"configKey"`
 	ConfigValue string `json:"configValue"`
-	ConfigType  string `json:"configType"`
-	IsFrontend  string `json:"isFrontend"`
+	ConfigType  int64  `json:"configType"`
+	IsFrontend  int64  `json:"isFrontend"`
 	Remark      string `json:"remark,optional"`
 	CreateBy    int64  `json:"createBy,optional"`
 	UpdateBy    int64  `json:"updateBy,optional"`
@@ -365,8 +360,8 @@ type ConfigUpdateReq struct {
 	ConfigName  string `json:"configName"`
 	ConfigKey   string `json:"configKey"`
 	ConfigValue string `json:"configValue"`
-	ConfigType  string `json:"configType"`
-	IsFrontend  string `json:"isFrontend"`
+	ConfigType  int64  `json:"configType"`
+	IsFrontend  int64  `json:"isFrontend"`
 	Remark      string `json:"remark"`
 	UpdateBy    int64  `json:"updateBy,optional"`
 }
@@ -554,7 +549,7 @@ type DictDataListReq struct {
 }
 
 type DictDataListData struct {
-	DictCode  int64  `json:"dictCode"`
+	DictId    int64  `json:"dictId"`
 	DictLabel string `json:"dictLabel"`
 	DictValue string `json:"dictValue"`
 	DictType  string `json:"dictType"`
@@ -570,11 +565,11 @@ type DictDataListResp struct {
 }
 
 type DictDataRetrieveReq struct {
-	DictCode int64 `path:"dictCode"`
+	DictId int64 `path:"dictId"`
 }
 
 type DictDataRetrieveResp struct {
-	DictCode  int64  `json:"dictCode"`
+	DictId    int64  `json:"dictId"`
 	DictLabel string `json:"dictLabel"`
 	DictValue string `json:"dictValue"`
 	DictType  string `json:"dictType"`
@@ -595,7 +590,7 @@ type DictDataAddReq struct {
 }
 
 type DictDataUpdateReq struct {
-	DictCode  int64  `json:"dictCode"`
+	DictId    int64  `json:"dictId"`
 	DictLabel string `json:"dictLabel"`
 	DictValue string `json:"dictValue"`
 	DictType  string `json:"dictType"`

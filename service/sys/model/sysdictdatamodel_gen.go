@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/cache"
@@ -18,18 +19,18 @@ import (
 var (
 	sysDictDataFieldNames          = builder.RawFieldNames(&SysDictData{})
 	sysDictDataRows                = strings.Join(sysDictDataFieldNames, ",")
-	sysDictDataRowsExpectAutoSet   = strings.Join(stringx.Remove(sysDictDataFieldNames, "`dict_code`", "`create_time`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`"), ",")
-	sysDictDataRowsWithPlaceHolder = strings.Join(stringx.Remove(sysDictDataFieldNames, "`dict_code`", "`create_time`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`"), "=?,") + "=?"
+	sysDictDataRowsExpectAutoSet   = strings.Join(stringx.Remove(sysDictDataFieldNames, "`dict_id`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`", "`create_time`"), ",")
+	sysDictDataRowsWithPlaceHolder = strings.Join(stringx.Remove(sysDictDataFieldNames, "`dict_id`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`", "`create_time`"), "=?,") + "=?"
 
-	cacheSysDictDataDictCodePrefix = "cache:sysDictData:dictCode:"
+	cacheSysDictDataDictIdPrefix = "cache:sysDictData:dictId:"
 )
 
 type (
 	sysDictDataModel interface {
 		Insert(ctx context.Context, data *SysDictData) (sql.Result, error)
-		FindOne(ctx context.Context, dictCode int64) (*SysDictData, error)
+		FindOne(ctx context.Context, dictId int64) (*SysDictData, error)
 		Update(ctx context.Context, data *SysDictData) error
-		Delete(ctx context.Context, dictCode int64) error
+		Delete(ctx context.Context, dictId int64) error
 	}
 
 	defaultSysDictDataModel struct {
@@ -38,22 +39,17 @@ type (
 	}
 
 	SysDictData struct {
-		DictCode  int64          `db:"dict_code"`
-		DictSort  sql.NullInt64  `db:"dict_sort"`
-		DictLabel sql.NullString `db:"dict_label"`
-		DictValue sql.NullString `db:"dict_value"`
-		DictType  sql.NullString `db:"dict_type"`
-		CssClass  sql.NullString `db:"css_class"`
-		ListClass sql.NullString `db:"list_class"`
-		IsDefault sql.NullString `db:"is_default"`
-		Status    sql.NullInt64  `db:"status"`
-		Default   sql.NullString `db:"default"`
-		Remark    sql.NullString `db:"remark"`
-		CreateBy  sql.NullInt64  `db:"create_by"`  // 创建者
-		UpdateBy  sql.NullInt64  `db:"update_by"`  // 更新者
-		CreatedAt sql.NullTime   `db:"created_at"` // 创建时间
-		UpdatedAt sql.NullTime   `db:"updated_at"` // 最后更新时间
-		DeletedAt sql.NullTime   `db:"deleted_at"` // 删除时间
+		DictId    int64     `db:"dict_id"`    // 编码
+		DictType  string    `db:"dict_type"`  // 字典类型
+		DictLabel string    `db:"dict_label"` // 数据标签
+		DictValue string    `db:"dict_value"` // 数据键值
+		DictSort  int64     `db:"dict_sort"`  // 显示排序
+		Status    int64     `db:"status"`     // 状态
+		Remark    string    `db:"remark"`     // 备注
+		CreateBy  int64     `db:"create_by"`  // 创建者
+		UpdateBy  int64     `db:"update_by"`  // 更新者
+		CreatedAt time.Time `db:"created_at"` // 创建时间
+		UpdatedAt time.Time `db:"updated_at"` // 更新时间
 	}
 )
 
@@ -64,21 +60,21 @@ func newSysDictDataModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultSysDictDa
 	}
 }
 
-func (m *defaultSysDictDataModel) Delete(ctx context.Context, dictCode int64) error {
-	sysDictDataDictCodeKey := fmt.Sprintf("%s%v", cacheSysDictDataDictCodePrefix, dictCode)
+func (m *defaultSysDictDataModel) Delete(ctx context.Context, dictId int64) error {
+	sysDictDataDictIdKey := fmt.Sprintf("%s%v", cacheSysDictDataDictIdPrefix, dictId)
 	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("delete from %s where `dict_code` = ?", m.table)
-		return conn.ExecCtx(ctx, query, dictCode)
-	}, sysDictDataDictCodeKey)
+		query := fmt.Sprintf("delete from %s where `dict_id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, dictId)
+	}, sysDictDataDictIdKey)
 	return err
 }
 
-func (m *defaultSysDictDataModel) FindOne(ctx context.Context, dictCode int64) (*SysDictData, error) {
-	sysDictDataDictCodeKey := fmt.Sprintf("%s%v", cacheSysDictDataDictCodePrefix, dictCode)
+func (m *defaultSysDictDataModel) FindOne(ctx context.Context, dictId int64) (*SysDictData, error) {
+	sysDictDataDictIdKey := fmt.Sprintf("%s%v", cacheSysDictDataDictIdPrefix, dictId)
 	var resp SysDictData
-	err := m.QueryRowCtx(ctx, &resp, sysDictDataDictCodeKey, func(ctx context.Context, conn sqlx.SqlConn, v interface{}) error {
-		query := fmt.Sprintf("select %s from %s where `dict_code` = ? limit 1", sysDictDataRows, m.table)
-		return conn.QueryRowCtx(ctx, v, query, dictCode)
+	err := m.QueryRowCtx(ctx, &resp, sysDictDataDictIdKey, func(ctx context.Context, conn sqlx.SqlConn, v interface{}) error {
+		query := fmt.Sprintf("select %s from %s where `dict_id` = ? limit 1", sysDictDataRows, m.table)
+		return conn.QueryRowCtx(ctx, v, query, dictId)
 	})
 	switch err {
 	case nil:
@@ -91,29 +87,29 @@ func (m *defaultSysDictDataModel) FindOne(ctx context.Context, dictCode int64) (
 }
 
 func (m *defaultSysDictDataModel) Insert(ctx context.Context, data *SysDictData) (sql.Result, error) {
-	sysDictDataDictCodeKey := fmt.Sprintf("%s%v", cacheSysDictDataDictCodePrefix, data.DictCode)
+	sysDictDataDictIdKey := fmt.Sprintf("%s%v", cacheSysDictDataDictIdPrefix, data.DictId)
 	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, sysDictDataRowsExpectAutoSet)
-		return conn.ExecCtx(ctx, query, data.DictSort, data.DictLabel, data.DictValue, data.DictType, data.CssClass, data.ListClass, data.IsDefault, data.Status, data.Default, data.Remark, data.CreateBy, data.UpdateBy, data.DeletedAt)
-	}, sysDictDataDictCodeKey)
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?)", m.table, sysDictDataRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.DictType, data.DictLabel, data.DictValue, data.DictSort, data.Status, data.Remark, data.CreateBy, data.UpdateBy)
+	}, sysDictDataDictIdKey)
 	return ret, err
 }
 
 func (m *defaultSysDictDataModel) Update(ctx context.Context, data *SysDictData) error {
-	sysDictDataDictCodeKey := fmt.Sprintf("%s%v", cacheSysDictDataDictCodePrefix, data.DictCode)
+	sysDictDataDictIdKey := fmt.Sprintf("%s%v", cacheSysDictDataDictIdPrefix, data.DictId)
 	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("update %s set %s where `dict_code` = ?", m.table, sysDictDataRowsWithPlaceHolder)
-		return conn.ExecCtx(ctx, query, data.DictSort, data.DictLabel, data.DictValue, data.DictType, data.CssClass, data.ListClass, data.IsDefault, data.Status, data.Default, data.Remark, data.CreateBy, data.UpdateBy, data.DeletedAt, data.DictCode)
-	}, sysDictDataDictCodeKey)
+		query := fmt.Sprintf("update %s set %s where `dict_id` = ?", m.table, sysDictDataRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, data.DictType, data.DictLabel, data.DictValue, data.DictSort, data.Status, data.Remark, data.CreateBy, data.UpdateBy, data.DictId)
+	}, sysDictDataDictIdKey)
 	return err
 }
 
 func (m *defaultSysDictDataModel) formatPrimary(primary interface{}) string {
-	return fmt.Sprintf("%s%v", cacheSysDictDataDictCodePrefix, primary)
+	return fmt.Sprintf("%s%v", cacheSysDictDataDictIdPrefix, primary)
 }
 
 func (m *defaultSysDictDataModel) queryPrimary(ctx context.Context, conn sqlx.SqlConn, v, primary interface{}) error {
-	query := fmt.Sprintf("select %s from %s where `dict_code` = ? limit 1", sysDictDataRows, m.table)
+	query := fmt.Sprintf("select %s from %s where `dict_id` = ? limit 1", sysDictDataRows, m.table)
 	return conn.QueryRowCtx(ctx, v, query, primary)
 }
 

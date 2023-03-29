@@ -27,7 +27,7 @@ func NewDictDataRetrieveLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 func (l *DictDataRetrieveLogic) DictDataRetrieve(req *types.DictDataRetrieveReq) (resp *types.DictDataRetrieveResp, err error) {
 	res, err := l.svcCtx.SysRpc.DictDataRetrieve(l.ctx, &sysclient.DictDataRetrieveReq{
-		DictCode: req.DictCode,
+		DictId: req.DictId,
 	})
 	if err != nil {
 		return nil, err

@@ -35,8 +35,8 @@ type (
 		ConfigName  string `json:"configName"`
 		ConfigKey   string `json:"configKey"`
 		ConfigValue string `json:"configValue"`
-		ConfigType  string `json:"configType"`
-		IsFrontend  string `json:"isFrontend"`
+		ConfigType  int64  `json:"configType"`
+		IsFrontend  int64  `json:"isFrontend"`
 		Remark      string `json:"remark"`
 		CreatedAt   string `json:"createdAt"`
 		UpdatedAt   string `json:"updatedAt"`
@@ -58,8 +58,8 @@ type (
 		ConfigName  string `json:"configName"`
 		ConfigKey   string `json:"configKey"`
 		ConfigValue string `json:"configValue"`
-		ConfigType  string `json:"configType"`
-		IsFrontend  string `json:"isFrontend"`
+		ConfigType  int64  `json:"configType"`
+		IsFrontend  int64  `json:"isFrontend"`
 		Remark      string `json:"remark"`
 	}
 )
@@ -69,8 +69,8 @@ type (
 		ConfigName  string `json:"configName"`
 		ConfigKey   string `json:"configKey"`
 		ConfigValue string `json:"configValue"`
-		ConfigType  string `json:"configType"`
-		IsFrontend  string `json:"isFrontend"`
+		ConfigType  int64  `json:"configType"`
+		IsFrontend  int64  `json:"isFrontend"`
 		Remark      string `json:"remark,optional"`
 		CreateBy    int64  `json:"createBy,optional"`
 		UpdateBy    int64  `json:"updateBy,optional"`
@@ -83,8 +83,8 @@ type (
 		ConfigName  string `json:"configName"`
 		ConfigKey   string `json:"configKey"`
 		ConfigValue string `json:"configValue"`
-		ConfigType  string `json:"configType"`
-		IsFrontend  string `json:"isFrontend"`
+		ConfigType  int64  `json:"configType"`
+		IsFrontend  int64  `json:"isFrontend"`
 		Remark      string `json:"remark"`
 		UpdateBy    int64  `json:"updateBy,optional"`
 	}

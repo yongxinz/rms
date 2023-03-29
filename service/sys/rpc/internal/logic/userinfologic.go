@@ -39,7 +39,7 @@ func (l *UserInfoLogic) UserInfo(in *sys.UserInfoReq) (*sys.UserInfoResp, error)
 		UserName:     res.Username,
 		Avatar:       "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
 		Name:         res.Username,
-		RoleId:       res.RoleId.Int64,
+		RoleId:       res.RoleId,
 		Introduction: "am a super administrator",
 		DeptId:       1,
 		Buttons:      []string{"*:*:*"},

@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/cache"
@@ -18,8 +19,8 @@ import (
 var (
 	sysConfigFieldNames          = builder.RawFieldNames(&SysConfig{})
 	sysConfigRows                = strings.Join(sysConfigFieldNames, ",")
-	sysConfigRowsExpectAutoSet   = strings.Join(stringx.Remove(sysConfigFieldNames, "`id`", "`create_time`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`"), ",")
-	sysConfigRowsWithPlaceHolder = strings.Join(stringx.Remove(sysConfigFieldNames, "`id`", "`create_time`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`"), "=?,") + "=?"
+	sysConfigRowsExpectAutoSet   = strings.Join(stringx.Remove(sysConfigFieldNames, "`id`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`", "`create_time`"), ",")
+	sysConfigRowsWithPlaceHolder = strings.Join(stringx.Remove(sysConfigFieldNames, "`id`", "`update_at`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`", "`create_time`"), "=?,") + "=?"
 
 	cacheSysConfigIdPrefix = "cache:sysConfig:id:"
 )
@@ -38,18 +39,17 @@ type (
 	}
 
 	SysConfig struct {
-		Id          int64          `db:"id"`           // 主键编码
-		ConfigName  sql.NullString `db:"config_name"`  // ConfigName
-		ConfigKey   sql.NullString `db:"config_key"`   // ConfigKey
-		ConfigValue sql.NullString `db:"config_value"` // ConfigValue
-		ConfigType  sql.NullString `db:"config_type"`  // ConfigType
-		IsFrontend  sql.NullString `db:"is_frontend"`  // 是否前台
-		Remark      sql.NullString `db:"remark"`       // Remark
-		CreateBy    sql.NullInt64  `db:"create_by"`    // 创建者
-		UpdateBy    sql.NullInt64  `db:"update_by"`    // 更新者
-		CreatedAt   sql.NullTime   `db:"created_at"`   // 创建时间
-		UpdatedAt   sql.NullTime   `db:"updated_at"`   // 最后更新时间
-		DeletedAt   sql.NullTime   `db:"deleted_at"`   // 删除时间
+		Id          int64     `db:"id"`           // 主键编码
+		ConfigName  string    `db:"config_name"`  // ConfigName
+		ConfigKey   string    `db:"config_key"`   // ConfigKey
+		ConfigValue string    `db:"config_value"` // ConfigValue
+		ConfigType  int64     `db:"config_type"`  // ConfigType
+		IsFrontend  int64     `db:"is_frontend"`  // 是否前台
+		Remark      string    `db:"remark"`       // Remark
+		CreateBy    int64     `db:"create_by"`    // 创建者
+		UpdateBy    int64     `db:"update_by"`    // 更新者
+		CreatedAt   time.Time `db:"created_at"`   // 创建时间
+		UpdatedAt   time.Time `db:"updated_at"`   // 更新时间
 	}
 )
 
@@ -89,8 +89,8 @@ func (m *defaultSysConfigModel) FindOne(ctx context.Context, id int64) (*SysConf
 func (m *defaultSysConfigModel) Insert(ctx context.Context, data *SysConfig) (sql.Result, error) {
 	sysConfigIdKey := fmt.Sprintf("%s%v", cacheSysConfigIdPrefix, data.Id)
 	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, sysConfigRowsExpectAutoSet)
-		return conn.ExecCtx(ctx, query, data.ConfigName, data.ConfigKey, data.ConfigValue, data.ConfigType, data.IsFrontend, data.Remark, data.CreateBy, data.UpdateBy, data.DeletedAt)
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?)", m.table, sysConfigRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.ConfigName, data.ConfigKey, data.ConfigValue, data.ConfigType, data.IsFrontend, data.Remark, data.CreateBy, data.UpdateBy)
 	}, sysConfigIdKey)
 	return ret, err
 }
@@ -99,7 +99,7 @@ func (m *defaultSysConfigModel) Update(ctx context.Context, data *SysConfig) err
 	sysConfigIdKey := fmt.Sprintf("%s%v", cacheSysConfigIdPrefix, data.Id)
 	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, sysConfigRowsWithPlaceHolder)
-		return conn.ExecCtx(ctx, query, data.ConfigName, data.ConfigKey, data.ConfigValue, data.ConfigType, data.IsFrontend, data.Remark, data.CreateBy, data.UpdateBy, data.DeletedAt, data.Id)
+		return conn.ExecCtx(ctx, query, data.ConfigName, data.ConfigKey, data.ConfigValue, data.ConfigType, data.IsFrontend, data.Remark, data.CreateBy, data.UpdateBy, data.Id)
 	}, sysConfigIdKey)
 	return err
 }

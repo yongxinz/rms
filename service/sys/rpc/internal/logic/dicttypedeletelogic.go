@@ -25,7 +25,7 @@ func NewDictTypeDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Di
 }
 
 func (l *DictTypeDeleteLogic) DictTypeDelete(in *sys.DictTypeDeleteReq) (*sys.DictTypeDeleteResp, error) {
-	err := l.svcCtx.DictType.DeleteMulti(l.ctx, in.DictIds)
+	err := l.svcCtx.DictType.DeleteMulti(l.ctx, in.Ids)
 	if err != nil {
 		return nil, errorx.NewSystemError(errorx.ServerErrorCode, err.Error())
 	}

@@ -26,7 +26,7 @@ func NewDictDataRetrieveLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *DictDataRetrieveLogic) DictDataRetrieve(in *sys.DictDataRetrieveReq) (*sys.DictDataRetrieveResp, error) {
-	res, err := l.svcCtx.DictData.FindOne(l.ctx, in.DictCode)
+	res, err := l.svcCtx.DictData.FindOne(l.ctx, in.DictId)
 	if err != nil {
 		if err == model.ErrNotFound {
 			return nil, errorx.NewDefaultError(errorx.PostIdErrorCode)
@@ -35,12 +35,12 @@ func (l *DictDataRetrieveLogic) DictDataRetrieve(in *sys.DictDataRetrieveReq) (*
 	}
 
 	return &sys.DictDataRetrieveResp{
-		DictCode:  res.DictCode,
-		DictLabel: res.DictLabel.String,
-		DictValue: res.DictValue.String,
-		DictType:  res.DictType.String,
-		DictSort:  res.DictSort.Int64,
-		Status:    res.Status.Int64,
-		Remark:    res.Remark.String,
+		DictId:    res.DictId,
+		DictLabel: res.DictLabel,
+		DictValue: res.DictValue,
+		DictType:  res.DictType,
+		DictSort:  res.DictSort,
+		Status:    res.Status,
+		Remark:    res.Remark,
 	}, nil
 }

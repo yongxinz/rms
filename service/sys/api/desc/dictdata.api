@@ -25,7 +25,7 @@ type (
 		DictType string `form:"dictType"`
 	}
 	DictDataListData {
-		DictCode  int64  `json:"dictCode"`
+		DictId    int64  `json:"dictId"`
 		DictLabel string `json:"dictLabel"`
 		DictValue string `json:"dictValue"`
 		DictType  string `json:"dictType"`
@@ -42,10 +42,10 @@ type (
 
 type (
 	DictDataRetrieveReq {
-		DictCode int64 `path:"dictCode"`
+		DictId int64 `path:"dictId"`
 	}
 	DictDataRetrieveResp {
-		DictCode  int64  `json:"dictCode"`
+		DictId    int64  `json:"dictId"`
 		DictLabel string `json:"dictLabel"`
 		DictValue string `json:"dictValue"`
 		DictType  string `json:"dictType"`
@@ -70,7 +70,7 @@ type (
 
 type (
 	DictDataUpdateReq {
-		DictCode  int64  `json:"dictCode"`
+		DictId    int64  `json:"dictId"`
 		DictLabel string `json:"dictLabel"`
 		DictValue string `json:"dictValue"`
 		DictType  string `json:"dictType"`
@@ -107,7 +107,7 @@ service sys {
 		summary: "获取单个字典"
 	)
 	@handler DictDataRetrieve
-	get /dict/data/:dictCode(DictDataRetrieveReq) returns (DictDataRetrieveResp)
+	get /dict/data/:dictId(DictDataRetrieveReq) returns (DictDataRetrieveResp)
 	@doc(
 		summary: "新增字典"
 	)
@@ -117,7 +117,7 @@ service sys {
 		summary: "更新字典"
 	)
 	@handler DictDataUpdate
-	put /dict/data/:dictCode(DictDataUpdateReq)
+	put /dict/data/:dictId(DictDataUpdateReq)
 	@doc(
 		summary: "删除字典"
 	)

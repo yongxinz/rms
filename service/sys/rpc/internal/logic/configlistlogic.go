@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 
 	"rms/common/errorx"
-	"rms/common/globalkey"
 	"rms/service/sys/rpc/internal/svc"
 	"rms/service/sys/rpc/sys"
 
@@ -40,13 +39,13 @@ func (l *ConfigListLogic) ConfigList(in *sys.ConfigListReq) (*sys.ConfigListResp
 	for _, item := range res {
 		data = append(data, &sys.ConfigListData{
 			Id:          item.Id,
-			ConfigName:  item.ConfigName.String,
-			ConfigKey:   item.ConfigKey.String,
-			ConfigValue: item.ConfigValue.String,
-			ConfigType:  item.ConfigKey.String,
-			IsFrontend:  item.IsFrontend.String,
-			Remark:      item.Remark.String,
-			CreatedAt:   item.CreatedAt.Time.Format(globalkey.SysDateFormat),
+			ConfigName:  item.ConfigName,
+			ConfigKey:   item.ConfigKey,
+			ConfigValue: item.ConfigValue,
+			ConfigType:  item.ConfigType,
+			IsFrontend:  item.IsFrontend,
+			Remark:      item.Remark,
+			CreatedAt:   item.CreatedAt.Format("2006-01-02 15:04:05"),
 		})
 	}
 

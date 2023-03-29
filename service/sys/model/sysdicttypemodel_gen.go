@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/cache"
@@ -18,8 +19,8 @@ import (
 var (
 	sysDictTypeFieldNames          = builder.RawFieldNames(&SysDictType{})
 	sysDictTypeRows                = strings.Join(sysDictTypeFieldNames, ",")
-	sysDictTypeRowsExpectAutoSet   = strings.Join(stringx.Remove(sysDictTypeFieldNames, "`dict_id`", "`update_time`", "`create_at`", "`created_at`", "`create_time`", "`update_at`", "`updated_at`"), ",")
-	sysDictTypeRowsWithPlaceHolder = strings.Join(stringx.Remove(sysDictTypeFieldNames, "`dict_id`", "`update_time`", "`create_at`", "`created_at`", "`create_time`", "`update_at`", "`updated_at`"), "=?,") + "=?"
+	sysDictTypeRowsExpectAutoSet   = strings.Join(stringx.Remove(sysDictTypeFieldNames, "`dict_id`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`", "`create_time`", "`update_at`"), ",")
+	sysDictTypeRowsWithPlaceHolder = strings.Join(stringx.Remove(sysDictTypeFieldNames, "`dict_id`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`", "`create_time`", "`update_at`"), "=?,") + "=?"
 
 	cacheSysDictTypeDictIdPrefix = "cache:sysDictType:dictId:"
 )
@@ -38,16 +39,15 @@ type (
 	}
 
 	SysDictType struct {
-		DictId    int64          `db:"dict_id"`
-		DictName  sql.NullString `db:"dict_name"`
-		DictType  sql.NullString `db:"dict_type"`
-		Status    sql.NullInt64  `db:"status"`
-		Remark    sql.NullString `db:"remark"`
-		CreateBy  sql.NullInt64  `db:"create_by"`  // 创建者
-		UpdateBy  sql.NullInt64  `db:"update_by"`  // 更新者
-		CreatedAt sql.NullTime   `db:"created_at"` // 创建时间
-		UpdatedAt sql.NullTime   `db:"updated_at"` // 最后更新时间
-		DeletedAt sql.NullTime   `db:"deleted_at"` // 删除时间
+		DictId    int64     `db:"dict_id"`    // 编码
+		DictName  string    `db:"dict_name"`  // 字典名称
+		DictType  string    `db:"dict_type"`  // 字典类型
+		Status    int64     `db:"status"`     // 状态
+		Remark    string    `db:"remark"`     // 备注
+		CreateBy  int64     `db:"create_by"`  // 创建者
+		UpdateBy  int64     `db:"update_by"`  // 更新者
+		CreatedAt time.Time `db:"created_at"` // 创建时间
+		UpdatedAt time.Time `db:"updated_at"` // 更新时间
 	}
 )
 
@@ -87,8 +87,8 @@ func (m *defaultSysDictTypeModel) FindOne(ctx context.Context, dictId int64) (*S
 func (m *defaultSysDictTypeModel) Insert(ctx context.Context, data *SysDictType) (sql.Result, error) {
 	sysDictTypeDictIdKey := fmt.Sprintf("%s%v", cacheSysDictTypeDictIdPrefix, data.DictId)
 	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?)", m.table, sysDictTypeRowsExpectAutoSet)
-		return conn.ExecCtx(ctx, query, data.DictName, data.DictType, data.Status, data.Remark, data.CreateBy, data.UpdateBy, data.DeletedAt)
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, sysDictTypeRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.DictName, data.DictType, data.Status, data.Remark, data.CreateBy, data.UpdateBy)
 	}, sysDictTypeDictIdKey)
 	return ret, err
 }
@@ -97,7 +97,7 @@ func (m *defaultSysDictTypeModel) Update(ctx context.Context, data *SysDictType)
 	sysDictTypeDictIdKey := fmt.Sprintf("%s%v", cacheSysDictTypeDictIdPrefix, data.DictId)
 	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `dict_id` = ?", m.table, sysDictTypeRowsWithPlaceHolder)
-		return conn.ExecCtx(ctx, query, data.DictName, data.DictType, data.Status, data.Remark, data.CreateBy, data.UpdateBy, data.DeletedAt, data.DictId)
+		return conn.ExecCtx(ctx, query, data.DictName, data.DictType, data.Status, data.Remark, data.CreateBy, data.UpdateBy, data.DictId)
 	}, sysDictTypeDictIdKey)
 	return err
 }

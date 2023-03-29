@@ -45,8 +45,8 @@ message ConfigListData{
     string configName = 2;
     string configKey = 3;
     string configValue = 4;
-    string configType = 5;
-    string isFrontend = 6;
+    int64 configType = 5;
+    int64 isFrontend = 6;
     string remark = 7;
     string createdAt = 8;
 }
@@ -65,8 +65,8 @@ message ConfigRetrieveResp {
     string configName = 2;
     string configKey = 3;
     string configValue = 4;
-    string configType = 5;
-    string isFrontend = 6;
+    int64 configType = 5;
+    int64 isFrontend = 6;
     string remark = 7;
 }
 
@@ -74,8 +74,8 @@ message ConfigAddReq {
     string configName = 1;
     string configKey = 2;
     string configValue = 3;
-    string configType = 4;
-    string isFrontend = 5;
+    int64 configType = 4;
+    int64 isFrontend = 5;
     string remark = 6;
     int64 createBy = 7;
     int64 updateBy = 8;
@@ -88,8 +88,8 @@ message ConfigUpdateReq {
     string configName = 2;
     string configKey = 3;
     string configValue = 4;
-    string configType = 5;
-    string isFrontend = 6;
+    int64 configType = 5;
+    int64 isFrontend = 6;
     string remark = 7;
     int64 updateBy = 8;
 }
@@ -124,15 +124,14 @@ message UserInfoResp {
 message UserRetrieveResp {
     int64 userId = 1;
     string username = 2;
-    string nickName = 3;
-    string phone = 4;
-    string status = 5;
-    string email = 6;
-    string sex = 7;
-    string remark = 8;
-    int64 roleId = 9;
-    int64 deptId = 10;
-    int64 postId = 11;
+    string phone = 3;
+    int64 status = 4;
+    string email = 5;
+    int64 sex = 6;
+    string remark = 7;
+    int64 roleId = 8;
+    int64 deptId = 9;
+    int64 postId = 10;
 }
 
 message UserListReq {
@@ -143,22 +142,20 @@ message UserListReq {
 message UserListData{
     int64 userId = 1;
     string userName = 2;
-    string nickName = 3;
-    string phone = 4;
-    string status = 5;
-    string email = 6;
-    string salt = 7;
-    string avatar = 8;
-    string sex = 9;
-    string remark = 10;
+    string phone = 3;
+    int64 status = 4;
+    string email = 5;
+    string avatar = 6;
+    int64 sex = 7;
+    string remark = 8;
+    string createdAt = 9;
+    string updatedAt = 10;
     int64 createBy = 11;
-    string createdAt = 12;
-    string updatedAt = 13;
-    int64 updateBy = 14;
-    int64 roleId = 15;
-    int64 deptId = 16;
-    int64 postId = 17;
-    DeptListData dept = 18;
+    int64 updateBy = 12;
+    int64 roleId = 13;
+    int64 deptId = 14;
+    int64 postId = 15;
+    DeptListData dept = 16;
 }
 
 message UserListResp {
@@ -169,19 +166,17 @@ message UserListResp {
 message UserAddReq {
     string username = 1;
     string password = 2;
-    string nickName = 3;
-    string phone = 4;
-    int64 roleId = 5;
-    string salt = 6;
-    string avatar = 7;
-    string sex = 8;
-    string email = 9;
-    int64 deptId = 10;
-    int64 postId = 11;
-    string remark = 12;
-    string status = 13;
-    int64 createBy = 14;
-    int64 updateBy = 16;
+    string phone = 3;
+    int64 roleId = 4;
+    string avatar = 5;
+    int64 sex = 6;
+    string email = 7;
+    int64 deptId = 8;
+    int64 postId = 9;
+    string remark = 10;
+    int64 status = 11;
+    int64 createBy = 12;
+    int64 updateBy = 13;
 }
 
 message UserAddResp {}
@@ -189,23 +184,22 @@ message UserAddResp {}
 message UserUpdateReq {
     int64 userId = 1;
     string username = 2;
-    string nickName = 3;
-    string phone = 4;
-    int64 roleId = 5;
-    string sex = 6;
-    string email = 7;
-    int64 deptId = 8;
-    int64 postId = 9;
-    string remark = 10;
-    string status = 11;
-    int64 updateBy = 12;
+    string phone = 3;
+    int64 roleId = 4;
+    int64 sex = 5;
+    string email = 6;
+    int64 deptId = 7;
+    int64 postId = 8;
+    string remark = 9;
+    int64 status = 10;
+    int64 updateBy = 11;
 }
 
 message UserUpdateResp {}
 
 message UserUpdateStatusReq {
     int64 userId = 1;
-    string status = 2;
+    int64 status = 2;
     int64 updateBy = 3;
 }
 
@@ -648,7 +642,7 @@ message DictTypeUpdateReq {
 message DictTypeUpdateResp {}
 
 message DictTypeDeleteReq {
-    repeated int64 dictIds = 1;
+    repeated int64 ids = 1;
 }
 
 message DictTypeDeleteResp {}
@@ -673,7 +667,7 @@ message DictDataListReq {
 }
 
 message DictDataListData{
-    int64 dictCode = 1;
+    int64 dictId = 1;
     string dictLabel = 2;
     string dictValue = 3;
     string dictType = 4;
@@ -689,11 +683,11 @@ message DictDataListResp {
 }
 
 message DictDataRetrieveReq {
-    int64 dictCode = 1;
+    int64 dictId = 1;
 }
 
 message DictDataRetrieveResp {
-    int64 dictCode = 1;
+    int64 dictId = 1;
     string dictLabel = 2;
     string dictValue = 3;
     string dictType = 4;
@@ -716,7 +710,7 @@ message DictDataAddReq {
 message DictDataAddResp {}
 
 message DictDataUpdateReq {
-    int64 dictCode = 1;
+    int64 dictId = 1;
     string dictLabel = 2;
     string dictValue = 3;
     string dictType = 4;
@@ -729,7 +723,7 @@ message DictDataUpdateReq {
 message DictDataUpdateResp {}
 
 message DictDataDeleteReq {
-    repeated int64 dictIds = 1;
+    repeated int64 ids = 1;
 }
 
 message DictDataDeleteResp {}

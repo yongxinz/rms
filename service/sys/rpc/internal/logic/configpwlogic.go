@@ -36,8 +36,8 @@ func (l *ConfigPwLogic) ConfigPw(in *sys.ConfigPwReq) (*sys.ConfigPwResp, error)
 
 	configKey, configValue := "", ""
 	for _, item := range res {
-		configKey = item.ConfigKey.String
-		configValue = item.ConfigValue.String
+		configKey = item.ConfigKey
+		configValue = item.ConfigValue
 		break
 	}
 

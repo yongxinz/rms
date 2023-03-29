@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 
 	"rms/common/errorx"
-	"rms/common/globalkey"
 	"rms/service/sys/rpc/internal/svc"
 	"rms/service/sys/rpc/sys"
 
@@ -40,11 +39,11 @@ func (l *DictTypeListLogic) DictTypeList(in *sys.DictTypeListReq) (*sys.DictType
 	for _, item := range res {
 		data = append(data, &sys.DictTypeListData{
 			DictId:    item.DictId,
-			DictName:  item.DictName.String,
-			DictType:  item.DictType.String,
-			Status:    item.Status.Int64,
-			Remark:    item.Remark.String,
-			CreatedAt: item.CreatedAt.Time.Format(globalkey.SysDateFormat),
+			DictName:  item.DictName,
+			DictType:  item.DictType,
+			Status:    item.Status,
+			Remark:    item.Remark,
+			CreatedAt: item.CreatedAt.Format("2006-01-02 15:04:05"),
 		})
 	}
 

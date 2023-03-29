@@ -26,7 +26,7 @@ func NewDictDataUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Di
 }
 
 func (l *DictDataUpdateLogic) DictDataUpdate(in *sys.DictDataUpdateReq) (*sys.DictDataUpdateResp, error) {
-	SysDictData, err := l.svcCtx.DictData.FindOne(l.ctx, in.DictCode)
+	SysDictData, err := l.svcCtx.DictData.FindOne(l.ctx, in.DictId)
 	if err != nil {
 		return nil, errorx.NewDefaultError(errorx.UserIdErrorCode)
 	}

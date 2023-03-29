@@ -19,8 +19,8 @@ import (
 var (
 	sysUserFieldNames          = builder.RawFieldNames(&SysUser{})
 	sysUserRows                = strings.Join(sysUserFieldNames, ",")
-	sysUserRowsExpectAutoSet   = strings.Join(stringx.Remove(sysUserFieldNames, "`user_id`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`", "`create_time`", "`update_at`"), ",")
-	sysUserRowsWithPlaceHolder = strings.Join(stringx.Remove(sysUserFieldNames, "`user_id`", "`updated_at`", "`update_time`", "`create_at`", "`created_at`", "`create_time`", "`update_at`"), "=?,") + "=?"
+	sysUserRowsExpectAutoSet   = strings.Join(stringx.Remove(sysUserFieldNames, "`user_id`", "`update_time`", "`create_at`", "`created_at`", "`create_time`", "`update_at`", "`updated_at`"), ",")
+	sysUserRowsWithPlaceHolder = strings.Join(stringx.Remove(sysUserFieldNames, "`user_id`", "`update_time`", "`create_at`", "`created_at`", "`create_time`", "`update_at`", "`updated_at`"), "=?,") + "=?"
 
 	cacheSysUserUserIdPrefix   = "cache:sysUser:userId:"
 	cacheSysUserUsernamePrefix = "cache:sysUser:username:"
@@ -41,24 +41,22 @@ type (
 	}
 
 	SysUser struct {
-		UserId    int64          `db:"user_id"`    // 编码
-		Username  string         `db:"username"`   // 用户名
-		Password  string         `db:"password"`   // 密码
-		NickName  sql.NullString `db:"nick_name"`  // 昵称
-		Phone     sql.NullString `db:"phone"`      // 手机号
-		RoleId    sql.NullInt64  `db:"role_id"`    // 角色ID
-		Salt      sql.NullString `db:"salt"`       // 加盐
-		Avatar    string         `db:"avatar"`     // 头像
-		Sex       sql.NullString `db:"sex"`        // 性别
-		Email     sql.NullString `db:"email"`      // 邮箱
-		DeptId    sql.NullInt64  `db:"dept_id"`    // 部门
-		PostId    sql.NullInt64  `db:"post_id"`    // 岗位
-		Remark    sql.NullString `db:"remark"`     // 备注
-		Status    sql.NullString `db:"status"`     // 状态
-		CreateBy  sql.NullInt64  `db:"create_by"`  // 创建者
-		UpdateBy  sql.NullInt64  `db:"update_by"`  // 更新者
-		CreatedAt time.Time      `db:"created_at"` // 创建时间
-		UpdatedAt time.Time      `db:"updated_at"` // 更新时间
+		UserId    int64     `db:"user_id"`    // 编码
+		Username  string    `db:"username"`   // 用户名
+		Password  string    `db:"password"`   // 密码
+		Phone     string    `db:"phone"`      // 手机号
+		RoleId    int64     `db:"role_id"`    // 角色ID
+		Avatar    string    `db:"avatar"`     // 头像
+		Sex       int64     `db:"sex"`        // 性别
+		Email     string    `db:"email"`      // 邮箱
+		DeptId    int64     `db:"dept_id"`    // 部门
+		PostId    int64     `db:"post_id"`    // 岗位
+		Remark    string    `db:"remark"`     // 备注
+		Status    int64     `db:"status"`     // 状态
+		CreateBy  int64     `db:"create_by"`  // 创建者
+		UpdateBy  int64     `db:"update_by"`  // 更新者
+		CreatedAt time.Time `db:"created_at"` // 创建时间
+		UpdatedAt time.Time `db:"updated_at"` // 更新时间
 	}
 )
 
@@ -125,8 +123,8 @@ func (m *defaultSysUserModel) Insert(ctx context.Context, data *SysUser) (sql.Re
 	sysUserUserIdKey := fmt.Sprintf("%s%v", cacheSysUserUserIdPrefix, data.UserId)
 	sysUserUsernameKey := fmt.Sprintf("%s%v", cacheSysUserUsernamePrefix, data.Username)
 	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
-		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, sysUserRowsExpectAutoSet)
-		return conn.ExecCtx(ctx, query, data.Username, data.Password, data.NickName, data.Phone, data.RoleId, data.Salt, data.Avatar, data.Sex, data.Email, data.DeptId, data.PostId, data.Remark, data.Status, data.CreateBy, data.UpdateBy)
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, sysUserRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.Username, data.Password, data.Phone, data.RoleId, data.Avatar, data.Sex, data.Email, data.DeptId, data.PostId, data.Remark, data.Status, data.CreateBy, data.UpdateBy)
 	}, sysUserUserIdKey, sysUserUsernameKey)
 	return ret, err
 }
@@ -141,7 +139,7 @@ func (m *defaultSysUserModel) Update(ctx context.Context, newData *SysUser) erro
 	sysUserUsernameKey := fmt.Sprintf("%s%v", cacheSysUserUsernamePrefix, data.Username)
 	_, err = m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `user_id` = ?", m.table, sysUserRowsWithPlaceHolder)
-		return conn.ExecCtx(ctx, query, newData.Username, newData.Password, newData.NickName, newData.Phone, newData.RoleId, newData.Salt, newData.Avatar, newData.Sex, newData.Email, newData.DeptId, newData.PostId, newData.Remark, newData.Status, newData.CreateBy, newData.UpdateBy, newData.UserId)
+		return conn.ExecCtx(ctx, query, newData.Username, newData.Password, newData.Phone, newData.RoleId, newData.Avatar, newData.Sex, newData.Email, newData.DeptId, newData.PostId, newData.Remark, newData.Status, newData.CreateBy, newData.UpdateBy, newData.UserId)
 	}, sysUserUserIdKey, sysUserUsernameKey)
 	return err
 }

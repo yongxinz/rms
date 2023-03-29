@@ -259,7 +259,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/dict/data/:dictCode",
+				Path:    "/dict/data/:dictId",
 				Handler: dictdata.DictDataRetrieveHandler(serverCtx),
 			},
 			{
@@ -269,7 +269,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPut,
-				Path:    "/dict/data/:dictCode",
+				Path:    "/dict/data/:dictId",
 				Handler: dictdata.DictDataUpdateHandler(serverCtx),
 			},
 			{

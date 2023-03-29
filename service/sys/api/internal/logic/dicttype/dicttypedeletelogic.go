@@ -26,7 +26,7 @@ func NewDictTypeDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Di
 
 func (l *DictTypeDeleteLogic) DictTypeDelete(req *types.DictTypeDeleteReq) error {
 	_, err := l.svcCtx.SysRpc.DictTypeDelete(l.ctx, &sysclient.DictTypeDeleteReq{
-		DictIds: req.Ids,
+		Ids: req.Ids,
 	})
 	return err
 }

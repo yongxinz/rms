@@ -37,14 +37,13 @@ func (l *UserRetrieveLogic) UserRetrieve(in *sys.UserInfoReq) (*sys.UserRetrieve
 	return &sys.UserRetrieveResp{
 		UserId:   res.UserId,
 		Username: res.Username,
-		NickName: res.NickName.String,
-		Phone:    res.Phone.String,
-		Status:   res.Status.String,
-		Email:    res.Email.String,
-		Sex:      res.Sex.String,
-		Remark:   res.Remark.String,
-		RoleId:   res.RoleId.Int64,
-		DeptId:   res.DeptId.Int64,
-		PostId:   res.PostId.Int64,
+		Phone:    res.Phone,
+		Status:   res.Status,
+		Email:    res.Email,
+		Sex:      res.Sex,
+		Remark:   res.Remark,
+		RoleId:   res.RoleId,
+		DeptId:   res.DeptId,
+		PostId:   res.PostId,
 	}, nil
 }

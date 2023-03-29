@@ -36,9 +36,9 @@ func (l *DictTypeRetrieveLogic) DictTypeRetrieve(in *sys.DictTypeRetrieveReq) (*
 
 	return &sys.DictTypeRetrieveResp{
 		DictId:   res.DictId,
-		DictName: res.DictName.String,
-		DictType: res.DictType.String,
-		Status:   res.Status.Int64,
-		Remark:   res.Remark.String,
+		DictName: res.DictName,
+		DictType: res.DictType,
+		Status:   res.Status,
+		Remark:   res.Remark,
 	}, nil
 }

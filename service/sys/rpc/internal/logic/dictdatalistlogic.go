@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 
 	"rms/common/errorx"
-	"rms/common/globalkey"
 	"rms/service/sys/rpc/internal/svc"
 	"rms/service/sys/rpc/sys"
 
@@ -34,19 +33,19 @@ func (l *DictDataListLogic) DictDataList(in *sys.DictDataListReq) (*sys.DictData
 		return nil, errorx.NewSystemError(errorx.ServerErrorCode, err.Error())
 	}
 
-	count, _ := l.svcCtx.DictType.Count(l.ctx)
+	count, _ := l.svcCtx.DictData.Count(l.ctx, in.DictType)
 
 	var data []*sys.DictDataListData
 	for _, item := range res {
 		data = append(data, &sys.DictDataListData{
-			DictCode:  item.DictCode,
-			DictLabel: item.DictLabel.String,
-			DictValue: item.DictValue.String,
-			DictType:  item.DictType.String,
-			DictSort:  item.DictSort.Int64,
-			Status:    item.Status.Int64,
-			Remark:    item.Remark.String,
-			CreatedAt: item.CreatedAt.Time.Format(globalkey.SysDateFormat),
+			DictId:    item.DictId,
+			DictLabel: item.DictLabel,
+			DictValue: item.DictValue,
+			DictType:  item.DictType,
+			DictSort:  item.DictSort,
+			Status:    item.Status,
+			Remark:    item.Remark,
+			CreatedAt: item.CreatedAt.Format("2006-01-02 15:04:05"),
 		})
 	}
 

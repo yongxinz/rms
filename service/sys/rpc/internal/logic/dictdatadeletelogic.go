@@ -25,7 +25,7 @@ func NewDictDataDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Di
 }
 
 func (l *DictDataDeleteLogic) DictDataDelete(in *sys.DictDataDeleteReq) (*sys.DictDataDeleteResp, error) {
-	err := l.svcCtx.DictData.DeleteMulti(l.ctx, in.DictIds)
+	err := l.svcCtx.DictData.DeleteMulti(l.ctx, in.Ids)
 	if err != nil {
 		return nil, errorx.NewSystemError(errorx.ServerErrorCode, err.Error())
 	}

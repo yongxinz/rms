@@ -49,13 +49,11 @@ type (
 	UserListData {
 		UserId    int64        `json:"userId"`
 		UserName  string       `json:"username"`
-		NickName  string       `json:"nickName"`
 		Phone     string       `json:"phone"`
-		Status    string       `json:"status"`
+		Status    int64        `json:"status"`
 		Email     string       `json:"email"`
-		Salt      string       `json:"salt"`
 		Avatar    string       `json:"avatar"`
-		Sex       string       `json:"sex"`
+		Sex       int64        `json:"sex"`
 		Remark    string       `json:"remark"`
 		CreatedAt string       `json:"createdAt"`
 		UpdatedAt string       `json:"updatedAt"`
@@ -76,11 +74,10 @@ type (
 	UserAddReq {
 		Username  string       `json:"username"`
 		Password  string       `json:"password"`
-		NickName  string       `json:"nickName"`
 		Phone     string       `json:"phone"`
-		Status    string       `json:"status"`
+		Status    int64        `json:"status"`
 		Email     string       `json:"email"`
-		Sex       string       `json:"sex,optional"`
+		Sex       int64        `json:"sex,optional"`
 		Remark    string       `json:"remark,optional"`
 		RoleId    int64        `json:"roleId,optional"`
 		DeptId    int64        `json:"deptId"`
@@ -97,11 +94,10 @@ type (
 	UserRetrieveResp {
 		UserId    int64        `json:"userId"`
 		Username  string       `json:"username"`
-		NickName  string       `json:"nickName"`
 		Phone     string       `json:"phone"`
-		Status    string       `json:"status"`
+		Status    int64        `json:"status"`
 		Email     string       `json:"email"`
-		Sex       string       `json:"sex"`
+		Sex       int64        `json:"sex"`
 		Remark    string       `json:"remark"`
 		RoleId    int64        `json:"roleId"`
 		DeptId    int64        `json:"deptId"`
@@ -113,11 +109,10 @@ type (
 	UserUpdateReq {
 		UserId    int64        `json:"userId"`
 		Username  string       `json:"username"`
-		NickName  string       `json:"nickName"`
 		Phone     string       `json:"phone"`
-		Status    string       `json:"status"`
+		Status    int64        `json:"status"`
 		Email     string       `json:"email"`
-		Sex       string       `json:"sex,optional"`
+		Sex       int64        `json:"sex,optional"`
 		Remark    string       `json:"remark,optional"`
 		RoleId    int64        `json:"roleId,optional"`
 		DeptId    int64        `json:"deptId"`
@@ -129,7 +124,7 @@ type (
 type (
 	UserUpdateStatusReq {
 		UserId    int64        `json:"userId"`
-		Status    string       `json:"status"`
+		Status    int64        `json:"status"`
 		UpdateBy  int64        `json:"updateBy,optional"`
 	}
 )
